@@ -6,7 +6,7 @@ import {
   IProduct,
   CardProduct,
   Navigation,
-} from "../../components";
+} from "../../components/ui";
 
 export function ProductsListPage() {
   const productsList: IProduct[] = [

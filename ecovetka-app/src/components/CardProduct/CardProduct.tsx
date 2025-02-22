@@ -1,7 +1,7 @@
-import { Box } from "../Box";
-import { Image } from "../Image";
-import { Text } from "../Text";
-import { Title } from "../Title";
+import { Box } from "../ui/Box";
+import { Image } from "../ui/Image";
+import { Text } from "../ui/Text";
+import { Title } from "../ui/Title";
 import { IProduct } from "./IProduct";
 
 interface ICardProduct {
