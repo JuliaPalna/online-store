@@ -2,8 +2,26 @@
   "name": "ecovetka-store",
   "private": true,
   "version": "0.0.0",
+  "scripts": {
+    "dev:client": "npm run dev --prefix packages/client",
+    "dev:server": "npm run dev --prefix packages/server",
+    "dev:all": "npm run dev:client & npm run dev:server",
+    "build:client": "npm run build --prefix packages/client",
+    "build:server": "npm run build --prefix packages/server",
+    "build:all": "npm run build:client & npm run build:server",
+    "types:client": "npm run types --prefix packages/client",
+    "types:server": "npm run types --prefix packages/server",
+    "types:all": "npm run types:client & npm run types:server"
+  },
   "workspaces": [
     "packages/server",
     "packages/client"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^3.5.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  }
 }
