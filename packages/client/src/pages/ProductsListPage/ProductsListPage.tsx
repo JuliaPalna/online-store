@@ -6,6 +6,8 @@ import {
   IProduct,
   CardProduct,
 } from "../../components/ui";
+import { Link } from "react-router-dom";
+import { getProductInfoRoute } from "../../lib/routes";
 
 export function ProductsListPage() {
   const { data, error, isLoading, isFetching, isError } =
@@ -27,7 +29,9 @@ export function ProductsListPage() {
         {data.products.map((product: IProduct) => {
           return (
             <ListItem key={product.id}>
-              <CardProduct product={product}></CardProduct>
+              <Link to={getProductInfoRoute({ id: product.id })}>
+                <CardProduct product={product}></CardProduct>
+              </Link>
             </ListItem>
           );
         })}

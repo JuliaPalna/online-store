@@ -1,15 +1,26 @@
-// import { ProductsListPage } from "./pages";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TrpcProvider } from "./lib/trpc";
-import { ProductsListPage } from "./pages";
+import { MainPage, ProductInfoPage, ProductsListPage } from "./pages";
+import {
+  getMainRoute,
+  getProductInfoRoute,
+  getProductsListRoute,
+  productInfoRouteParams,
+} from "./lib/routes";
 
 function App() {
   return (
-    // <>
-    //   <ProductsListPage />
-    // </>
-
     <TrpcProvider>
-      <ProductsListPage />
+      <BrowserRouter>
+        <Routes>
+          <Route path={getMainRoute()} element={<MainPage />} />
+          <Route path={getProductsListRoute()} element={<ProductsListPage />} />
+          <Route
+            path={getProductInfoRoute(productInfoRouteParams)}
+            element={<ProductInfoPage />}
+          />
+        </Routes>
+      </BrowserRouter>
     </TrpcProvider>
   );
 }
