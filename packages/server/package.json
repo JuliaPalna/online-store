@@ -2,12 +2,14 @@
   "name": "@ecovetka-store/server",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node-dev --rs ./src/index.ts",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
+    "dev": "ts-node-dev --rs ./src/index.ts",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
     "start": "node ./dist/index.js",
-    "types": "tsc --noEmit --project ./tsconfig.json",
-    "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
+    "types": "tsc --noEmit --project ./tsconfig.json"
   },
   "dependencies": {
     "@trpc/server": "^10.37.1",
