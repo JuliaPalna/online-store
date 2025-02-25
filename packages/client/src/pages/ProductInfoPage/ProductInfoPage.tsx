@@ -1,16 +1,32 @@
 import { useParams } from "react-router-dom";
+import { trpc } from "../../lib/trpc";
+import { CardProduct } from "../../components";
 
 export function ProductInfoPage() {
   const { id } = useParams();
 
   if (!id) {
-    return "Error useParams";
+    return <span>Товар на найден</span>;
+  }
+
+  const { data, error, isLoading, isFetching, isError } =
+    trpc.getProduct.useQuery({ id: id });
+
+  if (isLoading || isFetching) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  if (!data.product) {
+    return <span>Товар на найден</span>;
   }
 
   return (
     <>
-      <p>страница товра + {id}</p>
-      {/* <CardProduct product={}></CardProduct> */}
+      <CardProduct product={data.product}></CardProduct>
     </>
   );
 }

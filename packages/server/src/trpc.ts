@@ -1,43 +1,23 @@
 import { initTRPC } from "@trpc/server";
+import _ from "lodash";
+import { z } from "zod";
 
-const products = [
-  {
-    id: "1",
-    name: "Товар 1",
-    description: "описание товара 1",
-    image: {
-      description: "описание картинки товара 1",
-      src: "./src/image/",
-    },
-    likes: 3,
-    balance: 3,
-    balanceStatus: "Заканчивается",
+const products = _.times(100, (i) => ({
+  id: `${i + 1}`,
+  name: `Товар ${i + 1}`,
+  description: `описание товара ${i + 1}`,
+  image: {
+    description: `описание картинки товара ${i + 1}`,
+    src: `./src/image/${i + 1}`,
   },
-  {
-    id: "2",
-    name: "Товар 2",
-    description: "описание товара 2",
-    image: {
-      description: "описание картинки товара 2",
-      src: "./src/image/",
-    },
-    likes: 10,
-    balance: 0,
-    balanceStatus: "Нет в наличии",
-  },
-  {
-    id: "3",
-    name: "Товар 3",
-    description: "описание товара 3",
-    image: {
-      description: "описание картинки товара 3",
-      src: "./src/image/",
-    },
-    likes: 5,
-    balance: 12,
-    balanceStatus: "В наличии",
-  },
-];
+  likes: 3,
+  balance: 3,
+  balanceStatus: "Заканчивается / Нет в наличии / В наличии",
+  text: _.times(
+    30,
+    (j) => `<p>Text paragrph ${j + 1} of idea ${i + 1}...</p>`,
+  ).join(""),
+}));
 
 const trpc = initTRPC.create();
 
@@ -45,8 +25,31 @@ export const trpcRouter = trpc.router({
   //get-запрос
   //http://localhost:3000/trpc/getProducts
   getProducts: trpc.procedure.query(() => {
-    return { products };
+    return {
+      products: products.map((product) =>
+        _.pick(product, [
+          "id",
+          "name",
+          "description",
+          "image",
+          "likes",
+          "balance",
+          "balanceStatus",
+        ]),
+      ),
+    };
   }),
+
+  getProduct: trpc.procedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .query(({ input }) => {
+      const product = products.find((product) => product.id === input.id);
+      return { product: product || null };
+    }),
 });
 
 export type TrpcRouter = typeof trpcRouter;
