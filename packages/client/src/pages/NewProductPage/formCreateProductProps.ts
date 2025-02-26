@@ -1,10 +1,7 @@
 export const formCreateProductProps = {
   name: "",
   description: "",
-  image: {
-    description: "",
-    src: "#",
-  },
+  imageSrc: "",
   count: 0,
 };
 

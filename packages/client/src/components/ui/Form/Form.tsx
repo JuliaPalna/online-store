@@ -9,8 +9,12 @@ interface IFormProps {
 export function Form({ nameButton, children, onSubmit }: IFormProps) {
   return (
     <form onSubmit={onSubmit} className="form">
-      {children.map((item) => {
-        return <Box className="wrap-item">{item}</Box>;
+      {children.map((item, key) => {
+        return (
+          <Box key={key} className="wrap-item">
+            {item}
+          </Box>
+        );
       })}
 
       <Button type="submit" disabled={false} className="button">

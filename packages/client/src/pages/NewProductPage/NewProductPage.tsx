@@ -46,12 +46,12 @@ export function NewProductPage() {
           />,
 
           <Field
-            name="count"
+            name="file"
             label="Выберите изображение"
             type="file"
-            value={formik.values["count"]}
+            value={formik.values["imageSrc"]}
             onChange={(event) =>
-              formik.setFieldValue("count", event.target.value)
+              formik.setFieldValue("imageSrc", event.target.value)
             }
           />,
         ]}
