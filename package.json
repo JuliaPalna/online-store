@@ -16,6 +16,8 @@
     "prettify:client": "npm run prettify --prefix packages/client",
     "prettify:server": "npm run prettify --prefix packages/server",
     "prettify": "npm run prettify:client & npm run prettify:server",
+    "stylelint": "npm run stylelint --prefix packages/client",
+    "stylecheck": "npm run stylecheck --prefix packages/client",
     "types:client": "npm run types --prefix packages/client",
     "types:server": "npm run types --prefix packages/server",
     "types": "npm run types:client & npm run types:server",
