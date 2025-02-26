@@ -1,7 +1,6 @@
-import { Image } from "../ui/Image";
-import { Text } from "../ui/Text";
-import { Title } from "../ui/Title";
+import { Image, Text, Title } from "../ui";
 import { IProduct } from "./IProduct";
+import css from "./index.module.scss";
 
 interface ICardProduct {
   product: IProduct;
@@ -10,11 +9,17 @@ interface ICardProduct {
 export function CardProduct({ product }: ICardProduct) {
   return (
     <>
-      <Title>{product.name}</Title>
-      <Text>{product.description}</Text>
-      <Image src={product.image.src} alt={product.image.description}></Image>
-      <Text>{`Likes: ${product.likes}`}</Text>
-      <Text>{product.balanceStatus}</Text>
+      <Title size={1} className={css.title}>
+        {product.name}
+      </Title>
+      <Text className={css.description}>{product.description}</Text>
+      <Image
+        src={product.image.src}
+        alt={product.image.description}
+        className={css.image}
+      />
+      <Text className={css.likes}>{`Likes: ${product.likes}`}</Text>
+      <Text className={css.status}>{product.balanceStatus}</Text>
     </>
   );
 }

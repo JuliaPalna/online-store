@@ -1,12 +1,8 @@
 interface IListItem extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
-  key: string;
+  className: string;
 }
 
-export function ListItem({ children, key }: IListItem) {
-  return (
-    <li className="list__item" key={key}>
-      {children}
-    </li>
-  );
+export function ListItem({ children, className }: IListItem) {
+  return <li className={className}>{children}</li>;
 }

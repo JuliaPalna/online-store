@@ -7,18 +7,25 @@ import {
   getProductsListRoute,
   productInfoRouteParams,
 } from "./lib/routes";
+import { Layout } from "./components";
+import "./styles/global.scss";
 
 function App() {
   return (
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={getMainRoute()} element={<MainPage />} />
-          <Route path={getProductsListRoute()} element={<ProductsListPage />} />
-          <Route
-            path={getProductInfoRoute(productInfoRouteParams)}
-            element={<ProductInfoPage />}
-          />
+          <Route element={<Layout />}>
+            <Route path={getMainRoute()} element={<MainPage />} />
+            <Route
+              path={getProductsListRoute()}
+              element={<ProductsListPage />}
+            />
+            <Route
+              path={getProductInfoRoute(productInfoRouteParams)}
+              element={<ProductInfoPage />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TrpcProvider>
