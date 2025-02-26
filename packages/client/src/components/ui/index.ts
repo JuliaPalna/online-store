@@ -8,3 +8,6 @@ export * from "./Text";
 export * from "./Title";
 export * from "../CardProduct";
 export * from "./Navigation";
+export * from "./Field";
+export * from "./Textarea";
+export * from "./Form";

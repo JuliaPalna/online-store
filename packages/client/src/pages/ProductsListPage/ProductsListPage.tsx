@@ -1,11 +1,5 @@
 import { trpc } from "../../lib/trpc";
-import {
-  List,
-  ListItem,
-  Title,
-  IProduct,
-  CardProduct,
-} from "../../components/ui";
+import { List, ListItem, Title, IProduct, CardProduct } from "../../components";
 import { Link } from "react-router-dom";
 import { getProductInfoRoute } from "../../lib/routes";
 
@@ -23,12 +17,12 @@ export function ProductsListPage() {
 
   return (
     <>
-      <Title>Список товаров</Title>
+      <Title className="">Список товаров</Title>
 
-      <List>
+      <List className="">
         {data.products.map((product: IProduct) => {
           return (
-            <ListItem key={product.id}>
+            <ListItem className="" key={product.id}>
               <Link to={getProductInfoRoute({ id: product.id })}>
                 <CardProduct product={product}></CardProduct>
               </Link>

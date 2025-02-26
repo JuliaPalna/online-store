@@ -12,3 +12,7 @@ export type TProductInfoRouteParams = typeof productInfoRouteParams;
 export function getProductInfoRoute({ id }: TProductInfoRouteParams): string {
   return `/products/${id}`;
 }
+
+export function getNewProductRoute(): string {
+  return "/products/new";
+}

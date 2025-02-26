@@ -1,8 +1,8 @@
-interface IBox extends React.HTMLAttributes<HTMLDivElement> {
+interface IBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className: string;
 }
 
-export function Box({ children, className }: IBox) {
+export function Box({ children, className }: IBoxProps) {
   return <div className={className}>{children}</div>;
 }

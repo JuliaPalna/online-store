@@ -11,7 +11,7 @@ const products = _.times(100, (i) => ({
     src: `./src/image/${i + 1}`,
   },
   likes: 3,
-  balance: 3,
+  count: 3,
   balanceStatus: "Заканчивается / Нет в наличии / В наличии",
   text: _.times(
     30,
@@ -33,7 +33,7 @@ export const trpcRouter = trpc.router({
           "description",
           "image",
           "likes",
-          "balance",
+          "count",
           "balanceStatus",
         ]),
       ),

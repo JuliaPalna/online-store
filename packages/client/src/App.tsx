@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TrpcProvider } from "./lib/trpc";
-import { MainPage, ProductInfoPage, ProductsListPage } from "./pages";
 import {
-  getMainRoute,
-  getProductInfoRoute,
-  getProductsListRoute,
-  productInfoRouteParams,
-} from "./lib/routes";
+  MainPage,
+  NewProductPage,
+  ProductInfoPage,
+  ProductsListPage,
+} from "./pages";
+import * as routs from "./lib/routes";
 import { Layout } from "./components";
 import "./styles/global.scss";
 
@@ -16,14 +16,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path={getMainRoute()} element={<MainPage />} />
+            <Route path={routs.getMainRoute()} element={<MainPage />} />
             <Route
-              path={getProductsListRoute()}
+              path={routs.getProductsListRoute()}
               element={<ProductsListPage />}
             />
             <Route
-              path={getProductInfoRoute(productInfoRouteParams)}
+              path={routs.getProductInfoRoute(routs.productInfoRouteParams)}
               element={<ProductInfoPage />}
+            />
+            <Route
+              path={routs.getNewProductRoute()}
+              element={<NewProductPage />}
             />
           </Route>
         </Routes>

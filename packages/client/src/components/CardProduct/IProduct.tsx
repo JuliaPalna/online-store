@@ -7,6 +7,6 @@ export interface IProduct {
     src: string;
   };
   likes: number;
-  balance: number;
+  count: number;
   balanceStatus: string;
 }
