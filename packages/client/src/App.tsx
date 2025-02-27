@@ -9,13 +9,14 @@ import {
 import * as routs from "./lib/routes";
 import { Layout } from "./components";
 import "./styles/global.scss";
+import { pageList } from "./lib/pagesList";
 
 function App() {
   return (
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<Layout props={pageList} />}>
             <Route path={routs.getMainRoute()} element={<MainPage />} />
             <Route
               path={routs.getProductsListRoute()}

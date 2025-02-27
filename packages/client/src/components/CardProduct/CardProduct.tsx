@@ -1,12 +1,8 @@
 import { Image, Text, Title } from "../ui";
-import { IProduct } from "./IProduct";
+import { ICardProductProps } from "./ICardProductProps";
 import css from "./index.module.scss";
 
-interface ICardProduct {
-  product: IProduct;
-}
-
-export function CardProduct({ product }: ICardProduct) {
+export function CardProduct({ product }: ICardProductProps) {
   return (
     <>
       <Title size={1} className={css.title}>
