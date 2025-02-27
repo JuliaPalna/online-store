@@ -3,6 +3,7 @@ interface IFieldProps {
   label: string;
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   type?: "password" | "text" | "email" | "number" | "file" | "tel";
 }
 
@@ -12,6 +13,7 @@ export function Field({
   type = "text",
   value,
   onChange,
+  onBlur,
 }: IFieldProps) {
   return (
     <>
@@ -23,6 +25,7 @@ export function Field({
         type={type}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
       />
     </>
   );

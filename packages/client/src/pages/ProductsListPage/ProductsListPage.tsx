@@ -2,6 +2,7 @@ import { trpc } from "../../lib/trpc";
 import { List, ListItem, Title, IProduct, CardProduct } from "../../components";
 import { Link } from "react-router-dom";
 import { getProductInfoRoute } from "../../lib/routes";
+import React from "react";
 
 export function ProductsListPage() {
   const { data, error, isLoading, isFetching, isError } =
@@ -22,11 +23,13 @@ export function ProductsListPage() {
       <List className="">
         {data.products.map((product: IProduct) => {
           return (
-            <ListItem className="" key={product.id}>
-              <Link to={getProductInfoRoute({ id: product.id })}>
-                <CardProduct product={product}></CardProduct>
-              </Link>
-            </ListItem>
+            <React.Fragment key={product.id}>
+              <ListItem className="">
+                <Link to={getProductInfoRoute({ id: product.id })}>
+                  <CardProduct product={product} />
+                </Link>
+              </ListItem>
+            </React.Fragment>
           );
         })}
       </List>

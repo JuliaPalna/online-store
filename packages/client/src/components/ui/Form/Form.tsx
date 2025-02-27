@@ -1,25 +1,21 @@
-import { Box, Button } from "..";
+import React from "react";
+import { Box } from "..";
 
 interface IFormProps {
-  nameButton: string;
   children: React.ReactNode[];
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function Form({ nameButton, children, onSubmit }: IFormProps) {
+export function Form({ children, onSubmit }: IFormProps) {
   return (
     <form onSubmit={onSubmit} className="form">
       {children.map((item, key) => {
         return (
-          <Box key={key} className="wrap-item">
-            {item}
-          </Box>
+          <React.Fragment key={`formitem${key}}`}>
+            <Box className="wrap-item">{item}</Box>
+          </React.Fragment>
         );
       })}
-
-      <Button type="submit" disabled={false} className="button">
-        {nameButton}
-      </Button>
     </form>
   );
 }

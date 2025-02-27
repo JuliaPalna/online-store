@@ -1,61 +1,84 @@
-import { useFormik } from "formik";
-import { Field, Form, Textarea, Title } from "../../components";
-import {
-  formCreateProductProps,
-  TFormCreateProductProps,
-} from "./formCreateProductProps";
+import { Formik } from "formik";
+import { Button, Field, Form, Text, Textarea, Title } from "../../components";
+import { formCreateProductProps } from "./formCreateProductProps";
+import { withZodSchema } from "formik-validator-zod";
+import { formCreateProductSchema } from "./formCreateProductSchema";
 
 export function NewProductPage() {
-  const formik = useFormik<TFormCreateProductProps>({
-    initialValues: formCreateProductProps,
-    onSubmit: () => {
-      // console.info("Submitted", values);
-    },
-  });
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    formik.handleSubmit();
-  }
-
   return (
     <>
       <Title className={""}>Форма создания товара</Title>
 
-      <Form
-        nameButton="Создать"
-        onSubmit={handleSubmit}
-        children={[
-          <Field
-            name="name"
-            label="Наименование"
-            type="text"
-            value={formik.values["name"]}
-            onChange={(event) =>
-              formik.setFieldValue("name", event.target.value)
-            }
-          />,
+      <Formik
+        initialValues={formCreateProductProps}
+        validate={withZodSchema(formCreateProductSchema)}
+        onSubmit={() => {
+          // console.info("Submitted", values);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <Form onSubmit={handleSubmit}>
+            <Field
+              name="name"
+              label="Наименование"
+              type="text"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.name && touched.name && (
+              <Text className="error">{errors.name}</Text>
+            )}
 
-          <Textarea
-            name="description"
-            label="Описание"
-            value={formik.values["description"]}
-            onChange={(event) =>
-              formik.setFieldValue("description", event.target.value)
-            }
-          />,
+            <Textarea
+              name="description"
+              label="Описание"
+              value={values.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.description && touched.description && (
+              <Text className="error">{errors.description}</Text>
+            )}
 
-          <Field
-            name="file"
-            label="Выберите изображение"
-            type="file"
-            value={formik.values["imageSrc"]}
-            onChange={(event) =>
-              formik.setFieldValue("imageSrc", event.target.value)
-            }
-          />,
-        ]}
-      />
+            <Field
+              name="count"
+              label="Количество"
+              type="number"
+              value={values.count}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.count && touched.count && (
+              <Text className="error">{errors.count}</Text>
+            )}
+
+            <Field
+              name="imageSrc"
+              label="Выберите изображение"
+              type="file"
+              value={values.imageSrc}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.imageSrc && touched.imageSrc && (
+              <Text className="error">{errors.imageSrc}</Text>
+            )}
+
+            <Button type="submit" disabled={isSubmitting} className="button">
+              Создать
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 }
