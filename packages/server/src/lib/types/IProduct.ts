@@ -1,3 +1,5 @@
+import { TBalanceStatus } from "./TBalanceStatus";
+
 export interface IProduct {
   id: string;
   name: string;
@@ -6,7 +8,7 @@ export interface IProduct {
     description: string;
     src: string;
   };
-  likes: number;
+  likes?: number;
   count: number;
-  balanceStatus: string;
+  balanceStatus: TBalanceStatus;
 }

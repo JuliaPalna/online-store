@@ -1,20 +1,28 @@
 import { Formik } from "formik";
 import { Button, Field, Form, Text, Textarea, Title } from "../../components";
-import { formCreateProductProps } from "./formCreateProductProps";
+import {
+  initialProductProps,
+  TInitialProductProps,
+} from "./initialProductProps";
 import { withZodSchema } from "formik-validator-zod";
-import { formCreateProductSchema } from "./formCreateProductSchema";
+import { trpc } from "../../lib/trpc";
+import { createProductSchema } from "../../../../server/src/lib/shema/createProductSchema/shema";
 
 export function NewProductPage() {
+  const createProductTrpc = trpc.createProduct.useMutation();
+
+  async function createProduct(values: TInitialProductProps) {
+    await createProductTrpc.mutateAsync(values);
+  }
+
   return (
     <>
       <Title className={""}>Форма создания товара</Title>
 
       <Formik
-        initialValues={formCreateProductProps}
-        validate={withZodSchema(formCreateProductSchema)}
-        onSubmit={() => {
-          // console.info("Submitted", values);
-        }}
+        initialValues={initialProductProps}
+        validate={withZodSchema(createProductSchema)}
+        onSubmit={createProduct}
       >
         {({
           values,

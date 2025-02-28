@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const imageValidationRegex: RegExp = /\.(?:jpe?g|svg|png|gif)$/;
 
-export const formCreateProductSchema = z.object({
+export const createProductSchema = z.object({
   name: z
     .string()
     .nonempty()
@@ -19,3 +19,5 @@ export const formCreateProductSchema = z.object({
     ),
   count: z.number(),
 });
+
+export type TCreateProductSchema = typeof createProductSchema;

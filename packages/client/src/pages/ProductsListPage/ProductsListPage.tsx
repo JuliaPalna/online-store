@@ -1,8 +1,9 @@
 import { trpc } from "../../lib/trpc";
-import { List, ListItem, Title, IProduct, CardProduct } from "../../components";
+import { List, ListItem, Title, CardProduct } from "../../components";
 import { Link } from "react-router-dom";
 import { getProductInfoRoute } from "../../lib/routes";
 import React from "react";
+import { IProduct } from "../../../../server/src/lib/types";
 
 export function ProductsListPage() {
   const { data, error, isLoading, isFetching, isError } =
