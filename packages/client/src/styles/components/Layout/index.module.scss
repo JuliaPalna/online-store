@@ -1,8 +1,6 @@
-@use "../../../../../node_modules/include-media/dist/_include-media" as *;
-@use "../../styles/_vars" as *;
-@use "../../styles/_mixins" as *;
-
-$breakpoint: "<=900px";
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../vars" as *;
+@use "../../_mixins" as *;
 
 .layout {
   display: flex;
@@ -13,11 +11,12 @@ $breakpoint: "<=900px";
   }
 
   .navigation {
-    height: 100%;
     overflow: auto;
     flex: 0 0 200px;
     padding: 20px 30px;
     border-right: 1px solid $black;
+    height: 100%;
+
     @include media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
@@ -27,9 +26,9 @@ $breakpoint: "<=900px";
     }
 
     .logo {
+      margin-bottom: 10px;
       font-weight: bold;
       font-size: 20px;
-      margin-bottom: 10px;
     }
 
     .menu {

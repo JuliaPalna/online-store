@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { trpc } from "../../lib/trpc";
 import { CardProduct } from "../../components";
+import { ReactElement } from "react";
+import { trpc } from "../../api/trpc";
 
-export function ProductInfoPage() {
+export function ProductInfoPage(): ReactElement {
   const { id } = useParams();
 
   if (!id) {

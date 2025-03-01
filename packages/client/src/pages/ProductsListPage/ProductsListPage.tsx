@@ -1,11 +1,13 @@
-import { trpc } from "../../lib/trpc";
+import cn from "classnames";
+import { trpc } from "../../api/trpc";
 import { List, ListItem, Title, CardProduct } from "../../components";
 import { Link } from "react-router-dom";
 import { getProductInfoRoute } from "../../lib/routes";
-import React from "react";
+import React, { ReactElement } from "react";
 import { IProduct } from "../../../../server/src/lib/types";
+import css from "../../styles/components/Flex/index.module.scss";
 
-export function ProductsListPage() {
+export function ProductsListPage(): ReactElement {
   const { data, error, isLoading, isFetching, isError } =
     trpc.getProducts.useQuery();
 
@@ -19,9 +21,9 @@ export function ProductsListPage() {
 
   return (
     <>
-      <Title className="">Список товаров</Title>
+      <Title>Список товаров</Title>
 
-      <List className="">
+      <List className={cn({ [css.flex]: true, [css["column"]]: true })}>
         {data.products.map((product: IProduct) => {
           return (
             <React.Fragment key={product.id}>

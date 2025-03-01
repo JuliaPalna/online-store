@@ -1,8 +1,9 @@
+import { ReactElement } from "react";
 import { Image, Text, Title } from "../ui";
 import { ICardProductProps } from "./ICardProductProps";
 import css from "./index.module.scss";
 
-export function CardProduct({ product }: ICardProductProps) {
+export function CardProduct({ product }: ICardProductProps): ReactElement {
   return (
     <>
       <Title size={1} className={css.title}>

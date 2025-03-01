@@ -1,10 +1,16 @@
+import { ReactElement } from "react";
+
 interface ITitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: string;
-  className: string;
+  className?: string;
   size?: 1 | 2 | 3;
 }
 
-export function Title({ children, className, size = 1 }: ITitleProps) {
+export function Title({
+  children,
+  className,
+  size = 1,
+}: ITitleProps): ReactElement {
   switch (size) {
     case 1:
       return <h1 className={className}>{children}</h1>;

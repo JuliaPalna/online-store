@@ -12,3 +12,5 @@ export interface IProduct {
   count: number;
   balanceStatus: TBalanceStatus;
 }
+
+export type TProductsList = IProduct[];

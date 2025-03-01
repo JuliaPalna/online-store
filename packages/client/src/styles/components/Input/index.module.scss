@@ -1,0 +1,20 @@
+@use "../../_vars" as *;
+@use "../../_mixins/" as *;
+
+.input {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid $black;
+  border-radius: 3px;
+  background-color: $white;
+  outline: none;
+
+  &:focus {
+    border-color: $blue;
+  }
+
+  &.invalid {
+    border-color: $red;
+  }
+}

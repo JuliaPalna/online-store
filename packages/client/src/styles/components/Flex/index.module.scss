@@ -1,0 +1,10 @@
+.flex {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 20px;
+  }
+}

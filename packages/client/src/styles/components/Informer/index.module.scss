@@ -1,0 +1,22 @@
+@use "../../vars" as *;
+@use "../../_mixins" as *;
+
+.informer {
+  padding: $paddingMiddle;
+  border-radius: $borderRadiusSmall;
+
+  &.success {
+    color: $success;
+    background-color: $successBackgroundColor;
+  }
+
+  &.error {
+    color: $error;
+    background-color: $errorBackgroundColor;
+  }
+
+  &.info {
+    color: $black;
+    background-color: $white;
+  }
+}

@@ -1,13 +1,10 @@
+import { ReactElement } from "react";
+
 interface IBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className: string;
-  key?: string | number;
+  className?: string;
 }
 
-export function Box({ children, className, key }: IBoxProps) {
-  return (
-    <div className={className} key={key}>
-      {children}
-    </div>
-  );
+export function Box({ children, className }: IBoxProps): ReactElement {
+  return <div className={className}>{children}</div>;
 }

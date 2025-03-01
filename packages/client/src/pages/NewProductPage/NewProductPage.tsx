@@ -1,19 +1,20 @@
 import { Formik } from "formik";
 import { Button, Field, Form, Text, Textarea, Title } from "../../components";
-import {
-  initialProductProps,
-  TInitialProductProps,
-} from "./initialProductProps";
+import { initialProductProps } from "./initialProductProps";
 import { withZodSchema } from "formik-validator-zod";
-import { trpc } from "../../lib/trpc";
+import { trpc } from "../../api/trpc";
 import { createProductSchema } from "../../../../server/src/lib/shema/createProductSchema/shema";
+import { useDispatch } from "../../hook/useDispatch";
+import { Input } from "../../components/ui/Input";
+import { Informer } from "../../components/ui/Informer";
+import { ReactElement } from "react";
 
-export function NewProductPage() {
+export function NewProductPage(): ReactElement {
   const createProductTrpc = trpc.createProduct.useMutation();
 
-  async function createProduct(values: TInitialProductProps) {
-    await createProductTrpc.mutateAsync(values);
-  }
+  const { isSuccess, error, dispatch } = useDispatch(async (props) => {
+    await createProductTrpc.mutateAsync(props);
+  });
 
   return (
     <>
@@ -22,7 +23,10 @@ export function NewProductPage() {
       <Formik
         initialValues={initialProductProps}
         validate={withZodSchema(createProductSchema)}
-        onSubmit={createProduct}
+        onSubmit={(values, actions) => {
+          dispatch(values);
+          actions.resetForm();
+        }}
       >
         {({
           values,
@@ -33,56 +37,93 @@ export function NewProductPage() {
           handleSubmit,
           isSubmitting,
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <Field
               name="name"
               label="Наименование"
-              type="text"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.name && touched.name && (
-              <Text className="error">{errors.name}</Text>
-            )}
-
-            <Textarea
-              name="description"
-              label="Описание"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.description && touched.description && (
-              <Text className="error">{errors.description}</Text>
-            )}
+              disabled={isSubmitting}
+              error={errors.name && touched.name && errors.name}
+            >
+              <Input
+                name="name"
+                type="text"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={isSubmitting}
+                invalid={!!(errors.name && touched.name)}
+              />
+            </Field>
 
             <Field
               name="count"
               label="Количество"
-              type="number"
-              value={values.count}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.count && touched.count && (
-              <Text className="error">{errors.count}</Text>
-            )}
+              disabled={isSubmitting}
+              error={errors.count && touched.count && errors.count}
+            >
+              <Input
+                name="count"
+                type="number"
+                value={values.count}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={isSubmitting}
+                invalid={!!(errors.count && touched.count)}
+              />
+            </Field>
 
+            <Field
+              name="description"
+              label="Описание"
+              disabled={isSubmitting}
+              error={
+                errors.description && touched.description && errors.description
+              }
+            >
+              <Textarea
+                name="description"
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={isSubmitting}
+                invalid={!!(errors.description && touched.description)}
+              />
+            </Field>
             <Field
               name="imageSrc"
               label="Выберите изображение"
-              type="file"
-              value={values.imageSrc}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.imageSrc && touched.imageSrc && (
-              <Text className="error">{errors.imageSrc}</Text>
+              disabled={isSubmitting}
+              error={errors.imageSrc && touched.imageSrc && errors.imageSrc}
+            >
+              <Input
+                name="imageSrc"
+                type="file"
+                value={values.imageSrc}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={isSubmitting}
+                invalid={!!(errors.imageSrc && touched.imageSrc)}
+              />
+            </Field>
+
+            {!!isSuccess && (
+              <Informer status="success">
+                <Text>Товар создан</Text>
+              </Informer>
+            )}
+            {!!error && (
+              <Informer status="error">
+                <Text>{error}</Text>
+              </Informer>
             )}
 
             <Button type="submit" disabled={isSubmitting} className="button">
-              Создать
+              {isSubmitting ? "isSubmitting..." : "Создать"}
             </Button>
           </Form>
         )}

@@ -20,4 +20,4 @@ export const createProductSchema = z.object({
   count: z.number(),
 });
 
-export type TCreateProductSchema = typeof createProductSchema;
+export type TCreateProductSchema = z.infer<typeof createProductSchema>;

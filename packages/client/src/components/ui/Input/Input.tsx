@@ -1,27 +1,31 @@
 import cn from "classnames";
-import css from "../../../styles/components/Textarea/index.module.scss";
+import css from "../../../styles/components/Input/index.module.scss";
 import { ReactElement } from "react";
-interface ITextareaProps {
+
+interface IInputProps {
   name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  type?: "password" | "text" | "email" | "number" | "file" | "tel";
   disabled: boolean;
   invalid?: boolean;
 }
 
-export function Textarea({
+export function Input({
   name,
+  type = "text",
   value,
   onChange,
   onBlur,
   disabled,
   invalid,
-}: ITextareaProps): ReactElement {
+}: IInputProps): ReactElement {
   return (
-    <textarea
+    <input
       id={name}
       name={name}
+      type={type}
       value={value}
       onChange={onChange}
       onBlur={onBlur}

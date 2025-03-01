@@ -1,0 +1,19 @@
+@use "../../_vars" as *;
+@use "../../_mixins/" as *;
+
+.field {
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+
+  .error {
+    margin-top: 4px;
+    color: $red;
+  }
+}

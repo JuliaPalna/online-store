@@ -1,0 +1,28 @@
+@use "../../vars" as *;
+@use "../../_mixins" as *;
+
+.button {
+  padding: 8px 15px;
+  border-radius: $borderRadiusSmall;
+  border-color: $black;
+  font-weight: bold;
+  color: $buttonColor;
+  background-color: $buttonBackgroundColor;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: $buttonHover;
+  }
+
+  &:active {
+    background-color: $buttonActive;
+  }
+
+  &.disabled {
+    color: #d9d9d9;
+    background-color: #929292;
+    pointer-events: none;
+  }
+}

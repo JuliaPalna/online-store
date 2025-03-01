@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Box, List, ListItem, Navigation } from "../ui";
-import css from "./index.module.scss";
+import css from "../../styles/components/Layout/index.module.scss";
 import { ILayoutProps } from "./ILayoutProps";
 
-export function Layout({ props }: { props: ILayoutProps[] }) {
+export function Layout({ props }: { props: ILayoutProps[] }): ReactElement {
   return (
     <Box className={css.layout}>
       <Navigation className={css.navigation}>

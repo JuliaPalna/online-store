@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { products, trpc } from "../../lib";
+import { IProduct } from "../../lib/types";
+import { isFindItem } from "../../utils/isFindItem";
 
 export const getProductTrpcRoute = trpc.procedure
   .input(
@@ -8,6 +10,11 @@ export const getProductTrpcRoute = trpc.procedure
     }),
   )
   .query(({ input }) => {
-    const product = products.find((product) => product.id === input.id);
+    const product: IProduct | undefined = isFindItem({
+      array: products,
+      element: input.id,
+      property: "id",
+    });
+
     return { product: product || null };
   });

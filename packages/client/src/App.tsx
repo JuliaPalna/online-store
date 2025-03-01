@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { TrpcProvider } from "./lib/trpc";
+import { TrpcProvider } from "./api/trpc";
 import {
   MainPage,
   NewProductPage,

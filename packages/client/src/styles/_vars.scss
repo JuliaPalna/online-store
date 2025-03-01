@@ -1,10 +1,26 @@
+$breakpoint: "<=900px";
+
+$defaultFontFamily: "Helvetica", "Arial", sans-serif;
+$defaultFontSize: 14px;
+
+$defaultLineHeight: 1.2;
+$paddingMiddle: 10px;
+$borderRadiusSmall: 3px;
+
 $white: #fff;
 $black: #000;
 $blue: #00c;
 $red: #c00;
 
-$defaultFontFamily: "Helvetica", "Arial", sans-serif;
-$defaultFontSize: 14px;
 $defaultBackgroundColor: $white;
 $defaultTextColor: $black;
-$defaultLineHeight: 1.2;
+
+$success: #2b6d2b;
+$successBackgroundColor: #d7ffd7;
+$error: #631717;
+$errorBackgroundColor: #ffd1d1;
+
+$buttonColor: $black;
+$buttonBackgroundColor: $white;
+$buttonHover: rgb(97, 97, 241);
+$buttonActive: rgb(29, 29, 223);
