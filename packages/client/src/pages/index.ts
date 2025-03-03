@@ -3,4 +3,6 @@ export * from "./MainPage";
 export * from "./NewProductPage";
 export * from "./ProductInfoPage";
 export * from "./ProductsListPage";
+export * from "./SingInPage";
+export * from "./SingUpPage";
 // @endindex

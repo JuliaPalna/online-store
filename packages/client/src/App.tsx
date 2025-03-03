@@ -5,11 +5,13 @@ import {
   NewProductPage,
   ProductInfoPage,
   ProductsListPage,
+  SingInPage,
+  SingUpPage,
 } from "./pages";
 import * as routs from "./lib/routes";
 import { Layout } from "./components";
-import "./styles/global.scss";
 import { pageList } from "./lib/pagesList";
+import "./styles/global.scss";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
               path={routs.getNewProductRoute()}
               element={<NewProductPage />}
             />
+            <Route path={routs.singUpRoute()} element={<SingUpPage />} />
+            <Route path={routs.singInRoute()} element={<SingInPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,4 +1,4 @@
-import { trpc } from "../../lib";
+import { trpc } from "../../api/trpc";
 import { IProduct } from "../../types";
 import { createProductSchema } from "../../lib/shema/createProductSchema/shema";
 

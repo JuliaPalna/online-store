@@ -1,26 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { TInitialProductProps } from "../pages/NewProductPage/initialProductProps";
 
-export function useDispatch(
-  callback: (props: TInitialProductProps) => Promise<void>,
-) {
+export function useDispatch(callback: (values: any) => Promise<void>) {
   const [isSuccess, setisSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const dispatch = async (props: TInitialProductProps) => {
+  const dispatch = async (props: any) => {
     try {
       await callback(props);
       setisSuccess(true);
-      // setTimeout(() => {
-      //   setisSuccess(false);
-      // }, 4000);
+      setTimeout(() => {
+        setisSuccess(false);
+      }, 4000);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       }
-      // setTimeout(() => {
-      //   setError(null);
-      // }, 4000);
+      setTimeout(() => {
+        setError(null);
+      }, 4000);
     }
   };
 

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { trpc } from "../../lib";
+import { trpc } from "../../api/trpc";
 import { IProduct } from "../../types";
 
 export const getProductTrpcRoute = trpc.procedure

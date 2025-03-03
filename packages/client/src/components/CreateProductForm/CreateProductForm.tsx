@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { Button, Field, Text, Textarea, Title, Informer, Input } from "../ui";
-import css from "../../styles/components/CreateProductForm/index.module.scss";
+import { Field, Textarea, Input } from "../ui";
 import { FormikProps } from "formik";
 import { TInitialProductProps } from "../../pages/NewProductPage/initialProductProps";
+import { Form } from "../Form";
 
 interface ICreateProductFormProps {
   formik: FormikProps<TInitialProductProps>;
@@ -16,15 +16,18 @@ export function CreateProductForm({
   errorCreate,
 }: ICreateProductFormProps): ReactElement {
   return (
-    <form
+    <Form
+      disabled={formik.isSubmitting}
+      error={errorCreate}
+      isSuccess={isSuccessCreate}
       onSubmit={(event) => {
         event.preventDefault();
         formik.handleSubmit();
       }}
-      className={css.form}
+      title="Форма создания товара"
+      buttonName={formik.isSubmitting ? "Отправка..." : "Создать"}
+      successMessage="Товар создан"
     >
-      <Title className={css.title}>Форма создания товара</Title>
-
       <Field
         name="name"
         label="Наименование"
@@ -99,25 +102,6 @@ export function CreateProductForm({
           invalid={!!(formik.errors.price && formik.touched.price)}
         />
       </Field>
-
-      {isSuccessCreate && (
-        <Informer status="success">
-          <Text>Товар создан</Text>
-        </Informer>
-      )}
-      {!!errorCreate && (
-        <Informer status="error">
-          <Text>{errorCreate}</Text>
-        </Informer>
-      )}
-
-      <Button
-        type="submit"
-        disabled={formik.isSubmitting}
-        className={css.button}
-      >
-        {formik.isSubmitting ? "formik.isSubmitting..." : "Создать"}
-      </Button>
-    </form>
+    </Form>
   );
 }

@@ -14,4 +14,12 @@ export const pageList: ILayoutProps[] = [
     name: "Список товаров",
     route: routes.getProductsListRoute(),
   },
+  {
+    name: "Регистрация",
+    route: routes.singUpRoute(),
+  },
+  {
+    name: "Вход",
+    route: routes.singInRoute(),
+  },
 ];

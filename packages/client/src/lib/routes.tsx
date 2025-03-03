@@ -16,3 +16,11 @@ export function getProductInfoRoute({ id }: TProductInfoRouteParams): string {
 export function getNewProductRoute(): string {
   return "/products/new";
 }
+
+export function singUpRoute(): string {
+  return "/products/singup";
+}
+
+export function singInRoute(): string {
+  return "/products/singin";
+}

@@ -1,1 +1,1 @@
-export * from "./createProductForm";
+export * from "./CreateProductForm";
