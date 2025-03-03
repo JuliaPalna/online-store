@@ -1,11 +1,9 @@
-import cn from "classnames";
-import { trpc } from "../../api/trpc";
-import { List, ListItem, Title, CardProduct } from "../../components";
-import { Link } from "react-router-dom";
-import { getProductInfoRoute } from "../../lib/routes";
 import React, { ReactElement } from "react";
-import { IProduct } from "../../../../server/src/lib/types";
-import css from "../../styles/components/Flex/index.module.scss";
+import { Link } from "react-router-dom";
+import { trpc } from "../../api/trpc";
+import { List, ListItem, Title, CardProduct, Box } from "../../components";
+import { getProductInfoRoute } from "../../lib/routes";
+import css from "./index.module.scss";
 
 export function ProductsListPage(): ReactElement {
   const { data, error, isLoading, isFetching, isError } =
@@ -21,15 +19,20 @@ export function ProductsListPage(): ReactElement {
 
   return (
     <>
-      <Title>Список товаров</Title>
+      <Title className={css.title}>Каталог</Title>
 
-      <List className={cn({ [css.flex]: true, [css["column"]]: true })}>
-        {data.products.map((product: IProduct) => {
+      <List className={css.list}>
+        {data.products.map((product) => {
           return (
             <React.Fragment key={product.id}>
-              <ListItem className="">
-                <Link to={getProductInfoRoute({ id: product.id })}>
-                  <CardProduct product={product} />
+              <ListItem className={css.item}>
+                <Link
+                  className={css.link}
+                  to={getProductInfoRoute({ id: product.id })}
+                >
+                  <Box className={css.wrap}>
+                    <CardProduct product={product} />
+                  </Box>
                 </Link>
               </ListItem>
             </React.Fragment>

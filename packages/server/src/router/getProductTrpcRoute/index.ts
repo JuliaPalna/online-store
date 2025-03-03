@@ -1,7 +1,6 @@
 import { z } from "zod";
-import { products, trpc } from "../../lib";
-import { IProduct } from "../../lib/types";
-import { isFindItem } from "../../utils/isFindItem";
+import { trpc } from "../../lib";
+import { IProduct } from "../../types";
 
 export const getProductTrpcRoute = trpc.procedure
   .input(
@@ -9,11 +8,11 @@ export const getProductTrpcRoute = trpc.procedure
       id: z.string(),
     }),
   )
-  .query(({ input }) => {
-    const product: IProduct | undefined = isFindItem({
-      array: products,
-      element: input.id,
-      property: "id",
+  .query(async ({ ctx, input }) => {
+    const product: IProduct | null = await ctx.prisma.product.findUnique({
+      where: {
+        id: input.id,
+      },
     });
 
     return { product: product || null };

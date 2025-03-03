@@ -1,5 +1,5 @@
-import { IProduct } from "../../../../server/src/lib/types";
-
 export interface ICardProductProps {
-  product: IProduct;
+  name: string;
+  price: number;
+  likes: number;
 }

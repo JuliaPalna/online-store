@@ -5,13 +5,14 @@
   display: block;
   padding: 10px;
   width: 100%;
-  border: 1px solid $black;
-  border-radius: 3px;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadiusSmall;
   background-color: $white;
   outline: none;
+  cursor: pointer;
 
   &:focus {
-    border-color: $blue;
+    border-color: $borderColorFocus;
   }
 
   &.invalid {

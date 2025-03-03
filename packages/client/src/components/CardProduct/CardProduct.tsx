@@ -1,22 +1,25 @@
 import { ReactElement } from "react";
-import { Image, Text, Title } from "../ui";
+import { Box, Button, Text, Title } from "../ui";
 import { ICardProductProps } from "./ICardProductProps";
-import css from "./index.module.scss";
+import css from "../../styles/components/CardProduct/index.module.scss";
 
-export function CardProduct({ product }: ICardProductProps): ReactElement {
+export function CardProduct({
+  product,
+}: {
+  product: ICardProductProps;
+}): ReactElement {
   return (
     <>
+      <Box className={css.wrapImage}>Картинка</Box>
       <Title size={1} className={css.title}>
         {product.name}
       </Title>
-      <Text className={css.description}>{product.description}</Text>
-      <Image
-        src={product.image.src}
-        alt={product.image.description}
-        className={css.image}
-      />
+      <Text className={css.price}>{`Цена: ${product.price}`}</Text>
       <Text className={css.likes}>{`Likes: ${product.likes}`}</Text>
-      <Text className={css.status}>{product.balanceStatus}</Text>
+
+      <Button className={css.button} disabled={false}>
+        Купить
+      </Button>
     </>
   );
 }

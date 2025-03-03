@@ -25,5 +25,9 @@
     "moduleResolution": "Node",
     "target": "ESNext"
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "../client/src/utils",
+    "../client/src/types/TBalanceStatus.ts"
+  ]
 }

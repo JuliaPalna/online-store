@@ -1,13 +1,23 @@
 @use "./vars" as *;
 @use "../../../../node_modules/include-media/dist/_include-media" as *;
 
-@mixin link($color: $blue, $hoverColor: $red) {
+@mixin link($color: $black, $hoverColor: $grey) {
   color: $color;
   transition: color 200ms ease;
+  width: 100%;
+  height: 100%;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   &:hover,
   &:active {
-    color: $hoverColor;
     transition: none;
   }
 }
@@ -20,4 +30,61 @@
 @mixin h2 {
   font-size: 24px;
   font-weight: bold;
+}
+
+@mixin h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@mixin flex {
+  display: flex;
+  gap: 20px;
+}
+
+@mixin flexColumn {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+}
+
+@mixin flexRow {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+}
+
+@mixin width {
+  @include media($breakpointMin900) {
+    width: 33.3333%;
+  }
+}
+
+@mixin button {
+  padding: 8px 15px;
+  border: 1px solid $buttonBackgroundColor;
+  border-radius: $borderRadiusSmall;
+  color: $buttonColor;
+  background-color: $buttonBackgroundColor;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: $buttonHover;
+  }
+
+  &:active {
+    background-color: $buttonActive;
+  }
+
+  &.disabled {
+    color: #d9d9d9;
+    background-color: #929292;
+    pointer-events: none;
+  }
 }

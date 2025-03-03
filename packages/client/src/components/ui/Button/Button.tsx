@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
-import css from "../../../styles/components/Button/index.module.scss";
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: string;
-  // className?: string;
+  className?: string;
   onClick?: (e: React.MouseEvent) => void;
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
@@ -10,14 +9,14 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 export function Button({
   children,
-  // className,
+  className,
   onClick,
   type = "button",
   disabled = true,
 }: IButtonProps): ReactElement {
   return (
     <button
-      className={css.button}
+      className={className}
       onClick={onClick}
       type={type}
       disabled={disabled}

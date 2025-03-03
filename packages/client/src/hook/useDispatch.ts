@@ -18,9 +18,9 @@ export function useDispatch(
       if (error instanceof Error) {
         setError(error.message);
       }
-      setTimeout(() => {
-        setError(null);
-      }, 4000);
+      // setTimeout(() => {
+      //   setError(null);
+      // }, 4000);
     }
   };
 

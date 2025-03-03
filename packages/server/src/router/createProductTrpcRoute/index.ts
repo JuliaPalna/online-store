@@ -1,34 +1,28 @@
-import { products, trpc } from "../../lib";
-import { getbalanceStatus } from "../../utils/getBalanceStatus";
-import { IProduct } from "../../lib/types";
+import { trpc } from "../../lib";
+import { IProduct } from "../../types";
 import { createProductSchema } from "../../lib/shema/createProductSchema/shema";
-import { isFindItem } from "../../utils/isFindItem";
 
 export const createProductTrpcRoute = trpc.procedure
   .input(createProductSchema)
-  .mutation(({ input }) => {
-    const isFindProduct: IProduct | undefined = isFindItem({
-      array: products,
-      element: input,
-      property: "name",
+  .mutation(async ({ ctx, input }) => {
+    const isFindProduct: IProduct | null = await ctx.prisma.product.findUnique({
+      where: {
+        name: input.name,
+      },
     });
 
     if (isFindProduct) {
       throw Error(`Товар ${input.name} уже есть в каталоге`);
     }
 
-    const newProduct: IProduct = {
-      id: input.name,
-      name: input.name,
-      description: input.description,
-      image: {
-        description: input.name,
-        src: input.imageSrc,
-      },
-      count: input.count,
-      balanceStatus: getbalanceStatus({ count: input.count }),
+    const newProduct = {
+      ...input,
+      likes: 0,
     };
 
-    products.unshift(newProduct);
+    await ctx.prisma.product.create({
+      data: newProduct,
+    });
+
     return true;
   });

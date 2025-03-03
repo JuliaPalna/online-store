@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-const imageValidationRegex: RegExp = /\.(?:jpe?g|svg|png|gif)$/;
-
 export const createProductSchema = z.object({
   name: z
     .string()
@@ -11,12 +9,7 @@ export const createProductSchema = z.object({
     .string()
     .nonempty()
     .min(20, "Текст должен быть длиной не менее 20 символов."),
-  imageSrc: z
-    .string()
-    .refine(
-      (value) => imageValidationRegex.test(value),
-      "Прикрепите изображение",
-    ),
+  price: z.number(),
   count: z.number(),
 });
 

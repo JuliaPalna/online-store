@@ -1,0 +1,29 @@
+@use "../../_vars.scss" as *;
+@use "../../_mixins.scss" as *;
+
+.wrapImage {
+  position: relative;
+  padding-bottom: 100%;
+  border: 1px solid $black;
+  border-radius: $borderRadiusSmall;
+}
+
+.title {
+  @include h2;
+}
+
+.button {
+  @include button;
+}
+// .description {
+
+// }
+// .image {
+
+// }
+// .likes {
+
+// }
+// .status {
+
+// }

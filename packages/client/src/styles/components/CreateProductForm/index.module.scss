@@ -1,0 +1,15 @@
+@use "../../vars" as *;
+@use "../../_mixins.scss" as *;
+
+.form {
+  @include flex;
+  @include flexColumn;
+
+  .title {
+    @include h1;
+  }
+
+  .button {
+    @include button;
+  }
+}

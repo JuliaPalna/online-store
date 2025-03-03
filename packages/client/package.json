@@ -27,6 +27,7 @@
     "reset-css": "^5.0.2",
     "sass": "^1.85.1",
     "server": "*",
+    "superjson": "^2.2.2",
     "zod": "^3.24.2"
   },
   "devDependencies": {

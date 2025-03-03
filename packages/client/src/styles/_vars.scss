@@ -1,26 +1,34 @@
 $breakpoint: "<=900px";
+$breakpointMin900: ">=900px";
 
-$defaultFontFamily: "Helvetica", "Arial", sans-serif;
+$borderChek: "1px solid $red";
+
+$defaultFontFamily: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
 $defaultFontSize: 14px;
 
 $defaultLineHeight: 1.2;
 $paddingMiddle: 10px;
-$borderRadiusSmall: 3px;
+$borderRadiusSmall: 4px;
 
 $white: #fff;
+$grey: #d5d5d7;
 $black: #000;
 $blue: #00c;
-$red: #c00;
+$red: #631717;
+$green: #3c5422;
 
 $defaultBackgroundColor: $white;
 $defaultTextColor: $black;
 
 $success: #2b6d2b;
 $successBackgroundColor: #d7ffd7;
-$error: #631717;
+$error: $red;
 $errorBackgroundColor: #ffd1d1;
 
-$buttonColor: $black;
-$buttonBackgroundColor: $white;
-$buttonHover: rgb(97, 97, 241);
-$buttonActive: rgb(29, 29, 223);
+$borderColor: $grey;
+$borderColorFocus: $black;
+
+$buttonColor: $white;
+$buttonBackgroundColor: $green;
+$buttonHover: rgb(73, 114, 35);
+$buttonActive: #3c5422;

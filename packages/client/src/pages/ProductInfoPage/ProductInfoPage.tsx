@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
-import { CardProduct } from "../../components";
 import { ReactElement } from "react";
 import { trpc } from "../../api/trpc";
+import { Box, Button, Text, Title } from "../../components";
+import { getbalanceStatus } from "../../utils/getBalanceStatus";
+import css from "./index.module.scss";
 
 export function ProductInfoPage(): ReactElement {
   const { id } = useParams();
@@ -26,8 +28,16 @@ export function ProductInfoPage(): ReactElement {
   }
 
   return (
-    <>
-      <CardProduct product={data.product}></CardProduct>
-    </>
+    <Box className={css.wrap}>
+      <Title className={css.title} size={1}>
+        {data.product.name}
+      </Title>
+      <Text>{`${data.product.description}`}</Text>
+      <Text>{`Цена: ${data.product.price}`}</Text>
+      <Text>{`статус: ${getbalanceStatus({ count: data.product.count })}`}</Text>
+      <Text>{`Likes: ${data.product.likes}`}</Text>
+
+      <Button className={css.button}>Купить</Button>
+    </Box>
   );
 }

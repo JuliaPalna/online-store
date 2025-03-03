@@ -3,7 +3,7 @@
 @use "../../_mixins" as *;
 
 .layout {
-  display: flex;
+  @include flex;
   flex-flow: row nowrap;
   height: 100%;
   @include media($breakpoint) {
@@ -13,7 +13,6 @@
   .navigation {
     overflow: auto;
     flex: 0 0 200px;
-    padding: 20px 30px;
     border-right: 1px solid $black;
     height: 100%;
 
@@ -32,9 +31,16 @@
     }
 
     .menu {
+      @include flex;
+      @include flexColumn;
+      gap: 0;
+
       .item {
+        position: relative;
+        padding: 10px 30px;
+
         &:not(:first-child) {
-          margin-top: 5px;
+          border-top: 1px solid $black;
         }
 
         .link {

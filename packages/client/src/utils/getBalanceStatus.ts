@@ -1,7 +1,7 @@
-import { TBalanceStatus } from "../lib/types";
+import { TBalanceStatus } from "../types/TBalanceStatus";
 
 export function getbalanceStatus({ count }: { count: number }): TBalanceStatus {
-  if (count) {
+  if (+count) {
     return "Нет в наличии";
   } else if (count < 4) {
     return "Заканчивается";
