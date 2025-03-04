@@ -5,14 +5,12 @@ import { IFormSingUpProps } from "./IFormSingUpProps";
 
 export function SingUpForm({
   formik,
-  isSuccessCreate,
   errorCreate,
 }: IFormSingUpProps): ReactElement {
   return (
     <Form
       disabled={formik.isSubmitting}
       error={errorCreate}
-      isSuccess={isSuccessCreate}
       onSubmit={(event) => {
         event.preventDefault();
         formik.handleSubmit();

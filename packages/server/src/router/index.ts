@@ -2,8 +2,9 @@ import { trpc } from "../api/trpc";
 import { getProductTrpcRoute } from "./getProductTrpcRoute";
 import { getProductsTrpcRoute } from "./getProductsTrpcRoute";
 import { createProductTrpcRoute } from "./createProductTrpcRoute";
-import { singUpTrpcRoute } from "./singUpTrpcRoute/singUpTrpcRoute";
-import { singInTrpcRoute } from "./singInTrpcRoute/singInTrpcRoute";
+import { singInTrpcRoute } from "./singInTrpcRoute";
+import { singUpTrpcRoute } from "./singUpTrpcRoute";
+import { getAuthorizationUserRoute } from "./getAuthorizationUserRoute";
 
 export const trpcRouter = trpc.router({
   //get-запрос
@@ -13,6 +14,7 @@ export const trpcRouter = trpc.router({
   createProduct: createProductTrpcRoute,
   singUp: singUpTrpcRoute,
   singIn: singInTrpcRoute,
+  authorizationUser: getAuthorizationUserRoute,
 });
 
-export type TrpcRouter = typeof trpcRouter;
+export type TTrpcRouter = typeof trpcRouter;

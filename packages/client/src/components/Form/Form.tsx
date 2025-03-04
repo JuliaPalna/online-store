@@ -7,7 +7,7 @@ interface IFormProps {
   children: React.ReactNode;
   successMessage?: string;
   disabled: boolean;
-  isSuccess: boolean;
+  isSuccess?: boolean;
   error: string | null;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   buttonName?: string;

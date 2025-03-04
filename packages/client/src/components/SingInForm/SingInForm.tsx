@@ -2,16 +2,11 @@ import { Form } from "../Form";
 import { Field, Input } from "../ui";
 import { IFormSingInProps } from "./IFormSingInProps";
 
-export function SingInForm({
-  formik,
-  isSuccessCreate,
-  errorCreate,
-}: IFormSingInProps) {
+export function SingInForm({ formik, errorCreate }: IFormSingInProps) {
   return (
     <Form
       disabled={formik.isSubmitting}
       error={errorCreate}
-      isSuccess={isSuccessCreate}
       onSubmit={(event) => {
         event.preventDefault();
         formik.handleSubmit();

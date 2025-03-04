@@ -1,16 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
 import { SingInForm } from "../../components/SingInForm";
 import { withZodSchema } from "formik-validator-zod";
 import { singInShema } from "../../../../server/src/lib/shema/singInShema/shema";
 import { initialSingInProps } from "./initialSingInProps";
 import { useDispatch } from "../../hook/useDispatch";
 import { trpc } from "../../api/trpc";
+import { getMainRoute } from "../../lib/routes";
 
 export function SingInPage() {
   const singInTrpcRoute = trpc.singIn.useMutation();
+  const navigate = useNavigate();
+  const trpcUtils = trpc.useContext();
 
-  const { isSuccess, error, dispatch } = useDispatch(async (values) => {
-    await singInTrpcRoute.mutateAsync(values);
+  const { error, dispatch } = useDispatch(async (values) => {
+    const { token } = await singInTrpcRoute.mutateAsync(values);
+    Cookies.set("token", token, { expires: 99999 });
+    trpcUtils.invalidate();
+    navigate(getMainRoute());
   });
 
   const formik = useFormik({
@@ -24,11 +32,7 @@ export function SingInPage() {
 
   return (
     <>
-      <SingInForm
-        formik={formik}
-        isSuccessCreate={isSuccess}
-        errorCreate={error}
-      />
+      <SingInForm formik={formik} errorCreate={error} />
     </>
   );
 }

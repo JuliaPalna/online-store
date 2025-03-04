@@ -1,16 +1,19 @@
 import express from "express";
 import cors from "cors";
 import { applyTrpcToExpressApp } from "./api/trpc";
+import { applyPassportToExpressApp } from "./api/passport";
 import { trpcRouter } from "./router";
 import { createAppContext, TAppContext } from "./context/AppContext/AppContext";
 
 (async () => {
   let appContext: TAppContext | null = null;
+
   try {
     appContext = createAppContext();
     const expressApp = express();
     expressApp.use(cors());
 
+    applyPassportToExpressApp(expressApp, appContext);
     applyTrpcToExpressApp(expressApp, appContext, trpcRouter);
 
     expressApp.listen(3000, () => {

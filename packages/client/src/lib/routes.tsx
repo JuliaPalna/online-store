@@ -24,3 +24,7 @@ export function singUpRoute(): string {
 export function singInRoute(): string {
   return "/products/singin";
 }
+
+export function singOutRoute(): string {
+  return "/products/singout";
+}

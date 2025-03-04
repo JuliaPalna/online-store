@@ -25,9 +25,5 @@
     "moduleResolution": "Node",
     "target": "ESNext"
   },
-  "include": [
-    "src",
-    "../client/src/utils",
-    "../client/src/types/TBalanceStatus.ts"
-  ]
+  "include": ["src", "src/api/passport/variables.ts"]
 }
