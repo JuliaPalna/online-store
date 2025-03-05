@@ -59,6 +59,13 @@ export default tseslint.config(
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/consistent-type-assertions": "off",
       "jsx-a11y/anchor-is-valid": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "[object.type=MetaProperty][property.name=env]",
+          message: "Use instead import { env } from lib/env",
+        },
+      ],
     },
   },
 );
