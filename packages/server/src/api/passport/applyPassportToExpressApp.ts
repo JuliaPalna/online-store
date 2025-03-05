@@ -2,7 +2,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { type Express } from "express";
 import { Passport } from "passport";
 import { TAppContext } from "../../context/AppContext/AppContext";
-import { SECRET_KEY_AUTHORIZATION } from "./variables";
+import { env } from "../../lib/env";
 
 export function applyPassportToExpressApp(
   expressApp: Express,
@@ -12,7 +12,7 @@ export function applyPassportToExpressApp(
 
   const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("Bearer"),
-    secretOrKey: SECRET_KEY_AUTHORIZATION,
+    secretOrKey: env.JWT_SECRET_KEY_AUTHORIZATION,
   };
 
   passport.use(

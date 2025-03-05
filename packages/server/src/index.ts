@@ -4,6 +4,7 @@ import { applyTrpcToExpressApp } from "./api/trpc";
 import { applyPassportToExpressApp } from "./api/passport";
 import { trpcRouter } from "./router";
 import { createAppContext, TAppContext } from "./context/AppContext/AppContext";
+import { env } from "./lib/env";
 
 (async () => {
   let appContext: TAppContext | null = null;
@@ -16,8 +17,9 @@ import { createAppContext, TAppContext } from "./context/AppContext/AppContext";
     applyPassportToExpressApp(expressApp, appContext);
     applyTrpcToExpressApp(expressApp, appContext, trpcRouter);
 
-    expressApp.listen(3000, () => {
-      // console.info("Listening at http://localhost:3000");
+    expressApp.listen(env.PORT, () => {
+      // eslint-disable-next-line no-console
+      console.info(`Listening at http://localhost:${env.PORT}`);
     });
   } catch (error) {
     await appContext?.stop();

@@ -2,7 +2,7 @@ import { trpc } from "../../api/trpc";
 import { signUpShema } from "../../lib/shema/signUpShema/shema";
 import { getToken } from "../../utils/getToken";
 import { getPasswordHash } from "../../utils/getPasswordHash";
-import { SECRET_KEY_AUTHORIZATION } from "../../api/passport";
+import { env } from "../../lib/env";
 
 export const singUpTrpcRoute = trpc.procedure
   .input(signUpShema)
@@ -24,7 +24,7 @@ export const singUpTrpcRoute = trpc.procedure
       },
     });
 
-    const token = getToken({ value: user.id, key: SECRET_KEY_AUTHORIZATION });
+    const token = getToken({ value: user.id, key: env.JWT_SECRET_KEY_AUTHORIZATION });
 
     return { token };
   });

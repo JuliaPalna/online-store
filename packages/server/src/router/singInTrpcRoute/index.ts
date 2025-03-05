@@ -1,8 +1,8 @@
 import { trpc } from "../../api/trpc";
+import { env } from "../../lib/env";
 import { singInShema } from "../../lib/shema/singInShema/shema";
 import { getPasswordHash } from "../../utils/getPasswordHash";
 import { getToken } from "../../utils/getToken";
-import { SECRET_KEY_AUTHORIZATION } from "../../api/passport";
 
 export const singInTrpcRoute = trpc.procedure
   .input(singInShema)
@@ -18,7 +18,7 @@ export const singInTrpcRoute = trpc.procedure
       throw Error("Неправильный пароль или почта");
     }
 
-    const token = getToken({ value: user.id, key: SECRET_KEY_AUTHORIZATION });
+    const token = getToken({ value: user.id, key: env.JWT_SECRET_KEY_AUTHORIZATION });
 
     return { token };
   });
