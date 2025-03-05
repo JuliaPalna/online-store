@@ -42,6 +42,16 @@ export function applyPassportToExpressApp(
       next();
       return;
     }
-    passport.authenticate("jwt", { session: false })(req, res, next);
+
+    passport.authenticate(
+      "jwt",
+      { session: false },
+      //исправление ошибки:
+      // при некорретном токене отражается главная страница + авторизация/вход
+      (...args: undefined[]) => {
+        req.user = args[1] || undefined;
+        next();
+      },
+    )(req, res, next);
   });
 }
