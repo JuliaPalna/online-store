@@ -1,0 +1,15 @@
+import { trpc } from "../../../api/trpc";
+
+export const getCategoryTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
+  const сategory = await ctx.prisma.category.findMany({
+    select: {
+      nameRu: true,
+      nameEn: true,
+    },
+    // orderBy: {
+    //   createAt: "desc",
+    // },
+  });
+
+  return { сategory };
+});

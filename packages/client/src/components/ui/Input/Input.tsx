@@ -1,29 +1,22 @@
+import { ReactElement } from "react";
+import { IInputProps } from "./types";
 import cn from "classnames";
 import css from "../../../styles/components/Input/index.module.scss";
-import { ReactElement } from "react";
-
-interface IInputProps {
-  name: string;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  type?: "password" | "text" | "email" | "number" | "file" | "tel";
-  disabled: boolean;
-  invalid?: boolean;
-}
 
 export function Input({
   name,
   type = "text",
-  value,
-  onChange,
-  onBlur,
-  disabled,
-  invalid,
+  data,
 }: IInputProps): ReactElement {
+  const onChange = data.handleChange;
+  const value = data.values[name];
+  const onBlur = data.handleBlur;
+  const disabled = data.isSubmitting;
+  const invalid = !!(data.errors[name] && data.touched[name]);
+
   return (
     <input
-      id={name}
+      id={data.name}
       name={name}
       type={type}
       value={value}

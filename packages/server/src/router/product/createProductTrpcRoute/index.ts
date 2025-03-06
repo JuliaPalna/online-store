@@ -1,17 +1,27 @@
 import { trpc } from "../../../api/trpc";
-import { createProductSchema } from "../../../lib/shema/createProductSchema/shema";
+import { createProductSchema } from "../../../lib/shema/productShema/createProductSchema/shema";
 
 export const createProductTrpcRoute = trpc.procedure
   .input(createProductSchema)
   .mutation(async ({ ctx, input }) => {
-    const isFind = await ctx.prisma.product.findUnique({
+    const product = await ctx.prisma.product.findUnique({
       where: {
         name: input.name,
       },
     });
 
-    if (isFind) {
+    if (product) {
       throw Error(`Товар ${input.name} уже есть в каталоге`);
+    }
+
+    const category = await ctx.prisma.category.findUnique({
+      where: {
+        nameRu: input.category,
+      },
+    });
+
+    if (!category) {
+      throw Error(`Товар ${input.category} нет каталоге`);
     }
 
     const newProduct = {
@@ -19,7 +29,7 @@ export const createProductTrpcRoute = trpc.procedure
       description: input.description,
       price: input.price,
       count: input.count,
-      // category: ""
+      categoryId: category.id,
     };
 
     await ctx.prisma.product.create({

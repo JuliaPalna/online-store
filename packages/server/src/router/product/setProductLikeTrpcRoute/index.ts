@@ -1,5 +1,5 @@
 import { trpc } from "../../../api/trpc";
-import { setProductLikeShema } from "../../../lib/shema/setProductLikeShema/shema";
+import { setProductLikeShema } from "../../../lib/shema/productShema/setProductLikeShema/shema";
 
 export const setProductLikeTrpcRoute = trpc.procedure
   .input(setProductLikeShema)

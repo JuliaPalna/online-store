@@ -1,25 +1,19 @@
+import { ReactElement } from "react";
 import cn from "classnames";
 import { Box } from "../Box";
 import { Text } from "../Text";
+import { IFieldProps } from "./types";
 import css from "../../../styles/components/Field/index.module.scss";
-import { ReactElement } from "react";
-
-interface IFieldProps {
-  name: string;
-  label: string;
-  disabled?: boolean;
-  error?: string | false | undefined;
-  children: React.ReactNode;
-}
 
 export function Field({
   name,
   label,
   children,
-  disabled,
-  error,
+  data,
 }: IFieldProps): ReactElement {
+  const error = data.errors[name] && data.touched[name] && data.errors[name];
   const invalid = !!error;
+  const disabled = data.isSubmitting;
 
   return (
     <Box className={cn({ [css.field]: true, [css.disabled]: disabled })}>

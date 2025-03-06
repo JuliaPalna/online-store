@@ -8,4 +8,4 @@ export interface IProduct {
   isLike: boolean;
 }
 
-export type TProductsList = IProduct[];
+export type TProductList = IProduct[];

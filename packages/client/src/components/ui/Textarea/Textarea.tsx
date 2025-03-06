@@ -1,23 +1,15 @@
+import { ReactElement } from "react";
+import { ITextareaProps } from "./types";
 import cn from "classnames";
 import css from "../../../styles/components/Textarea/index.module.scss";
-import { ReactElement } from "react";
-interface ITextareaProps {
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  disabled: boolean;
-  invalid?: boolean;
-}
 
-export function Textarea({
-  name,
-  value,
-  onChange,
-  onBlur,
-  disabled,
-  invalid,
-}: ITextareaProps): ReactElement {
+export function Textarea({ name, data }: ITextareaProps): ReactElement {
+  const value = data.values[name];
+  const onChange = data.handleChange;
+  const onBlur = data.handleBlur;
+  const disabled = data.isSubmitting;
+  const invalid = !!(data.errors[name] && data.touched[name]);
+
   return (
     <textarea
       id={name}

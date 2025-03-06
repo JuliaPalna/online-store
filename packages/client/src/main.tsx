@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TrpcProvider } from "./api/trpc.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { TrpcProvider } from "./provider/trpcProvider/index.tsx";
 import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(

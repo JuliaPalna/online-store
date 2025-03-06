@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import Cookies from "js-cookie";
 import { createTRPCReact } from "@trpc/react-query";
@@ -7,7 +7,7 @@ import { env } from "../lib/env";
 
 export const trpc = createTRPCReact<TTrpcRouter>();
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const trpcClient = trpc.createClient({
+export const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
       url: env.VITE_SERVER_TRPC_URL,
@@ -29,11 +29,3 @@ const trpcClient = trpc.createClient({
     }),
   ],
 });
-
-export const TrpcProvider = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trpc.Provider>
-  );
-};

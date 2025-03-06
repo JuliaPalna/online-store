@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import { Box, List, ListItem, Title } from "../../components/ui";
+import { ReactElement } from "react";
+// import { Title } from "../../components";
 import css from "./index.module.scss";
 import { trpc } from "../../api/trpc";
-import { getProductsListRoute } from "../../lib/routes";
-import { Link } from "react-router-dom";
+import { CatalogView } from "../../components/CatalogView";
+import { Title } from "../../components";
 
 export function MainPage(): ReactElement {
   const { data, error, isLoading, isFetching, isError } =
@@ -21,19 +21,7 @@ export function MainPage(): ReactElement {
     <>
       <Title className={css.title}>Главная страница</Title>
 
-      <List className={css.list}>
-        {data.сategory.map((item) => {
-          return (
-            <React.Fragment key={item.name}>
-              <ListItem className={css.item}>
-                <Link className={css.link} to={getProductsListRoute()}>
-                  <Box className={css.wrap}>{item.name}</Box>
-                </Link>
-              </ListItem>
-            </React.Fragment>
-          );
-        })}
-      </List>
+      <CatalogView сategory={data.сategory} />
     </>
   );
 }

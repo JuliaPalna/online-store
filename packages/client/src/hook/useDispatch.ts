@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+import { z } from "zod";
 
-export function useDispatch(callback: (values: any) => Promise<void>) {
+export function useDispatch<TZodSchema extends z.ZodTypeAny>(
+  callback: (values: z.infer<TZodSchema>) => Promise<void>,
+) {
   const [isSuccess, setisSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

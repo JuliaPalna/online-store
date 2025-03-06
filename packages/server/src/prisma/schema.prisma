@@ -23,14 +23,16 @@ model Product {
   count         Int
   createAt      DateTime        @default(now())
   likes         ProductLike[] 
-  category      ProductCategory[]
+  category      Category        @relation(fields: [categoryId], references: [id])
+  categoryId    String
 }
 
 model Category {
-  id            String    @id @default(uuid())
-  name          String    @unique
-  createAt      DateTime   @default(now())
-  products      ProductCategory[]  
+  id            String      @id @default(uuid())
+  nameRu        String      @unique
+  nameEn        String      @unique
+  createAt      DateTime    @default(now())
+  products      Product[]  
 }
 
 model ProductLike {
@@ -42,15 +44,4 @@ model ProductLike {
   userId      String
 
   @@unique([productId, userId])
-}
-
-model ProductCategory {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  product     Product   @relation(fields: [productId], references: [id])
-  productId   String
-  category    Category  @relation(fields: [categoryId], references: [id])
-  categoryId  String
-
-  @@unique([productId, categoryId])
 }
