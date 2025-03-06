@@ -9,16 +9,16 @@ export function useDispatch(callback: (values: any) => Promise<void>) {
     try {
       await callback(props);
       setisSuccess(true);
-      setTimeout(() => {
-        setisSuccess(false);
-      }, 4000);
+      // setTimeout(() => {
+      //   setisSuccess(false);
+      // }, 4000);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       }
-      setTimeout(() => {
-        setError(null);
-      }, 4000);
+      // setTimeout(() => {
+      //   setError(null);
+      // }, 4000);
     }
   };
 

@@ -4,6 +4,7 @@ import { trpc } from "../../api/trpc";
 import { Box, Button, Text, Title } from "../../components";
 import { getbalanceStatus } from "../../utils/getBalanceStatus";
 import css from "./index.module.scss";
+import { toggleProductLike } from "../../utils/toggleProductLike";
 
 export function ProductInfoPage(): ReactElement {
   const { id } = useParams();
@@ -14,6 +15,8 @@ export function ProductInfoPage(): ReactElement {
 
   const { data, error, isLoading, isFetching, isError } =
     trpc.getProduct.useQuery({ id: id });
+
+  const setProductLike = toggleProductLike({ data });
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
@@ -35,7 +38,20 @@ export function ProductInfoPage(): ReactElement {
       <Text>{`${data.product.description}`}</Text>
       <Text>{`Цена: ${data.product.price}`}</Text>
       <Text>{`статус: ${getbalanceStatus({ count: data.product.count })}`}</Text>
+
       <Text>{`Likes: ${data.product.likes}`}</Text>
+      <Button
+        className={css.button}
+        onClick={() => {
+          setProductLike.mutateAsync({
+            productId: data.product.id,
+            isLike: !data.product.isLike,
+          });
+        }}
+      >
+        Like
+      </Button>
+      {data.product.isLike ? "Like" : "Unlike"}
 
       <Button className={css.button}>Купить</Button>
     </Box>

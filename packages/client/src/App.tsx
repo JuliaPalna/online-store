@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { trpc } from "./api/trpc";
 import {
   MainPage,
+  NewCategoryPage,
   NewProductPage,
   ProductInfoPage,
   ProductsListPage,
@@ -43,6 +44,10 @@ function App() {
           element={<ProductInfoPage />}
         />
         <Route path={routs.getNewProductRoute()} element={<NewProductPage />} />
+        <Route
+          path={routs.getNewCategoryRoute()}
+          element={<NewCategoryPage />}
+        />
         <Route path={routs.singUpRoute()} element={<SingUpPage />} />
         <Route path={routs.singInRoute()} element={<SingInPage />} />
       </Route>

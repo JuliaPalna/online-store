@@ -1,10 +1,11 @@
 export interface IProduct {
-  id: string;
   name: string;
+  id: string;
   description: string;
   price: number;
-  likes?: number;
   count: number;
+  likes: number;
+  isLike: boolean;
 }
 
 export type TProductsList = IProduct[];

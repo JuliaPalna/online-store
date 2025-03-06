@@ -2,10 +2,10 @@ import { useFormik } from "formik";
 import { initialProductProps } from "./initialProductProps";
 import { withZodSchema } from "formik-validator-zod";
 import { trpc } from "../../api/trpc";
-import { createProductSchema } from "../../../../server/src/lib/shema/createProductSchema/shema";
 import { ReactElement } from "react";
 import { CreateProductForm } from "../../components/CreateProductForm";
 import { useDispatch } from "../../hook/useDispatch";
+import { createProductSchema } from "../../../../server/src/lib/shema/createProductSchema/shema";
 
 export function NewProductPage(): ReactElement {
   const createProductTrpc = trpc.createProduct.useMutation();
@@ -28,6 +28,6 @@ export function NewProductPage(): ReactElement {
       formik={formik}
       isSuccessCreate={isSuccess}
       errorCreate={error}
-    ></CreateProductForm>
+    />
   );
 }

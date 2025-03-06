@@ -28,3 +28,7 @@ export function singInRoute(): string {
 export function singOutRoute(): string {
   return "/products/singout";
 }
+
+export function getNewCategoryRoute(): string {
+  return "/products/newcategory";
+}

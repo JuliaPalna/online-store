@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 interface ILinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   href: string;
-  children: React.ReactNode;
+  children: React.ReactNode | string;
   className: string;
 }
 

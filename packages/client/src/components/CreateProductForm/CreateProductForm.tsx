@@ -1,14 +1,7 @@
 import { ReactElement } from "react";
 import { Field, Textarea, Input } from "../ui";
-import { FormikProps } from "formik";
-import { TInitialProductProps } from "../../pages/NewProductPage/initialProductProps";
 import { Form } from "../Form";
-
-interface ICreateProductFormProps {
-  formik: FormikProps<TInitialProductProps>;
-  isSuccessCreate: boolean;
-  errorCreate: string | null;
-}
+import { ICreateProductFormProps } from "./types";
 
 export function CreateProductForm({
   formik,
@@ -100,6 +93,27 @@ export function CreateProductForm({
           onBlur={formik.handleBlur}
           disabled={formik.isSubmitting}
           invalid={!!(formik.errors.price && formik.touched.price)}
+        />
+      </Field>
+
+      <Field
+        name="category"
+        label="Категория"
+        disabled={formik.isSubmitting}
+        error={
+          formik.errors.category &&
+          formik.touched.category &&
+          formik.errors.category
+        }
+      >
+        <Input
+          name="category"
+          type="text"
+          value={formik.values.category}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          disabled={formik.isSubmitting}
+          invalid={!!(formik.errors.category && formik.touched.category)}
         />
       </Field>
     </Form>

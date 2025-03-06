@@ -8,9 +8,10 @@ export const createProductSchema = z.object({
   description: z
     .string()
     .nonempty()
-    .min(20, "Текст должен быть длиной не менее 20 символов."),
+    .min(5, "Текст должен быть длиной не менее 5 символов."),
   price: z.number(),
   count: z.number(),
+  category: z.string().nonempty().min(1),
 });
 
 export type TCreateProductSchema = z.infer<typeof createProductSchema>;

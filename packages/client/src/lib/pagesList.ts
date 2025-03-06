@@ -11,6 +11,10 @@ export const initialPageList: ILayoutProps[] = [
     route: routes.getNewProductRoute(),
   },
   {
+    name: "Создать новую категорию",
+    route: routes.getNewCategoryRoute(),
+  },
+  {
     name: "Список товаров",
     route: routes.getProductsListRoute(),
   },

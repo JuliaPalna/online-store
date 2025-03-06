@@ -12,7 +12,7 @@ export function Button({
   className,
   onClick,
   type = "button",
-  disabled = true,
+  disabled = false,
 }: IButtonProps): ReactElement {
   return (
     <button
