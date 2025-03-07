@@ -12,6 +12,7 @@ import {
   SingUpPage,
   SingOutPage,
   UpdateProductPage,
+  NotFoundPage,
 } from "./pages";
 import {
   pagesListAutorisationUser,
@@ -41,6 +42,7 @@ function App() {
 
       <Route element={<Layout props={pageList} />}>
         <Route path={routs.getMainRoute()} element={<MainPage />} />
+        <Route path="*" element={<NotFoundPage />} />
 
         {/* category */}
         <Route path={routs.getCatalogRoute()} element={<CatalogPage />} />

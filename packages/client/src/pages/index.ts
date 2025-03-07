@@ -2,6 +2,7 @@
 export * from "./CatalogPage/CatalogPage";
 export * from "./CatalogPage/NewCategoryPage";
 export * from "./MainPage";
+export * from "./OtherPage/NotFoundPage";
 export * from "./ProductPage/NewProductPage";
 export * from "./ProductPage/ProductInfoPage";
 export * from "./ProductPage/ProductListPage";
