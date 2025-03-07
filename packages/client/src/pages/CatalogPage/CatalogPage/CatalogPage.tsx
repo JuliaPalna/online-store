@@ -4,7 +4,7 @@ import { CatalogView } from "../../../components/CatalogView";
 
 export function CatalogPage() {
   const { data, error, isLoading, isFetching, isError } =
-    trpc.getCategory.useQuery();
+    trpc.getCategoryList.useQuery();
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;

@@ -5,6 +5,7 @@ export * from "./MainPage";
 export * from "./ProductPage/NewProductPage";
 export * from "./ProductPage/ProductInfoPage";
 export * from "./ProductPage/ProductListPage";
+export * from "./ProductPage/UpdateProductPage";
 export * from "./SingPage/SingInPage";
 export * from "./SingPage/SingOutPage";
 export * from "./SingPage/SingUpPage";

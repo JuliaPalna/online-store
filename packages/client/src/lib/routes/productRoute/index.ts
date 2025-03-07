@@ -12,16 +12,23 @@ export function getProductLisByCategorytRoute({
   return `/catalog/${name}`;
 }
 
-export const productInfoRouteParams = {
+export const productRouteParams = {
   id: ":id",
   category: ":category",
 };
 
-export type TProductInfoRouteParams = typeof productInfoRouteParams;
+export type TProductRouteParams = typeof productRouteParams;
 
 export function getProductInfoRoute({
   id,
   category,
-}: TProductInfoRouteParams): string {
+}: TProductRouteParams): string {
   return `/catalog/${category}/${id}`;
+}
+
+export function updateProductRoute({
+  id,
+  category,
+}: TProductRouteParams): string {
+  return `/catalog/${category}/${id}/update`;
 }

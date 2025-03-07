@@ -5,4 +5,4 @@ export const updateProductShema = createProductSchema.extend({
   id: z.string().nonempty().min(1),
 });
 
-export type TEditProductShema = z.infer<typeof updateProductShema>;
+export type TUpdateProductShema = z.infer<typeof updateProductShema>;

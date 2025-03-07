@@ -7,7 +7,7 @@ import { Title } from "../../components";
 
 export function MainPage(): ReactElement {
   const { data, error, isLoading, isFetching, isError } =
-    trpc.getCategory.useQuery();
+    trpc.getCategoryList.useQuery();
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;

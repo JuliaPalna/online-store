@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ReactElement } from "react";
 import { trpc } from "../../../api/trpc";
 import { Box, Button, Text, Title } from "../../../components";
 import { getbalanceStatus } from "../../../utils/getBalanceStatus";
 import css from "./index.module.scss";
 import { toggleProductLike } from "../../../utils/toggleProductLike";
+import { updateProductRoute } from "../../../lib/routes";
 
 export function ProductInfoPage(): ReactElement {
   const { id } = useParams();
@@ -54,6 +55,16 @@ export function ProductInfoPage(): ReactElement {
       {data.product.isLike ? "Like" : "Unlike"}
 
       <Button className={css.button}>Купить</Button>
+
+      <Link
+        className={css.link}
+        to={updateProductRoute({
+          id: data.product.id,
+          category: data.product.category.nameEn,
+        })}
+      >
+        <Button className={css.button}>Редактировать</Button>
+      </Link>
     </Box>
   );
 }

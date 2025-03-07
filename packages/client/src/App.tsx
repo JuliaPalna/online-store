@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { trpc } from "./api/trpc";
+import * as routs from "./lib/routes";
 import {
   CatalogPage,
   MainPage,
@@ -9,16 +10,16 @@ import {
   ProductListPage,
   SingInPage,
   SingUpPage,
+  SingOutPage,
+  UpdateProductPage,
 } from "./pages";
-import * as routs from "./lib/routes";
-import { Layout } from "./components";
-import "./styles/global.scss";
-import { SingOutPage } from "./pages/SingPage/SingOutPage";
 import {
   pagesListAutorisationUser,
   pagesListInitial,
   pagesListNotAutorisationUser,
 } from "./lib/pageList";
+import { Layout } from "./components";
+import "./styles/global.scss";
 
 function App() {
   const { data, isLoading, isFetching, isError } =
@@ -41,8 +42,15 @@ function App() {
       <Route element={<Layout props={pageList} />}>
         <Route path={routs.getMainRoute()} element={<MainPage />} />
 
+        {/* category */}
         <Route path={routs.getCatalogRoute()} element={<CatalogPage />} />
 
+        <Route
+          path={routs.getNewCategoryRoute()}
+          element={<NewCategoryPage />}
+        />
+
+        {/* product */}
         <Route
           path={routs.getProductLisByCategorytRoute(
             routs.productLisByCategorytRouteParams,
@@ -50,16 +58,18 @@ function App() {
           element={<ProductListPage />}
         />
         <Route
-          path={routs.getProductInfoRoute(routs.productInfoRouteParams)}
+          path={routs.getProductInfoRoute(routs.productRouteParams)}
           element={<ProductInfoPage />}
         />
 
-        <Route path={routs.getNewProductRoute()} element={<NewProductPage />} />
         <Route
-          path={routs.getNewCategoryRoute()}
-          element={<NewCategoryPage />}
+          path={routs.updateProductRoute(routs.productRouteParams)}
+          element={<UpdateProductPage />}
         />
 
+        <Route path={routs.getNewProductRoute()} element={<NewProductPage />} />
+
+        {/* authorization */}
         <Route path={routs.singUpRoute()} element={<SingUpPage />} />
         <Route path={routs.singInRoute()} element={<SingInPage />} />
       </Route>

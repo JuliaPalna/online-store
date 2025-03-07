@@ -19,6 +19,7 @@ export const getProductTrpcRoute = trpc.procedure
         description: true,
         price: true,
         count: true,
+        category: true,
         _count: {
           select: {
             likes: true,
