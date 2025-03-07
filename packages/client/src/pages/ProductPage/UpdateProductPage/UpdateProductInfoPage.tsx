@@ -3,6 +3,8 @@ import { trpc } from "../../../api/trpc";
 // import { useForm } from "../../../hook/useForm";
 import { useParams } from "react-router-dom";
 import { ProductInfoForm } from "./ProductInfoForm";
+import { Text } from "../../../components";
+import { useUserContext } from "../../../context/UserContext";
 // import { getProductInfoRoute } from "../../../lib/routes";
 // import _ from "lodash";
 // import { ProductInfoForm } from "./ProductInfoForm";
@@ -11,24 +13,11 @@ import { ProductInfoForm } from "./ProductInfoForm";
 
 export function UpdateProductPage(): ReactElement {
   const { id } = useParams();
+  const user = useUserContext();
 
-  // const user = trpc.authorizationUser.useQuery();
-
-  // if (!user) {
-  //   return <span>Авторизуйтесь</span>;
-  // }
-
-  // if (user.isLoading || user.isFetching) {
-  //   return <span>Loading...</span>;
-  // }
-
-  // if (user.isError) {
-  //   return <span>Error: {user.error.message}</span>;
-  // }
-
-  // if (!user.data.authorization) {
-  //   return <span>Авторизуйтесь</span>;
-  // }
+  if (!user) {
+    return <Text>{"No authorization!".toUpperCase()}</Text>;
+  }
 
   if (!id) {
     return <span>Товар на найден</span>;

@@ -1,7 +1,7 @@
 import { TPageListRouteProps } from "../types";
 import * as routes from "../../routes";
 
-export const pagesListInitial: TPageListRouteProps = [
+export const pageListInitial: TPageListRouteProps = [
   {
     name: "Главная страница",
     route: routes.getMainRoute(),

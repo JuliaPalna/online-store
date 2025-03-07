@@ -1,7 +1,7 @@
 import { TPageListRouteProps } from "../types";
 import * as routes from "../../routes";
 
-export const pagesListAutorisationUser: TPageListRouteProps = [
+export const pageListAutorisationUser: TPageListRouteProps = [
   {
     name: "Создать новый товаров",
     route: routes.getNewProductRoute(),

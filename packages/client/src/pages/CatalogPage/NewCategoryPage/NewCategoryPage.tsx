@@ -1,11 +1,14 @@
 import { ReactElement } from "react";
 import { trpc } from "../../../api/trpc";
-import { Field, Form, Input } from "../../../components";
+import { Field, Form, Input, Text } from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { initialCategorytProps } from "./types";
 import { createCategorySchema } from "../../../../../server/src/lib/shema/createCategorySchema/shema";
+import { useUserContext } from "../../../context/UserContext";
 
 export function NewCategoryPage(): ReactElement {
+  const user = useUserContext();
+
   const createProductCategoryTrpc = trpc.createCategory.useMutation();
 
   const { formik, error } = useForm({
@@ -15,6 +18,10 @@ export function NewCategoryPage(): ReactElement {
       await createProductCategoryTrpc.mutateAsync(values);
     },
   });
+
+  if (!user) {
+    return <Text>{"No authorization!".toUpperCase()}</Text>;
+  }
 
   return (
     <Form

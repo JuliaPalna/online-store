@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { trpc } from "./api/trpc";
 import * as routs from "./lib/routes";
 import {
   CatalogPage,
@@ -14,27 +13,18 @@ import {
   UpdateProductPage,
   NotFoundPage,
 } from "./pages";
-import {
-  pagesListAutorisationUser,
-  pagesListInitial,
-  pagesListNotAutorisationUser,
-} from "./lib/pageList";
+import * as pages from "./lib/pageList";
 import { Layout } from "./components";
 import "./styles/global.scss";
+import { useUserContext } from "./context/UserContext";
 
 function App() {
-  const { data, isLoading, isFetching, isError } =
-    trpc.authorizationUser.useQuery();
+  const user = useUserContext();
+  let pageList = [...pages.pageListInitial];
 
-  let pageList = [...pagesListInitial];
-
-  if (isLoading || isFetching || isError) {
-    return;
-  }
-
-  pageList = data.authorization
-    ? [...pageList, ...pagesListAutorisationUser]
-    : [...pageList, ...pagesListNotAutorisationUser];
+  pageList = user
+    ? [...pageList, ...pages.pageListAutorisationUser]
+    : [...pageList, ...pages.pageListNotAutorisationUser];
 
   return (
     <Routes>

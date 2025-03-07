@@ -2,10 +2,12 @@ import { ReactElement } from "react";
 import { trpc } from "../../../api/trpc";
 import { createProductSchema } from "../../../../../server/src/lib/shema/productShema/createProductSchema/shema";
 import { initialProductProps } from "./initialProductProps";
-import { Field, Form, Input, Textarea } from "../../../components";
+import { Field, Form, Input, Text, Textarea } from "../../../components";
 import { useForm } from "../../../hook/useForm";
+import { useUserContext } from "../../../context/UserContext";
 
 export function NewProductPage(): ReactElement {
+  const user = useUserContext();
   const createProductTrpc = trpc.createProduct.useMutation();
 
   const { formik, error } = useForm({
@@ -15,6 +17,10 @@ export function NewProductPage(): ReactElement {
       await createProductTrpc.mutateAsync(values);
     },
   });
+
+  if (!user) {
+    return <Text>{"No authorization!".toUpperCase()}</Text>;
+  }
 
   return (
     <Form
