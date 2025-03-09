@@ -1,33 +1,31 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { trpc } from "../../../api/trpc";
-import { List, ListItem, Title, CardProduct, Box } from "../../../components";
+import {
+  List,
+  ListItem,
+  Title,
+  CardProduct,
+  Box,
+  PageWrapperCheckData,
+} from "../../../components";
 import { getProductInfoRoute } from "../../../lib/routes";
 import css from "./index.module.scss";
 
-export function ProductListPage(): ReactElement {
-  const { name } = useParams();
-
-  if (!name) {
-    throw Error("Not Found");
-  }
-  const { data, error, isLoading, isFetching, isError } =
-    trpc.getProductListByCategory.useQuery({ name: name });
-
-  if (isLoading || isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
+export const ProductListPage = PageWrapperCheckData({
+  useQuery: () => {
+    const { name } = useParams();
+    if (name) {
+      return trpc.getProductListByCategory.useQuery({ name: name });
+    }
+  },
+})(({ products }) => {
   return (
     <>
-      <Title className={css.title}>{name}</Title>
+      <Title className={css.title}>Список</Title>
 
       <List className={css.list}>
-        {data.products.map((product) => {
+        {products.map((product) => {
           return (
             <React.Fragment key={product.id}>
               <ListItem className={css.item}>
@@ -49,4 +47,4 @@ export function ProductListPage(): ReactElement {
       </List>
     </>
   );
-}
+});

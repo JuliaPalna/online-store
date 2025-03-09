@@ -1,24 +1,17 @@
 import { trpc } from "../../../api/trpc";
-import { Title } from "../../../components";
+import { PageWrapperCheckData, Title } from "../../../components";
 import { CatalogView } from "../../../components/CatalogView";
 
-export function CatalogPage() {
-  const { data, error, isLoading, isFetching, isError } =
-    trpc.getCategoryList.useQuery();
-
-  if (isLoading || isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
+export const CatalogPage = PageWrapperCheckData({
+  useQuery: () => {
+    return trpc.getCategoryList.useQuery();
+  },
+})(({ сategory }) => {
   return (
     <>
       <Title className={""}>Каталог</Title>
 
-      <CatalogView сategory={data.сategory} />
+      <CatalogView сategory={сategory} />
     </>
   );
-}
+});

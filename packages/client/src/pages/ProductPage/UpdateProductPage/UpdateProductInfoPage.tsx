@@ -1,51 +1,60 @@
-import { ReactElement } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { trpc } from "../../../api/trpc";
-// import { useForm } from "../../../hook/useForm";
-import { useParams } from "react-router-dom";
-import { ProductInfoForm } from "./ProductInfoForm";
-import { Text } from "../../../components";
-import { useUserContext } from "../../../context/UserContext";
-// import { getProductInfoRoute } from "../../../lib/routes";
-// import _ from "lodash";
-// import { ProductInfoForm } from "./ProductInfoForm";
-// import { updateProductShema } from "../../../../../server/src/lib/shema/productShema/updateProductShema/shema";
-// import { ProductInfoForm } from "./ProductInfoForm";
+import { useForm } from "../../../hook/useForm";
+import { updateProductShema } from "../../../../../server/src/lib/shema/productShema/updateProductShema/shema";
+import { getProductInfoRoute } from "../../../lib/routes";
+import {
+  PageWrapperCheckData,
+  PageWrapperCkecAuthorization,
+  ProductInfoForm,
+} from "../../../components";
 
-export function UpdateProductPage(): ReactElement {
-  const { id } = useParams();
-  const user = useUserContext();
+export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
+  return <WrapperUpdateProductPage />;
+});
 
-  if (!user) {
-    return <Text>{"No authorization!".toUpperCase()}</Text>;
-  }
+const WrapperUpdateProductPage = PageWrapperCheckData({
+  useQuery: () => {
+    const { id } = useParams();
+    if (id) {
+      return trpc.getProduct.useQuery({ id: id });
+    }
+  },
+})(({ product }) => {
+  const navigate = useNavigate();
+  const updateProductTrpc = trpc.updateProduct.useMutation();
+  const initialValues = {
+    name: product.name,
+    count: product.count,
+    description: product.description,
+    price: product.price,
+    category: product.category.nameRu,
+  };
 
-  if (!id) {
-    return <span>Товар на найден</span>;
-  }
+  const { formik, error } = useForm({
+    initialValues: initialValues,
+    validationSchema: updateProductShema.omit({ id: true }),
+    onSubmit: async (values) => {
+      await updateProductTrpc.mutateAsync({
+        id: product.id,
+        ...values,
+      });
 
-  const data = trpc.getProduct.useQuery({ id: id });
-
-  if (data.isLoading || data.isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (data.isError) {
-    return <span>Error: {data.error.message}</span>;
-  }
-
-  if (!data.data) {
-    return <span>Товар на найден</span>;
-  }
-
-  const product = data.data.product;
+      navigate(
+        getProductInfoRoute({
+          id: product.id,
+          category: product.category.nameEn,
+        }),
+      );
+    },
+  });
 
   return (
     <ProductInfoForm
       title="Редактировать товар"
       buttonName="Редактировать"
-      // error={error}
-      product={product}
-      // formik={formik}
+      error={error}
+      formik={formik}
     />
   );
-}
+});

@@ -1,70 +1,61 @@
 import { Link, useParams } from "react-router-dom";
-import { ReactElement } from "react";
 import { trpc } from "../../../api/trpc";
-import { Box, Button, Text, Title } from "../../../components";
+import {
+  Box,
+  Button,
+  PageWrapperCheckData,
+  Text,
+  Title,
+} from "../../../components";
 import { getbalanceStatus } from "../../../utils/getBalanceStatus";
 import css from "./index.module.scss";
 import { toggleProductLike } from "../../../utils/toggleProductLike";
 import { updateProductRoute } from "../../../lib/routes";
 
-export function ProductInfoPage(): ReactElement {
-  const { id } = useParams();
-
-  if (!id) {
-    return <span>Товар на найден</span>;
-  }
-
-  const { data, error, isLoading, isFetching, isError } =
-    trpc.getProduct.useQuery({ id: id });
-
-  const setProductLike = toggleProductLike({ data });
-
-  if (isLoading || isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
-  if (!data.product) {
-    return <span>Товар на найден</span>;
-  }
+export const ProductInfoPage = PageWrapperCheckData({
+  useQuery: () => {
+    const { id } = useParams();
+    if (id) {
+      return trpc.getProduct.useQuery({ id: id });
+    }
+  },
+})(({ product }) => {
+  const setProductLike = toggleProductLike({ product });
 
   return (
     <Box className={css.wrap}>
       <Title className={css.title} size={1}>
-        {data.product.name}
+        {product.name}
       </Title>
-      <Text>{`${data.product.description}`}</Text>
-      <Text>{`Цена: ${data.product.price}`}</Text>
-      <Text>{`статус: ${getbalanceStatus({ count: data.product.count })}`}</Text>
+      <Text>{`${product.description}`}</Text>
+      <Text>{`Цена: ${product.price}`}</Text>
+      <Text>{`статус: ${getbalanceStatus({ count: product.count })}`}</Text>
 
-      <Text>{`Likes: ${data.product.likes}`}</Text>
+      <Text>{`Likes: ${product.likes}`}</Text>
       <Button
         className={css.button}
         onClick={() => {
           setProductLike.mutateAsync({
-            productId: data.product.id,
-            isLike: !data.product.isLike,
+            productId: product.id,
+            isLike: !product.isLike,
           });
         }}
       >
         Like
       </Button>
-      {data.product.isLike ? "Like" : "Unlike"}
+      {product.isLike ? "Like" : "Unlike"}
 
       <Button className={css.button}>Купить</Button>
 
       <Link
         className={css.link}
         to={updateProductRoute({
-          id: data.product.id,
-          category: data.product.category.nameEn,
+          id: product.id,
+          category: product.category.nameEn,
         })}
       >
         <Button className={css.button}>Редактировать</Button>
       </Link>
     </Box>
   );
-}
+});

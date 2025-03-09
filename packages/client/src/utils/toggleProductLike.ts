@@ -1,23 +1,19 @@
 import { trpc } from "../api/trpc";
 import { IProduct } from "../../../server/src/types/IProduct";
 
-interface IProps {
-  data:
-    | {
-        product: IProduct;
-      }
-    | undefined;
-}
-
-export function toggleProductLike({ data }: IProps) {
+export function toggleProductLike({
+  product,
+}: {
+  product: IProduct | undefined;
+}) {
   const trpcUtils = trpc.useContext();
 
   const setProductLike = trpc.setProductLike.useMutation({
     onMutate: ({ isLike }) => {
-      if (!data) return;
+      if (!product) return;
 
       const oldGetProductData = trpcUtils.getProduct.getData({
-        id: data.product.id,
+        id: product.id,
       });
 
       if (oldGetProductData?.product) {
@@ -30,16 +26,13 @@ export function toggleProductLike({ data }: IProps) {
           },
         };
 
-        trpcUtils.getProduct.setData(
-          { id: data.product.id },
-          newGetProductData,
-        );
+        trpcUtils.getProduct.setData({ id: product.id }, newGetProductData);
       }
     },
     onSuccess: () => {
-      if (!data) return;
+      if (!product) return;
 
-      trpcUtils.getProduct.invalidate({ id: data.product.id });
+      trpcUtils.getProduct.invalidate({ id: product.id });
     },
   });
 

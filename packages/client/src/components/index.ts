@@ -4,4 +4,6 @@ export * from "./CatalogView";
 export * from "./Form";
 export * from "./Layout";
 export * from "./ui";
+export * from "./ProductInfoForm";
+export * from "./PageWrapper";
 // @endindex
