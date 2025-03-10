@@ -17,8 +17,13 @@ export function CheckDataTrpc<TData, TError>({
   if (isLoading || isFetching) {
     return <Text>Loading...</Text>;
   }
-  if (isError && error instanceof Error) {
-    return <span>Error: ${error.message}</span>;
+
+  if (isError) {
+    if (error instanceof Error) {
+      return <span>Error: ${error.message}</span>;
+    }
+
+    throw Error(`${error}`);
   }
 
   if (!data) {

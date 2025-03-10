@@ -10,4 +10,5 @@ export * from "./ProductPage/UpdateProductPage";
 export * from "./SingPage/SingInPage";
 export * from "./SingPage/SingOutPage";
 export * from "./SingPage/SingUpPage";
+export * from "./UserPage/UpdateProfilePage";
 // @endindex

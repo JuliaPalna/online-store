@@ -3,4 +3,5 @@ export * from "./adminRoute";
 export * from "./authorizationRoute";
 export * from "./main";
 export * from "./productRoute";
+export * from "./userRote";
 // @endindex

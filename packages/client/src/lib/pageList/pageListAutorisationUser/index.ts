@@ -11,6 +11,10 @@ export const pageListAutorisationUser: TPageListRouteProps = [
     route: routes.getNewCategoryRoute(),
   },
   {
+    name: "Редактировать профиль",
+    route: routes.updateUserRoute(),
+  },
+  {
     name: "Выход",
     route: routes.singOutRoute(),
   },

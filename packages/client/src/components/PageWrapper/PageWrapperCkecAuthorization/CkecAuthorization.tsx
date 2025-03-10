@@ -12,5 +12,5 @@ export function CkecAuthorization({
     return <Text>{"No authorization!".toUpperCase()}</Text>;
   }
 
-  return <Page />;
+  return <Page user={user} />;
 }

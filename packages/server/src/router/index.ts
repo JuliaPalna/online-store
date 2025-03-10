@@ -11,6 +11,7 @@ import { setProductLikeTrpcRoute } from "./product/setProductLikeTrpcRoute";
 import { getProductListByCategoryTrpcRoute } from "./product/getProductListByCategoryTrpcRoute";
 import { updateProductTrpcRoute } from "./product/updateProductTrpcRoute";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { updateProfileTrpcRoute } from "./user/updateProfileTrpcRoute";
 
 export const trpcRouter = trpc.router({
   //get-запрос
@@ -31,6 +32,9 @@ export const trpcRouter = trpc.router({
   // category
   createCategory: createCategoryTrpcRote,
   getCategoryList: getCategoryListTrpcRoute,
+
+  //user
+  updateProfile: updateProfileTrpcRoute,
 });
 
 export type TTrpcRouter = typeof trpcRouter;

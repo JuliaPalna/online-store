@@ -12,6 +12,7 @@ import {
   SingOutPage,
   UpdateProductPage,
   NotFoundPage,
+  UpdateProfilePage,
 } from "./pages";
 import * as pages from "./lib/pageList";
 import { Layout } from "./components";
@@ -60,6 +61,12 @@ function App() {
         />
 
         <Route path={routs.getNewProductRoute()} element={<NewProductPage />} />
+
+        {/* user */}
+        <Route
+          path={routs.updateProfileRoute()}
+          element={<UpdateProfilePage />}
+        />
 
         {/* authorization */}
         <Route path={routs.singUpRoute()} element={<SingUpPage />} />

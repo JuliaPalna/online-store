@@ -1,5 +1,8 @@
-import React from "react";
+import { ReactElement } from "react";
+import { type User } from "@prisma/client";
+
+type TUser = Omit<User, "password" | "createAt">;
 
 export type TWrapPageCheckUserProps = {
-  Page: React.FC;
+  Page: ({ user }: { user: TUser }) => ReactElement;
 };
