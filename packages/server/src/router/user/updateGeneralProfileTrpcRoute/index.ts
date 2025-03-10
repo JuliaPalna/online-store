@@ -1,9 +1,9 @@
 import _ from "lodash";
 import { trpc } from "../../../api/trpc";
-import { updateProfileShema } from "../../../lib/shema/updateProfileShema/shema";
+import { updateGeneralProfileShema } from "../../../lib/shema/updateProfileShema/shema";
 
-export const updateProfileTrpcRoute = trpc.procedure
-  .input(updateProfileShema)
+export const updateGeneralProfileTrpcRoute = trpc.procedure
+  .input(updateGeneralProfileShema)
   .mutation(async ({ ctx, input }) => {
     const authorizedUser = ctx.authorization;
 

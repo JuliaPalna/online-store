@@ -25,7 +25,9 @@ export function Form({
 }: IFormProps): ReactElement {
   return (
     <form onSubmit={onSubmit} className={css.form}>
-      <Title className={css.title}>{title}</Title>
+      <Title size={2} className={css.title}>
+        {title}
+      </Title>
 
       {children}
 

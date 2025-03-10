@@ -45,7 +45,3 @@ export function SingInPage() {
     </Form>
   );
 }
-
-{
-  /* <SingInForm formik={formik} errorCreate={error} /> */
-}

@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { withZodSchema } from "formik-validator-zod";
-import { FormikHelpers, useFormik } from "formik";
+import { FormikHelpers, FormikValues, useFormik } from "formik";
 import { z } from "zod";
 
-export function useForm<TZodSchema extends z.ZodTypeAny>({
-  initialValues = {},
-  validationSchema,
-  onSubmit,
-  isReset = true,
-}: {
+interface IUseFormProps<TZodSchema extends z.ZodTypeAny> {
   initialValues: z.infer<TZodSchema>;
   validationSchema: TZodSchema;
   onSubmit: (
@@ -16,23 +11,42 @@ export function useForm<TZodSchema extends z.ZodTypeAny>({
     actions: FormikHelpers<z.infer<TZodSchema>>,
   ) => Promise<void> | void;
   isReset?: boolean;
-}) {
-  const [error, setError] = useState<string | null>(null);
+}
 
-  const formik = useFormik<z.infer<TZodSchema>>({
+export function useForm<TZodSchema extends z.ZodTypeAny>({
+  initialValues = {},
+  validationSchema,
+  onSubmit,
+  isReset = true,
+}: IUseFormProps<TZodSchema>) {
+  const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const formik: FormikValues = useFormik<z.infer<TZodSchema>>({
     initialValues: initialValues,
     validate: withZodSchema(validationSchema),
     onSubmit: async (values, formikHelpers) => {
       try {
         setError(null);
         await onSubmit(values, formikHelpers);
+
         if (isReset) {
           formik.resetForm();
         }
+
+        setIsSuccess(true);
+
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 4000);
       } catch (error) {
+        setIsSuccess(false);
+
         if (error instanceof Error) {
           setError(error.message);
         }
+
+        throw Error(`${error}`);
       }
     },
   });
@@ -40,5 +54,6 @@ export function useForm<TZodSchema extends z.ZodTypeAny>({
   return {
     formik,
     error,
+    isSuccess,
   };
 }
