@@ -32,3 +32,7 @@ export function updateProductRoute({
 }: TProductRouteParams): string {
   return `/catalog/${category}/${id}/update`;
 }
+
+export function getNewProductRoute(): string {
+  return "/newproduct";
+}

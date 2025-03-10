@@ -12,7 +12,7 @@ export const pageListAutorisationUser: TPageListRouteProps = [
   },
   {
     name: "Редактировать профиль",
-    route: routes.updateUserRoute(),
+    route: routes.updateProfileRoute(),
   },
   {
     name: "Выход",
