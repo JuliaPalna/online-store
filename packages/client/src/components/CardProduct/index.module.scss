@@ -1,5 +1,5 @@
-@use "../../_vars.scss" as *;
-@use "../../_mixins.scss" as *;
+@use "../..//styles/_vars.scss" as *;
+@use "../../styles/mixins" as *;
 
 .wrapImage {
   position: relative;

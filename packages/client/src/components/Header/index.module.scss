@@ -1,0 +1,21 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/vars";
+
+.header {
+  @include flex;
+  @include flexRow;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 0 0 4px #bdbdbd;
+
+  .logo {
+    position: relative;
+    margin-left: 40vw;
+
+    .link {
+      @include link;
+    }
+  }
+}

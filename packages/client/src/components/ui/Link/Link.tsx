@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 interface ILinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode | string;
-  className: string;
+  className?: string;
 }
 
 export function Link({ children, href, className }: ILinkProps): ReactElement {

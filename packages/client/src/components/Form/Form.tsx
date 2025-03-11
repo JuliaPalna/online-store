@@ -1,7 +1,6 @@
-import { Button, Informer, Text, Title } from "../ui";
-
-import css from "../../styles/components/Form/index.module.scss";
 import React, { ReactElement } from "react";
+import { Button, Informer, Text, Title } from "../ui";
+import css from "./index.module.scss";
 interface IFormProps {
   title?: string;
   children: React.ReactNode;

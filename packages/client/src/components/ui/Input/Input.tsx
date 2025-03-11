@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { IInputProps } from "./types";
 import cn from "classnames";
-import css from "../../../styles/components/Input/index.module.scss";
+import css from "./index.module.scss";
 
 export function Input({
   name,

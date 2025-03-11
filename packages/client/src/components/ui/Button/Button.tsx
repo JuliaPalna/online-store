@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: React.ReactNode;
   className?: string;
   onClick?: (e: React.MouseEvent) => void;
   type?: "submit" | "reset" | "button";

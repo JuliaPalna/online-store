@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { ITextareaProps } from "./types";
 import cn from "classnames";
-import css from "../../../styles/components/Textarea/index.module.scss";
+import css from "./index.module.scss";
 
 export function Textarea({ name, data }: ITextareaProps): ReactElement {
   const value = data.values[name];

@@ -3,7 +3,7 @@ import cn from "classnames";
 import { Box } from "../Box";
 import { Text } from "../Text";
 import { IFieldProps } from "./types";
-import css from "../../../styles/components/Field/index.module.scss";
+import css from "./index.module.scss";
 
 export function Field({
   name,

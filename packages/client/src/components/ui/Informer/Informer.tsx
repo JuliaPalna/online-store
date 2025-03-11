@@ -1,8 +1,8 @@
-import cn from "classnames";
+import { ReactElement } from "react";
 import { Box } from "..";
 import { IInformerProps } from "./IInformer";
-import css from "../../../styles/components/Informer/index.module.scss";
-import { ReactElement } from "react";
+import cn from "classnames";
+import css from "./index.module.scss";
 
 export function Informer({ children, status }: IInformerProps): ReactElement {
   return (

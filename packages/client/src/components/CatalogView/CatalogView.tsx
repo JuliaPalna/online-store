@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Box, List, ListItem } from "../ui";
+import { Box, List, ListItem, Text } from "../ui";
 import { getProductLisByCategorytRoute } from "../../lib/routes";
 import css from "./index.module.scss";
 
@@ -24,7 +24,10 @@ export function CatalogView({ сategory }: IProps): ReactElement {
                   name: item.nameEn,
                 })}
               >
-                <Box className={css.wrap}>{item.nameRu}</Box>
+                <Box className={css.wrap}>
+                  <Box className={css.wrapImage}>Картинка</Box>
+                  <Text>{item.nameRu}</Text>
+                </Box>
               </Link>
             </ListItem>
           </React.Fragment>

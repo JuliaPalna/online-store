@@ -7,12 +7,16 @@
 }
 
 .list {
-  @include flex;
-  @include flexRow;
+  @include grid;
+  @include gridColumn;
 
   .item {
     position: relative;
-    @include width;
+    width: 100%;
+
+    &:not(:last-child) {
+      padding-bottom: 25px;
+    }
 
     .link {
       @include link;

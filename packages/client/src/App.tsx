@@ -14,24 +14,15 @@ import {
   NotFoundPage,
   UpdateProfilePage,
 } from "./pages";
-import * as pages from "./lib/pageList";
 import { Layout } from "./components";
 import "./styles/global.scss";
-import { useUserContext } from "./context/UserContext";
 
 function App() {
-  const user = useUserContext();
-  let pageList = [...pages.pageListInitial];
-
-  pageList = user
-    ? [...pageList, ...pages.pageListAutorisationUser]
-    : [...pageList, ...pages.pageListNotAutorisationUser];
-
   return (
     <Routes>
       <Route path={routs.singOutRoute()} element={<SingOutPage />} />
 
-      <Route element={<Layout props={pageList} />}>
+      <Route element={<Layout />}>
         <Route path={routs.getMainRoute()} element={<MainPage />} />
         <Route path="*" element={<NotFoundPage />} />
 

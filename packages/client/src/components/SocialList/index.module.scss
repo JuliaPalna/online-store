@@ -1,0 +1,16 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/vars";
+
+.list {
+  @include flex;
+  @include flexRow;
+
+  .item {
+    position: relative;
+    padding: 3px;
+
+    .link {
+      @include link;
+    }
+  }
+}

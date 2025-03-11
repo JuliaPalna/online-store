@@ -1,0 +1,36 @@
+@use "../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../styles/vars" as *;
+@use "../../styles/_mixins" as *;
+
+.layout {
+  position: relative;
+  @include flex;
+  flex-flow: column;
+  padding-bottom: 30px;
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $white;
+    z-index: 99999;
+  }
+
+  .content {
+    padding: 20px 30px;
+    padding-top: 60px;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .footer {
+  }
+
+  .bottomMenu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
