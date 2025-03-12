@@ -13,4 +13,5 @@ export * from "./Sidebar";
 export * from "./Text";
 export * from "./Textarea";
 export * from "./Title";
+export * from "./Loader";
 // @endindex

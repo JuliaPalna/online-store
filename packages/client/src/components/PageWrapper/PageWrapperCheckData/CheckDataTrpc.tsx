@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { TWrapPageGetDataProps } from "./types";
-import { Text } from "../../ui";
+import { Loader, Text } from "../../ui";
 
 export function CheckDataTrpc<TData, TError>({
   useQuery,
@@ -15,7 +15,7 @@ export function CheckDataTrpc<TData, TError>({
   const { data, error, isLoading, isFetching, isError } = result;
 
   if (isLoading || isFetching) {
-    return <Text>Loading...</Text>;
+    return <Loader type="section" />;
   }
 
   if (isError) {

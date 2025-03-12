@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
 import { getMainRoute } from "../../../lib/routes";
-import { Text } from "../../../components";
+import { Loader } from "../../../components";
 
 export function SingOutPage() {
   const navigate = useNavigate();
@@ -21,5 +21,5 @@ export function SingOutPage() {
       });
   }, []);
 
-  return <Text>Loading...</Text>;
+  return <Loader type="page" />;
 }

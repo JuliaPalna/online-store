@@ -1,22 +1,29 @@
 import { ReactElement } from "react";
+import cn from "classnames";
+import css from "./index.module.scss";
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className?: string;
   onClick?: (e: React.MouseEvent) => void;
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
+  ariaView?: "sidebar";
 }
 
 export function Button({
   children,
-  className,
   onClick,
   type = "button",
   disabled = false,
+  ariaView,
 }: IButtonProps): ReactElement {
   return (
     <button
-      className={className}
+      className={cn({
+        [css.button]: true,
+        [css.disabled]: disabled,
+        [css.loading]: disabled,
+        [css[`view-${ariaView}`]]: true,
+      })}
       onClick={onClick}
       type={type}
       disabled={disabled}

@@ -1,6 +1,6 @@
 import { UserContext } from "../../context/UserContext";
 import { trpc } from "../../api/trpc";
-import { Text } from "../../components";
+import { Loader, Text } from "../../components";
 
 export const UserContextProvider = ({
   children,
@@ -10,10 +10,10 @@ export const UserContextProvider = ({
   const { data, error, isLoading, isFetching, isError } =
     trpc.authorizationUser.useQuery();
 
-  let infoView: React.ReactNode = <Text>Загрузка...</Text>;
+  let infoView: React.ReactNode = <Loader type="section" />;
 
   if (isLoading || isFetching) {
-    infoView = <Text>Загрузка...</Text>;
+    infoView = <Loader type="section" />;
   } else if (isError) {
     infoView = <Text>{error.message}</Text>;
   } else {

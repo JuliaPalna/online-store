@@ -9,7 +9,7 @@ interface IFormProps {
   isSuccess?: boolean;
   error: string | null;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  buttonName?: string;
+  buttonName?: React.ReactNode;
 }
 
 export function Form({
@@ -42,7 +42,7 @@ export function Form({
         </Informer>
       )}
 
-      <Button className={css.button} disabled={disabled} type="submit">
+      <Button disabled={disabled} type="submit">
         {buttonName}
       </Button>
     </form>

@@ -7,19 +7,31 @@ import {
   Title,
   CardProduct,
   Box,
-  PageWrapperCheckData,
+  Text,
+  PageWrapperLoadingData,
 } from "../../../components";
 import { getProductInfoRoute } from "../../../lib/routes";
 import css from "./index.module.scss";
 
-export const ProductListPage = PageWrapperCheckData({
+export const ProductListPage = PageWrapperLoadingData({
   useQuery: () => {
     const { name } = useParams();
     if (name) {
-      return trpc.getProductListByCategory.useQuery({ name: name });
+      return trpc.getProductListByCategory.useInfiniteQuery(
+        { name: name, limit: 2 },
+        {
+          getNextPageParam: (lastPage) => lastPage.nextCursor,
+        },
+      );
     }
   },
-})(({ products }) => {
+})((data) => {
+  if (!data) {
+    return <Text>Not found</Text>;
+  }
+
+  const products = data?.pages.flatMap((page) => page.products);
+
   return (
     <>
       <Title className={css.title}>Список</Title>

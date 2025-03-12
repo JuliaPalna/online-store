@@ -9,9 +9,7 @@ export function Header(): ReactElement {
       <Menu />
 
       <Box className={css.logo}>
-        <Logo href={"#"} className={css.link}>
-          Logo
-        </Logo>
+        <Logo href={"#"}>Logo</Logo>
       </Box>
     </header>
   );

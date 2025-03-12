@@ -25,9 +25,7 @@ export function SocialList(): ReactElement {
         return (
           <React.Fragment key={index}>
             <ListItem className={css.item}>
-              <Link className={css.link} href={item.href}>
-                {item.icon}
-              </Link>
+              <Link href={item.href}>{item.icon}</Link>
             </ListItem>
           </React.Fragment>
         );

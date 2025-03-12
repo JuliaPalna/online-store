@@ -30,7 +30,7 @@ export function SingInPage() {
         event.preventDefault();
         formik.handleSubmit();
       }}
-      buttonName={formik.isSubmitting ? "Загрузка..." : "Войти"}
+      buttonName="Войти"
       successMessage="Успех!"
       error={error}
       disabled={formik.isSubmitting}

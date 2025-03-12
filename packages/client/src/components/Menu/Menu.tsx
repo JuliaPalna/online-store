@@ -25,7 +25,7 @@ export function Menu(): ReactElement {
 
   return (
     <>
-      <Button onClick={handelClick} className={css.button}>
+      <Button onClick={handelClick} ariaView="sidebar">
         <Sidebar status={isOpen} />
       </Button>
 

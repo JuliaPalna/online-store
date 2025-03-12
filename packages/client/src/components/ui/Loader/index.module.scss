@@ -1,0 +1,20 @@
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins" as *;
+
+.loader {
+  position: relative;
+  display: block;
+  @include loader($borderWidth: 5px, $size: 60px, $color: $grey);
+
+  &.type-page {
+    width: 100%;
+    min-height: inherit;
+    height: 100%;
+  }
+
+  &.type-section {
+    height: 80px;
+    width: 100%;
+  }
+}

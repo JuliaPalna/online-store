@@ -19,9 +19,7 @@ export function CardProduct({
       <Text className={css.price}>{`Цена: ${product.price}`}</Text>
       <Text className={css.likes}>{`Likes: ${product.likes}`}</Text>
 
-      <Button className={css.button} disabled={false}>
-        Купить
-      </Button>
+      <Button disabled={false}>Купить</Button>
     </>
   );
 }

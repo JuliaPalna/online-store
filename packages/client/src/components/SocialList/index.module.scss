@@ -8,9 +8,5 @@
   .item {
     position: relative;
     padding: 3px;
-
-    .link {
-      @include link;
-    }
   }
 }

@@ -45,7 +45,7 @@ export const ProductInfoPage = PageWrapperCheckData({
       </Button>
       {product.isLike ? "Like" : "Unlike"}
 
-      <Button className={css.button}>Купить</Button>
+      <Button>Купить</Button>
 
       <Link
         className={css.link}
@@ -54,7 +54,7 @@ export const ProductInfoPage = PageWrapperCheckData({
           category: product.category.nameEn,
         })}
       >
-        <Button className={css.button}>Редактировать</Button>
+        <Button>Редактировать</Button>
       </Link>
     </Box>
   );

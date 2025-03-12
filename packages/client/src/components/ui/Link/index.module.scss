@@ -1,0 +1,7 @@
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins" as *;
+
+.link {
+  @include link;
+}

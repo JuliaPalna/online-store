@@ -13,9 +13,5 @@
   .logo {
     position: relative;
     margin-left: 40vw;
-
-    .link {
-      @include link;
-    }
   }
 }

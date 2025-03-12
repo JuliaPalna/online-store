@@ -36,7 +36,7 @@ export function SingUpPage(): ReactElement {
         event.preventDefault();
         formik.handleSubmit();
       }}
-      buttonName={formik.isSubmitting ? "Загрузка..." : "Зарегистрироваться"}
+      buttonName="Зарегистрироваться"
       successMessage="Регистрация выполнена успешно"
       error={error}
       disabled={formik.isSubmitting}
