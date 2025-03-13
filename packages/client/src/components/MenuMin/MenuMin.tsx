@@ -12,7 +12,7 @@ export function MenuMin(): ReactElement {
     },
     {
       name: "Search",
-      route: "#",
+      route: routes.searchProductRoute(),
     },
     {
       name: "Корз",

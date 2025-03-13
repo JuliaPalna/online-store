@@ -8,7 +8,7 @@ export function Input({
   type = "text",
   data,
 }: IInputProps): ReactElement {
-  const onChange = data.handleChange;
+  const handleChange = data.handleChange;
   const value = data.values[name];
   const onBlur = data.handleBlur;
   const disabled = data.isSubmitting;
@@ -20,7 +20,7 @@ export function Input({
       name={name}
       type={type}
       value={value}
-      onChange={onChange}
+      onChange={handleChange}
       onBlur={onBlur}
       disabled={disabled}
       className={cn({

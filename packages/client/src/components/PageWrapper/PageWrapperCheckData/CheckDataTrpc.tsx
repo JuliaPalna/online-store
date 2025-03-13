@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { TWrapPageGetDataProps } from "./types";
-import { Loader, Text } from "../../ui";
+import { Informer, Loader, Text } from "../../ui";
 
 export function CheckDataTrpc<TData, TError>({
   useQuery,
@@ -9,7 +9,11 @@ export function CheckDataTrpc<TData, TError>({
   const result = useQuery();
 
   if (result === undefined) {
-    return <Text>Not found</Text>;
+    return  (
+      <Informer status="error">
+        <Text>Not found</Text>
+      </Informer>
+    );
   }
 
   const { data, error, isLoading, isFetching, isError } = result;
@@ -27,7 +31,11 @@ export function CheckDataTrpc<TData, TError>({
   }
 
   if (!data) {
-    return <Text>Not found</Text>;
+    return  (
+      <Informer status="error">
+        <Text>Not found</Text>
+      </Informer>
+    );
   }
 
   return <Page {...data} />;

@@ -1,0 +1,31 @@
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins.scss" as *;
+
+.title {
+  @include h1;
+  padding-bottom: 30px;
+}
+
+.list {
+  @include grid;
+  @include gridColumn;
+
+  .item {
+    position: relative;
+    width: 100%;
+
+    &:not(:last-child) {
+      padding-bottom: 25px;
+    }
+
+    .link {
+      @include link;
+    }
+  }
+
+  .wrap {
+    @include flex;
+    @include flexColumn;
+    padding: 0 10px;
+  }
+}

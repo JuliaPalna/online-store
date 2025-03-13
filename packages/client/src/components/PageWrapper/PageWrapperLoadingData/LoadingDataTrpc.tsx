@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Button, Loader, Text } from "../../ui";
+import { Button, Informer, Loader, Text } from "../../ui";
 import { TWrapLoadingDataProps } from "./types";
 
 export function LoadingDataTrpc<TData, TError>({
@@ -9,7 +9,11 @@ export function LoadingDataTrpc<TData, TError>({
   const result = useQuery();
 
   if (result === undefined) {
-    return <Text>Not found</Text>;
+    return  (
+      <Informer status="error">
+        <Text>Not found</Text>
+      </Informer>
+    );
   }
 
   const {
@@ -36,7 +40,11 @@ export function LoadingDataTrpc<TData, TError>({
   }
 
   if (!data.pages) {
-    return <Text>Not found</Text>;
+    return  (
+      <Informer status="error">
+        <Text>Not found</Text>
+      </Informer>
+    );
   }
 
   return (

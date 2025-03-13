@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Box, List, ListItem, Text } from "../ui";
-import { getProductLisByCategorytRoute } from "../../lib/routes";
+import { getProductListByCategoryRoute } from "../../lib/routes";
 import css from "./index.module.scss";
 
 interface IProps {
@@ -20,7 +20,7 @@ export function CatalogView({ сategory }: IProps): ReactElement {
             <ListItem className={css.item}>
               <Link
                 className={css.link}
-                to={getProductLisByCategorytRoute({
+                to={getProductListByCategoryRoute({
                   name: item.nameEn,
                 })}
               >

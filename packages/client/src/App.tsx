@@ -13,6 +13,7 @@ import {
   UpdateProductPage,
   NotFoundPage,
   UpdateProfilePage,
+  SearchProductPage,
 } from "./pages";
 import { Layout } from "./components";
 import "./styles/global.scss";
@@ -36,7 +37,7 @@ function App() {
 
         {/* product */}
         <Route
-          path={routs.getProductLisByCategorytRoute(
+          path={routs.getProductListByCategoryRoute(
             routs.productLisByCategorytRouteParams,
           )}
           element={<ProductListPage />}
@@ -45,6 +46,7 @@ function App() {
           path={routs.getProductInfoRoute(routs.productRouteParams)}
           element={<ProductInfoPage />}
         />
+        <Route path={routs.searchProductRoute()} element={<SearchProductPage />} />
 
         <Route
           path={routs.updateProductRoute(routs.productRouteParams)}

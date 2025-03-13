@@ -6,7 +6,7 @@ export const productLisByCategorytRouteParams = { name: ":name" };
 export type TProductLisByCategorytRouteParams =
   typeof productLisByCategorytRouteParams;
 
-export function getProductLisByCategorytRoute({
+export function getProductListByCategoryRoute({
   name,
 }: TProductLisByCategorytRouteParams): string {
   return `/catalog/${name}`;
@@ -35,4 +35,8 @@ export function updateProductRoute({
 
 export function getNewProductRoute(): string {
   return "/newproduct";
+}
+
+export function searchProductRoute(): string {
+  return "/search";
 }

@@ -1,10 +1,10 @@
 import { trpc } from "../api/trpc";
-import { IProduct } from "../../../server/src/types/IProduct";
+import { TProduct } from "../../../server/src/lib/shema/productShema/productSchema/shema";
 
 export function toggleProductLike({
   product,
 }: {
-  product: IProduct | undefined;
+  product: TProduct | undefined;
 }) {
   const trpcUtils = trpc.useContext();
 

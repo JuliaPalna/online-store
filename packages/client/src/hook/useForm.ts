@@ -6,7 +6,7 @@ import { z } from "zod";
 interface IUseFormProps<TZodSchema extends z.ZodTypeAny> {
   initialValues: z.infer<TZodSchema>;
   validationSchema: TZodSchema;
-  onSubmit: (
+  onSubmit?: (
     values: z.infer<TZodSchema>,
     actions: FormikHelpers<z.infer<TZodSchema>>,
   ) => Promise<void> | void;
@@ -27,6 +27,10 @@ export function useForm<TZodSchema extends z.ZodTypeAny>({
     validate: withZodSchema(validationSchema),
     onSubmit: async (values, formikHelpers) => {
       try {
+        if (!onSubmit) {
+          return;
+        }
+        
         setError(null);
         await onSubmit(values, formikHelpers);
 

@@ -8,7 +8,6 @@ import { getAuthorizationUserTrpcRoute } from "./authorization/getAuthorizationU
 import { createCategoryTrpcRote } from "./category/createCategoryTrpcRote";
 import { getCategoryListTrpcRoute } from "./category/getCategoryListTrpcRoute";
 import { setProductLikeTrpcRoute } from "./product/setProductLikeTrpcRoute";
-import { getProductListByCategoryTrpcRoute } from "./product/getProductListByCategoryTrpcRoute";
 import { updateProductTrpcRoute } from "./product/updateProductTrpcRoute";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { updateGeneralProfileTrpcRoute } from "./user/updateGeneralProfileTrpcRoute";
@@ -19,7 +18,6 @@ export const trpcRouter = trpc.router({
   //http://localhost:3000/trpc/getProducts
   // product
   getProductList: getProductListTrpcRoute,
-  getProductListByCategory: getProductListByCategoryTrpcRoute,
   getProduct: getProductTrpcRoute,
   createProduct: createProductTrpcRoute,
   updateProduct: updateProductTrpcRoute,
