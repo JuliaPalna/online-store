@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import { Button, List, ListItem, Sidebar } from "../ui";
+import { hasAdminPermission } from "../../../../server/src/utils/checkUserPermission";
 import * as pages from "../../lib/pageList";
 import cn from "classnames";
 import css from "./index.module.scss";
@@ -9,11 +10,22 @@ import css from "./index.module.scss";
 export function Menu(): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const user = useUserContext();
+  const isAdmin = hasAdminPermission(user);
   let pageList = [...pages.pageListInitial];
 
-  pageList = user
-    ? [...pageList, ...pages.pageListAutorisationUser]
-    : [...pageList, ...pages.pageListNotAutorisationUser];
+  if (user) {
+    pageList = isAdmin
+      ? [
+          ...pageList,
+          ...pages.pageListAdminPermission,
+          ...pages.pageListAutorisationUser,
+        ]
+      : [...pageList, ...pages.pageListAutorisationUser];
+  }
+
+  if (!user) {
+    pageList = [...pageList, ...pages.pageListNotAutorisationUser];
+  }
 
   function handelClick() {
     if (isOpen) {

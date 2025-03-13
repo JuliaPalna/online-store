@@ -27,7 +27,10 @@ export const updateGeneralProfileTrpcRoute = trpc.procedure
       where: {
         id: authorizedUser.id,
       },
-      data: input,
+      data: {
+        name: input.name,
+        email: input.email,
+      },
     });
 
     ctx.authorization = updateUser;

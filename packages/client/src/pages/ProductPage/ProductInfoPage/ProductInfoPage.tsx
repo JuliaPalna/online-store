@@ -11,6 +11,8 @@ import { getbalanceStatus } from "../../../utils/getBalanceStatus";
 import css from "./index.module.scss";
 import { toggleProductLike } from "../../../utils/toggleProductLike";
 import { updateProductRoute } from "../../../lib/routes";
+import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { useUserContext } from "../../../context/UserContext";
 
 export const ProductInfoPage = PageWrapperCheckData({
   useQuery: () => {
@@ -20,6 +22,7 @@ export const ProductInfoPage = PageWrapperCheckData({
     }
   },
 })(({ product }) => {
+  const user = useUserContext();
   const setProductLike = toggleProductLike({ product });
 
   return (
@@ -47,15 +50,17 @@ export const ProductInfoPage = PageWrapperCheckData({
 
       <Button>Купить</Button>
 
-      <Link
-        className={css.link}
-        to={updateProductRoute({
-          id: product.id,
-          category: product.category.nameEn,
-        })}
-      >
-        <Button>Редактировать</Button>
-      </Link>
+      {hasAdminPermission(user) && (
+        <Link
+          className={css.link}
+          to={updateProductRoute({
+            id: product.id,
+            category: product.category.nameEn,
+          })}
+        >
+          <Button>Редактировать</Button>
+        </Link>
+      )}
     </Box>
   );
 });

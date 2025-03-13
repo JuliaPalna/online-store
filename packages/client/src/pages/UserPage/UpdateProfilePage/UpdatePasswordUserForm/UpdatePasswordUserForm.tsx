@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Field, Form, Input } from "../../../../components";
 import { IPropsForm } from "../../types";
 
-export function UpdatePassworUserForm({
+export function UpdatePasswordUserForm({
   formik,
   error,
   isSuccess,

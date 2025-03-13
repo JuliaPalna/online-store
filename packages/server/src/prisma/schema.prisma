@@ -8,6 +8,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserPermission {
+  ADMIN_ALL
+}
+
 model User {
   id            String     @id @default(uuid())
   email         String     @unique
@@ -15,6 +19,7 @@ model User {
   name          String     @default("")
   createAt      DateTime   @default(now())
   productLikes  ProductLike[]
+  permissions   UserPermission[]
 }
 
 model Product {

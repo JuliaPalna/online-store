@@ -8,6 +8,9 @@ import {
   PageWrapperCkecAuthorization,
   ProductInfoForm,
 } from "../../../components";
+import { useUserContext } from "../../../context/UserContext";
+import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { NotFoundPage } from "../../OtherPage/NotFoundPage";
 
 export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
   return <WrapperUpdateProductPage />;
@@ -21,6 +24,8 @@ const WrapperUpdateProductPage = PageWrapperCheckData({
     }
   },
 })(({ product }) => {
+  const user = useUserContext();
+  const isAdmin = hasAdminPermission(user);
   const navigate = useNavigate();
   const updateProductTrpc = trpc.updateProduct.useMutation();
   const initialValues = {
@@ -50,11 +55,17 @@ const WrapperUpdateProductPage = PageWrapperCheckData({
   });
 
   return (
-    <ProductInfoForm
-      title="Редактировать товар"
-      buttonName="Редактировать"
-      error={error}
-      formik={formik}
-    />
+    <>
+      {!isAdmin ? (
+        <NotFoundPage />
+      ) : (
+        <ProductInfoForm
+          title="Редактировать товар"
+          buttonName="Редактировать"
+          error={error}
+          formik={formik}
+        />
+      )}
+    </>
   );
 });

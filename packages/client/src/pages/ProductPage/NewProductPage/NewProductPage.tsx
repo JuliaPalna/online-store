@@ -6,8 +6,13 @@ import {
   ProductInfoForm,
 } from "../../../components";
 import { useForm } from "../../../hook/useForm";
+import { useUserContext } from "../../../context/UserContext";
+import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { NotFoundPage } from "../../OtherPage/NotFoundPage";
 
 export const NewProductPage = PageWrapperCkecAuthorization()(() => {
+  const user = useUserContext();
+  const isAdmin = hasAdminPermission(user);
   const createProductTrpc = trpc.createProduct.useMutation();
 
   const { formik, error } = useForm({
@@ -19,11 +24,17 @@ export const NewProductPage = PageWrapperCkecAuthorization()(() => {
   });
 
   return (
-    <ProductInfoForm
-      title="Форма создания товара"
-      buttonName="Создать"
-      error={error}
-      formik={formik}
-    />
+    <>
+      {!isAdmin ? (
+        <NotFoundPage />
+      ) : (
+        <ProductInfoForm
+          title="Форма создания товара"
+          buttonName="Создать"
+          error={error}
+          formik={formik}
+        />
+      )}
+    </>
   );
 });
