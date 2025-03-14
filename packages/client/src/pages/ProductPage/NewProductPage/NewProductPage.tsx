@@ -2,6 +2,7 @@ import { trpc } from "../../../api/trpc";
 import { createProductSchema } from "../../../../../server/src/lib/shema/productShema/createProductSchema/shema";
 import { initialProductProps } from "./initialProductProps";
 import {
+  HelmetTitle,
   PageWrapperCkecAuthorization,
   ProductInfoForm,
 } from "../../../components";
@@ -25,6 +26,8 @@ export const NewProductPage = PageWrapperCkecAuthorization()(() => {
 
   return (
     <>
+      <HelmetTitle />
+
       {!isAdmin ? (
         <NotFoundPage />
       ) : (

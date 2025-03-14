@@ -1,6 +1,13 @@
 import { trpc } from "../../api/trpc";
 import { CatalogView } from "../../components/CatalogView";
-import { PageWrapperCheckData, Title } from "../../components";
+import {
+  Box,
+  HelmetTitle,
+  Image,
+  PageWrapperCheckData,
+  Title,
+} from "../../components";
+import image from "../../assets/images/organicFarming.png";
 import css from "./index.module.scss";
 
 export const MainPage = PageWrapperCheckData({
@@ -10,9 +17,17 @@ export const MainPage = PageWrapperCheckData({
 })(({ сategory }) => {
   return (
     <>
-      <Title className={css.title}>Главная страница</Title>
+      <HelmetTitle />
 
-      <CatalogView сategory={сategory} />
+      <Box className={css.image}>
+        <Image alt="" src={image} />
+      </Box>
+
+      <Title className={css.title}>Sore</Title>
+
+      <Box className={css.catalog}>
+        <CatalogView сategory={сategory} viewRow="row" />
+      </Box>
     </>
   );
 });

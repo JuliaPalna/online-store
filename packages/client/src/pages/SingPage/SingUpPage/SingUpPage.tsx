@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { z } from "zod";
 import { trpc } from "../../../api/trpc";
 import { getMainRoute } from "../../../lib/routes";
-import { Field, Form, Input } from "../../../components";
+import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { signUpShema } from "../../../../../server/src/lib/shema/singShema/signUpShema/shema";
 import { initialSingUpProps } from "./initialSingUpProps";
@@ -30,28 +30,32 @@ export function SingUpPage(): ReactElement {
   });
 
   return (
-    <Form
-      title="Регистрация"
-      onSubmit={(event) => {
-        event.preventDefault();
-        formik.handleSubmit();
-      }}
-      buttonName="Зарегистрироваться"
-      successMessage="Регистрация выполнена успешно"
-      error={error}
-      disabled={formik.isSubmitting}
-    >
-      <Field name="email" label="Почта" data={formik}>
-        <Input name="email" type="email" data={formik} />
-      </Field>
+    <>
+      <HelmetTitle title="Авторизация" />
 
-      <Field name="password" label="Пароль" data={formik}>
-        <Input name="password" type="password" data={formik} />
-      </Field>
+      <Form
+        title="Регистрация"
+        onSubmit={(event) => {
+          event.preventDefault();
+          formik.handleSubmit();
+        }}
+        buttonName="Зарегистрироваться"
+        successMessage="Регистрация выполнена успешно"
+        error={error}
+        disabled={formik.isSubmitting}
+      >
+        <Field name="email" label="Почта" data={formik}>
+          <Input name="email" type="email" data={formik} />
+        </Field>
 
-      <Field name="passwordAgain" label="Повторите пароль" data={formik}>
-        <Input name="passwordAgain" type="password" data={formik} />
-      </Field>
-    </Form>
+        <Field name="password" label="Пароль" data={formik}>
+          <Input name="password" type="password" data={formik} />
+        </Field>
+
+        <Field name="passwordAgain" label="Повторите пароль" data={formik}>
+          <Input name="passwordAgain" type="password" data={formik} />
+        </Field>
+      </Form>
+    </>
   );
 }

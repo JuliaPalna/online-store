@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { TrpcProvider, UserContextProvider } from "./provider/index.ts";
+import { HelmetProvider } from "react-helmet-async";
 
 const root: HTMLElement | null = document.getElementById("root");
 
@@ -11,13 +12,15 @@ if (root === null) {
 }
 
 createRoot(root).render(
-  <StrictMode>
-    <TrpcProvider>
-      <UserContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </UserContextProvider>
-    </TrpcProvider>
-  </StrictMode>,
+  <HelmetProvider>
+    <StrictMode>
+      <TrpcProvider>
+        <UserContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </UserContextProvider>
+      </TrpcProvider>
+    </StrictMode>
+  </HelmetProvider>,
 );

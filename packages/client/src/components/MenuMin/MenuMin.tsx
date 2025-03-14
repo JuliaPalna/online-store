@@ -3,27 +3,31 @@ import * as routes from "../../lib/routes";
 import { List, ListItem } from "../ui";
 import { Link } from "react-router-dom";
 import css from "./index.module.scss";
+import { BasketIcon, HomeIcon, LikeIcon, SearchIcon, UserIcon } from "../Icon";
 
 export function MenuMin(): ReactElement {
-  const menu = [
+  const menu: {
+    name: React.ReactNode;
+    route: string;
+  }[] = [
     {
-      name: "Main",
+      name: <HomeIcon />,
       route: routes.getMainRoute(),
     },
     {
-      name: "Search",
+      name: <SearchIcon />,
       route: routes.searchProductRoute(),
     },
     {
-      name: "Корз",
+      name: <BasketIcon />,
       route: "#",
     },
     {
-      name: "Lik",
+      name: <LikeIcon />,
       route: "#",
     },
     {
-      name: "SingIn",
+      name: <UserIcon />,
       route: routes.singInRoute(),
     },
   ];

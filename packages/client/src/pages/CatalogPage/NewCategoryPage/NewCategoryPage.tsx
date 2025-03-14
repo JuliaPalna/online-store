@@ -2,6 +2,7 @@ import { trpc } from "../../../api/trpc";
 import {
   Field,
   Form,
+  HelmetTitle,
   Input,
   PageWrapperCkecAuthorization,
 } from "../../../components";
@@ -27,6 +28,8 @@ export const NewCategoryPage = PageWrapperCkecAuthorization()(() => {
 
   return (
     <>
+      <HelmetTitle />
+
       {!isAdmin ? (
         <NotFoundPage />
       ) : (

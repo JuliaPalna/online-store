@@ -16,6 +16,8 @@
 
     .item {
       position: relative;
+      width: 25px;
+      height: 25px;
 
       .link {
         @include link;

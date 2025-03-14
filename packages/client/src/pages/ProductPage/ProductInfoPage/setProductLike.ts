@@ -1,11 +1,7 @@
-import { trpc } from "../api/trpc";
-import { TProduct } from "../../../server/src/lib/shema/productShema/productSchema/shema";
+import { trpc } from "../../../api/trpc";
+import { TProduct } from "../../../../../server/src/lib/shema/productShema/productSchema/shema";
 
-export function toggleProductLike({
-  product,
-}: {
-  product: TProduct | undefined;
-}) {
+export function setProductLike({ product }: { product: TProduct | undefined }) {
   const trpcUtils = trpc.useContext();
 
   const setProductLike = trpc.setProductLike.useMutation({

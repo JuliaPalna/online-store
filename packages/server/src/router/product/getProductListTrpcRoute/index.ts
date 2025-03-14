@@ -37,12 +37,20 @@ export const getProductListTrpcRoute = trpc.procedure
         id: true,
         name: true,
         price: true,
-        likes: true,
+        // likes: true,
         category: true,
         serialNumber: true,
         _count: {
           select: {
             likes: true,
+          },
+        },
+        likes: {
+          select: {
+            id: true,
+          },
+          where: {
+            userId: ctx.authorization?.id,
           },
         },
       },
@@ -65,6 +73,7 @@ export const getProductListTrpcRoute = trpc.procedure
     const result = productsView.map((product) => ({
       ..._.omit(product, ["_count"]),
       likes: product._count.likes,
+      isLike: !!product.likes.length,
     }));
 
     return { products: result, nextCursor };

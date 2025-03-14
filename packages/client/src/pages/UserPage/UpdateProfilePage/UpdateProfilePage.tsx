@@ -1,6 +1,10 @@
 import { updateGeneralProfileShema } from "../../../../../server/src/lib/shema/updateProfileShema/shema";
 import { trpc } from "../../../api/trpc";
-import { PageWrapperCkecAuthorization, Title } from "../../../components";
+import {
+  HelmetTitle,
+  PageWrapperCkecAuthorization,
+  Title,
+} from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { UpdateGeneralUserForm } from "./UpdateGeneralUserForm";
 import {
@@ -11,7 +15,7 @@ import { validationPasswordSchema } from "./UpdatePasswordUserForm";
 
 export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
   // const trpcUtils = trpc.useContext();
-  // const updateGeneralProfileTrpc = trpc.updateGeneralProfile.useMutation();
+  const updateGeneralProfileTrpc = trpc.updateGeneralProfile.useMutation();
   const updatePasswordlProfileTrpc = trpc.updatePasswordProfile.useMutation();
 
   const initialGeneralValues = {
@@ -26,7 +30,8 @@ export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
   } = useForm({
     initialValues: initialGeneralValues,
     validationSchema: updateGeneralProfileShema,
-    onSubmit: async () => {
+    onSubmit: async (values) => {
+      await updateGeneralProfileTrpc.mutateAsync(values);
       // const updatedGeneral = await updateGeneralProfileTrpc.mutateAsync(values);
       // trpcUtils.authorizationUser.setData(undefined, {
       //   authorization: {
@@ -56,7 +61,9 @@ export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
 
   return (
     <>
-      <Title size={1}>Редактировать профиль</Title>
+      <HelmetTitle title="Профиль" />
+
+      <Title size={1}>Профиль</Title>
 
       <UpdateGeneralUserForm
         formik={formikGeneral}

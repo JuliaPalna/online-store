@@ -4,6 +4,7 @@ import {
   Text,
   PageWrapperLoadingData,
   Informer,
+  HelmetTitle,
 } from "../../../components";
 import { ProductListView } from "../../../components/ProductListView";
 
@@ -21,7 +22,7 @@ export const ProductListPage = PageWrapperLoadingData({
   },
 })((data) => {
   if (!data) {
-    return  (
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>
@@ -31,7 +32,7 @@ export const ProductListPage = PageWrapperLoadingData({
   const products = data.pages.flatMap((page) => page.products);
 
   if (products.length < 1) {
-    return  (
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>
@@ -40,6 +41,8 @@ export const ProductListPage = PageWrapperLoadingData({
 
   return (
     <>
+      <HelmetTitle title={products[0].category.nameRu} />
+
       <ProductListView products={products} />
     </>
   );

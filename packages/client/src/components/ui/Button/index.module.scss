@@ -4,7 +4,7 @@
 .button {
   position: relative;
   padding: 8px 15px;
-  border: 1px solid $buttonBackgroundColor;
+  border: none;
   border-radius: $borderRadiusSmall;
   color: $buttonColor;
   background-color: $buttonBackgroundColor;
@@ -34,8 +34,9 @@
     }
   }
 
-  &.view-sidebar {
+  &.view-reset {
     border: none;
+    padding: 0;
     background-color: $white;
     color: $black;
 

@@ -1,6 +1,6 @@
 import { useDebounceValue } from "usehooks-ts";
 import { trpc } from "../../../api/trpc";
-import { Text, Informer, Input, Field } from "../../../components";
+import { Text, Informer, Input, Field, HelmetTitle } from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { getProductShema } from "../../../../../server/src/lib/shema/productShema/getProductShema/shema";
 import { ProductListView } from "../../../components/ProductListView";
@@ -39,7 +39,9 @@ export const SearchProductPage = () => {
 
   return (
     <>
-      <Field name="search" label="Search" data={formik}>
+      <HelmetTitle title="Поиск" />
+
+      <Field name="search" label="Поиск" data={formik}>
         <Input name="search" data={formik} />
       </Field>
 

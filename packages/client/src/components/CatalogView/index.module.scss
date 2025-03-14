@@ -4,6 +4,21 @@
 .list {
   @include grid;
   @include gridColumn;
+  gap: 30px;
+
+  &.view-row {
+    @include flex;
+    @include flexRow;
+    flex-wrap: nowrap;
+    gap: 30px;
+    overflow: auto;
+  }
+
+  &.view-column {
+    @include grid;
+    @include gridColumn;
+    gap: 30px;
+  }
 
   .item {
     position: relative;
@@ -17,11 +32,11 @@
   .wrap {
     @include flex;
     @include flexColumn;
+    align-items: center;
+    gap: 3px;
 
     .wrapImage {
       position: relative;
-      padding-bottom: 50%;
-      border: 1px solid $black;
       border-radius: $borderRadiusSmall;
     }
   }

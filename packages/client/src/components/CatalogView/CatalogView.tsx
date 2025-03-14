@@ -1,7 +1,9 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Box, List, ListItem, Text } from "../ui";
+import { Box, Image, List, ListItem, Text } from "../ui";
 import { getProductListByCategoryRoute } from "../../lib/routes";
+import image from "../../assets/images/organicFarming.png";
+import cn from "classnames";
 import css from "./index.module.scss";
 
 interface IProps {
@@ -9,11 +11,17 @@ interface IProps {
     nameRu: string;
     nameEn: string;
   }[];
+  viewRow?: "row";
 }
 
-export function CatalogView({ сategory }: IProps): ReactElement {
+export function CatalogView({ сategory, viewRow }: IProps): ReactElement {
   return (
-    <List className={css.list}>
+    <List
+      className={cn({
+        [css.list]: true,
+        [css[`view-${viewRow}`]]: true,
+      })}
+    >
       {сategory.map((item) => {
         return (
           <React.Fragment key={item.nameEn}>
@@ -25,7 +33,9 @@ export function CatalogView({ сategory }: IProps): ReactElement {
                 })}
               >
                 <Box className={css.wrap}>
-                  <Box className={css.wrapImage}>Картинка</Box>
+                  <Box className={css.wrapImage}>
+                    <Image alt={item.nameRu} src={image} />
+                  </Box>
                   <Text>{item.nameRu}</Text>
                 </Box>
               </Link>

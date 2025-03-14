@@ -5,6 +5,7 @@ import { createCategorySchema } from "../../createCategorySchema/shema";
 export const productSchema = updateProductShema.extend({
   category: createCategorySchema,
   likes: z.number(),
+  isLike: z.boolean(),
 });
 
 export type TProduct = z.infer<typeof productSchema>;

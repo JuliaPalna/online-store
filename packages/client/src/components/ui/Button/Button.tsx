@@ -6,7 +6,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   onClick?: (e: React.MouseEvent) => void;
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
-  ariaView?: "sidebar";
+  ariaView?: "reset";
 }
 
 export function Button({

@@ -3,16 +3,20 @@ import { trpc } from "../../../api/trpc";
 import {
   Box,
   Button,
+  HelmetTitle,
+  Image,
+  Likes,
   PageWrapperCheckData,
   Text,
   Title,
 } from "../../../components";
 import { getbalanceStatus } from "../../../utils/getBalanceStatus";
-import css from "./index.module.scss";
-import { toggleProductLike } from "../../../utils/toggleProductLike";
+import { setProductLike } from "./setProductLike";
 import { updateProductRoute } from "../../../lib/routes";
 import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
 import { useUserContext } from "../../../context/UserContext";
+import image from "../../../assets/images/organicFarming.png";
+import css from "./index.module.scss";
 
 export const ProductInfoPage = PageWrapperCheckData({
   useQuery: () => {
@@ -23,44 +27,53 @@ export const ProductInfoPage = PageWrapperCheckData({
   },
 })(({ product }) => {
   const user = useUserContext();
-  const setProductLike = toggleProductLike({ product });
+  const productLike = setProductLike({ product });
 
   return (
-    <Box className={css.wrap}>
-      <Title className={css.title} size={1}>
-        {product.name}
-      </Title>
-      <Text>{`${product.description}`}</Text>
-      <Text>{`Цена: ${product.price}`}</Text>
-      <Text>{`статус: ${getbalanceStatus({ count: product.count })}`}</Text>
+    <>
+      <HelmetTitle title={product.name} />
 
-      <Text>{`Likes: ${product.likes}`}</Text>
-      <Button
-        className={css.button}
-        onClick={() => {
-          setProductLike.mutateAsync({
-            productId: product.id,
-            isLike: !product.isLike,
-          });
-        }}
-      >
-        Like
-      </Button>
-      {product.isLike ? "Like" : "Unlike"}
+      <Box className={css.wrap}>
+        <Box className={css.wrapImage}>
+          <Image alt={product.name} src={image} />
+        </Box>
 
-      <Button>Купить</Button>
+        <Title className={css.title} size={1}>
+          {product.name}
+        </Title>
+        <Text>{`${product.description}`}</Text>
+        <Text>{`Цена: ${product.price}`}</Text>
+        <Text>{`статус: ${getbalanceStatus({ count: product.count })}`}</Text>
 
-      {hasAdminPermission(user) && (
-        <Link
-          className={css.link}
-          to={updateProductRoute({
-            id: product.id,
-            category: product.category.nameEn,
-          })}
+        <Button
+          ariaView="reset"
+          onClick={() => {
+            productLike.mutateAsync({
+              productId: product.id,
+              isLike: !product.isLike,
+            });
+          }}
         >
-          <Button>Редактировать</Button>
-        </Link>
-      )}
-    </Box>
+          <Likes
+            count={product.likes}
+            like={product.isLike ? "like" : "notLike"}
+          />
+        </Button>
+
+        <Button>Купить</Button>
+
+        {hasAdminPermission(user) && (
+          <Link
+            className={css.link}
+            to={updateProductRoute({
+              id: product.id,
+              category: product.category.nameEn,
+            })}
+          >
+            <Button>Редактировать</Button>
+          </Link>
+        )}
+      </Box>
+    </>
   );
 });

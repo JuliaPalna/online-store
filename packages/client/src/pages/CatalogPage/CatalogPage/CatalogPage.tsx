@@ -1,5 +1,5 @@
 import { trpc } from "../../../api/trpc";
-import { PageWrapperCheckData, Title } from "../../../components";
+import { HelmetTitle, PageWrapperCheckData, Title } from "../../../components";
 import { CatalogView } from "../../../components/CatalogView";
 
 export const CatalogPage = PageWrapperCheckData({
@@ -9,6 +9,7 @@ export const CatalogPage = PageWrapperCheckData({
 })(({ сategory }) => {
   return (
     <>
+      <HelmetTitle title="Каталог" />
       <Title className={""}>Каталог</Title>
 
       <CatalogView сategory={сategory} />

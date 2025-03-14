@@ -4,8 +4,8 @@
 .header {
   @include flex;
   @include flexRow;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   padding-left: 20px;
   padding-right: 20px;
   box-shadow: 0 0 4px #bdbdbd;

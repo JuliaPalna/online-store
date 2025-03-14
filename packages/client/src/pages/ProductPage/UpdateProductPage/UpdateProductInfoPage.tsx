@@ -4,6 +4,7 @@ import { useForm } from "../../../hook/useForm";
 import { updateProductShema } from "../../../../../server/src/lib/shema/productShema/updateProductShema/shema";
 import { getProductInfoRoute } from "../../../lib/routes";
 import {
+  HelmetTitle,
   PageWrapperCheckData,
   PageWrapperCkecAuthorization,
   ProductInfoForm,
@@ -56,6 +57,8 @@ const WrapperUpdateProductPage = PageWrapperCheckData({
 
   return (
     <>
+      <HelmetTitle />
+
       {!isAdmin ? (
         <NotFoundPage />
       ) : (

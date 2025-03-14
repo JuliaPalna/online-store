@@ -1,16 +1,17 @@
+@use "../../../../../node_modules/include-media/dist/_include-media" as *;
 @use "../..//styles/_vars.scss" as *;
 @use "../../styles/mixins" as *;
-
-.wrapImage {
-  position: relative;
-  padding-bottom: 100%;
-  border: 1px solid $black;
-  border-radius: $borderRadiusSmall;
-}
 
 .title {
   @include h2;
 }
+
+.wrapImage {
+  width: 100%;
+  position: relative;
+  border-radius: $borderRadiusSmall;
+}
+
 // .description {
 
 // }

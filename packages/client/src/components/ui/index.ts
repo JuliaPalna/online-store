@@ -14,4 +14,6 @@ export * from "./Text";
 export * from "./Textarea";
 export * from "./Title";
 export * from "./Loader";
+export * from "./HelmetTitle";
+export * from "./Likes";
 // @endindex

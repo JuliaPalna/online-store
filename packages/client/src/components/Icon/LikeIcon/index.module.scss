@@ -1,0 +1,12 @@
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins/" as *;
+
+.like {
+  path {
+    fill: $white;
+  }
+}
+
+.notLike {
+  fill: $black;
+}
