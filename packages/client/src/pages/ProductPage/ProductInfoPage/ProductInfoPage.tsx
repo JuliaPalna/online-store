@@ -28,6 +28,18 @@ export const ProductInfoPage = PageWrapperCheckData({
 })(({ product }) => {
   const user = useUserContext();
   const productLike = setProductLike({ product });
+  const addProductInCartTrpc = trpc.addProductInCart.useMutation();
+
+  const handelClickToggleLikeProduct = () => {
+    productLike.mutateAsync({
+      productId: product.id,
+      isLike: !product.isLike,
+    });
+  };
+
+  const handelClickAddProductInCart = async () => {
+    await addProductInCartTrpc.mutateAsync({ productId: product.id });
+  };
 
   return (
     <>
@@ -45,22 +57,14 @@ export const ProductInfoPage = PageWrapperCheckData({
         <Text>{`Цена: ${product.price}`}</Text>
         <Text>{`статус: ${getbalanceStatus({ count: product.count })}`}</Text>
 
-        <Button
-          ariaView="reset"
-          onClick={() => {
-            productLike.mutateAsync({
-              productId: product.id,
-              isLike: !product.isLike,
-            });
-          }}
-        >
+        <Button ariaView="reset" onClick={handelClickToggleLikeProduct}>
           <Likes
             count={product.likes}
             like={product.isLike ? "like" : "notLike"}
           />
         </Button>
 
-        <Button>Купить</Button>
+        <Button onClick={handelClickAddProductInCart}>Купить</Button>
 
         {hasAdminPermission(user) && (
           <Link

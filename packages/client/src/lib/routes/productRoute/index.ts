@@ -40,3 +40,11 @@ export function getNewProductRoute(): string {
 export function searchProductRoute(): string {
   return "/search";
 }
+
+export function getLikeProductRoute(): string {
+  return "/like";
+}
+
+export function getCartUserRoute(): string {
+  return "/cart";
+}

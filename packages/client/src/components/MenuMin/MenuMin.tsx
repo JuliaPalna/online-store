@@ -20,11 +20,11 @@ export function MenuMin(): ReactElement {
     },
     {
       name: <BasketIcon />,
-      route: "#",
+      route: routes.getCartUserRoute(),
     },
     {
       name: <LikeIcon />,
-      route: "#",
+      route: routes.getLikeProductRoute(),
     },
     {
       name: <UserIcon />,

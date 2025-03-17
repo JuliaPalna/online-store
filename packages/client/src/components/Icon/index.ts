@@ -5,4 +5,5 @@ export * from "./HomeIcon";
 export * from "./LikeIcon";
 export * from "./SearchIcon";
 export * from "./UserIcon";
+export * from "./DeleteIcon";
 // @endindex

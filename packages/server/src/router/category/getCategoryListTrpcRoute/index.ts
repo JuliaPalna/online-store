@@ -7,9 +7,9 @@ export const getCategoryListTrpcRoute = trpc.procedure.query(
         nameRu: true,
         nameEn: true,
       },
-      // orderBy: {
-      //   createAt: "desc",
-      // },
+      orderBy: {
+        createAt: "desc",
+      },
     });
 
     return { сategory };

@@ -17,6 +17,8 @@ import {
 } from "./pages";
 import { Layout } from "./components";
 import "./styles/global.scss";
+import { LikeProductPage } from "./pages/ProductPage/LikeProductPage";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   return (
@@ -46,7 +48,15 @@ function App() {
           path={routs.getProductInfoRoute(routs.productRouteParams)}
           element={<ProductInfoPage />}
         />
-        <Route path={routs.searchProductRoute()} element={<SearchProductPage />} />
+        <Route
+          path={routs.searchProductRoute()}
+          element={<SearchProductPage />}
+        />
+        <Route
+          path={routs.getLikeProductRoute()}
+          element={<LikeProductPage />}
+        />
+        <Route path={routs.getCartUserRoute()} element={<CartPage />} />
 
         <Route
           path={routs.updateProductRoute(routs.productRouteParams)}

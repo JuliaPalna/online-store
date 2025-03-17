@@ -9,35 +9,59 @@ export const getProductListTrpcRoute = trpc.procedure
       ? input.search.trim().replace(/[\s\n\t]/g, " & ")
       : undefined;
 
-    const products = await ctx.prisma.product.findMany({
-      where: !input.search
-        ? {
-            category: {
-              nameEn: input.name,
-            },
-          }
-        : {
-            category: {
-              nameEn: input.name,
-            },
-            OR: [
-              {
-                name: {
-                  search: normalizedSearch,
-                },
-              },
-              {
-                description: {
-                  search: normalizedSearch,
-                },
-              },
-            ],
+    const filterByCategory = {
+      category: {
+        nameEn: input.name,
+      },
+    };
+
+    const filterByLike = {
+      likes: {
+        some: {
+          userId: ctx.authorization?.id,
+        },
+      },
+    };
+
+    const filterBySearch = {
+      OR: [
+        {
+          name: {
+            search: normalizedSearch,
           },
+        },
+        {
+          description: {
+            search: normalizedSearch,
+          },
+        },
+      ],
+    };
+
+    const filterProduct = () => {
+      if (input.search) {
+        return filterBySearch;
+      }
+
+      if (input.name) {
+        return filterByCategory;
+      }
+
+      if (!ctx.authorization) {
+        return;
+      }
+
+      if (input.filterByLike) {
+        return filterByLike;
+      }
+    };
+
+    const products = await ctx.prisma.product.findMany({
+      where: filterProduct(),
       select: {
         id: true,
         name: true,
         price: true,
-        // likes: true,
         category: true,
         serialNumber: true,
         _count: {

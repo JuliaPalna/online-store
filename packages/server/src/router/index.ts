@@ -12,6 +12,8 @@ import { updateProductTrpcRoute } from "./product/updateProductTrpcRoute";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { updateGeneralProfileTrpcRoute } from "./user/updateGeneralProfileTrpcRoute";
 import { updatePasswordProfileTrpcRoute } from "./user/updatePasswordProfileTrpcRoute";
+import { getCartTrpcRoute } from "./cart/getCartTrpcRoute";
+import { addProductInCartTrpcRote } from "./cart/addProductInCartTrpcRoute";
 
 export const trpcRouter = trpc.router({
   //get-запрос
@@ -22,6 +24,10 @@ export const trpcRouter = trpc.router({
   createProduct: createProductTrpcRoute,
   updateProduct: updateProductTrpcRoute,
   setProductLike: setProductLikeTrpcRoute,
+
+  //cart
+  addProductInCart: addProductInCartTrpcRote,
+  getCart: getCartTrpcRoute,
 
   // authorization
   singUp: singUpTrpcRoute,
