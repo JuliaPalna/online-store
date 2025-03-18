@@ -13,12 +13,12 @@ import { CartItemProps } from "./types";
 
 export function CardItemCart({
   item,
-  onClickCountButton,
-  onClickRemove,
+  onClick,
+  onChange,
 }: {
   item: CartItemProps;
-  onClickCountButton?: (type: "plus" | "minus") => void;
-  onClickRemove?: () => void;
+  onClick: (e: React.MouseEvent) => void;
+  onChange: (e: React.ChangeEvent) => void;
 }): ReactElement {
   return (
     <Box className={css.wrap}>
@@ -33,21 +33,27 @@ export function CardItemCart({
         <Box className={css.countButton}>
           <Button
             ariaView="reset"
-            onClick={() => onClickCountButton?.("minus")}
+            onClick={onClick}
             disabled={item.quantity === 1}
+            ariaLabel="decrease"
           >
             -
           </Button>
 
-          <input name="quantity" type="number" value={item.quantity} />
+          <input
+            name="quantity"
+            type="number"
+            value={item.quantity}
+            onChange={onChange}
+          />
 
-          <Button ariaView="reset" onClick={() => onClickCountButton?.("plus")}>
+          <Button ariaView="reset" ariaLabel="increase" onClick={onClick}>
             +
           </Button>
         </Box>
 
         <Box className={css.delete}>
-          <Button ariaView="reset" onClick={onClickRemove}>
+          <Button ariaView="reset" ariaLabel="delete" onClick={onClick}>
             <DeleteIcon />
           </Button>
         </Box>

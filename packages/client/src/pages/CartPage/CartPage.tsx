@@ -5,15 +5,20 @@ import {
   Informer,
   HelmetTitle,
   PageWrapperCheckData,
-  Box,
+  List,
+  ListItem,
 } from "../../components";
 import { CardItemCart } from "./CardItemCart";
+import { useEventButtonCart } from "../../hook/useEventButtonCart";
 
 export const CartPage = PageWrapperCheckData({
   useQuery: () => {
     return trpc.getCart.useQuery();
   },
 })(({ cart }) => {
+  const { handelClick } = useEventButtonCart();
+  const handelChange = () => {};
+
   return (
     <>
       <HelmetTitle title="Корзина" />
@@ -23,15 +28,21 @@ export const CartPage = PageWrapperCheckData({
           <Text>Ваша корзина пуста</Text>
         </Informer>
       ) : (
-        <Box>
+        <List>
           {cart.items.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <CardItemCart item={item} />
+                <ListItem ariaLabel={item.product.name}>
+                  <CardItemCart
+                    item={item}
+                    onClick={handelClick}
+                    onChange={handelChange}
+                  />
+                </ListItem>
               </React.Fragment>
             );
           })}
-        </Box>
+        </List>
       )}
 
       <Text>{`Итого: ${cart.totalAmount} руб.`}</Text>

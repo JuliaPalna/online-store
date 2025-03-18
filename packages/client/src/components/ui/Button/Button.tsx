@@ -7,6 +7,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
   ariaView?: "reset";
+  ariaLabel?: "addInCart" | "like" | "increase" | "decrease" | "delete";
 }
 
 export function Button({
@@ -15,6 +16,7 @@ export function Button({
   type = "button",
   disabled = false,
   ariaView,
+  ariaLabel,
 }: IButtonProps): ReactElement {
   return (
     <button
@@ -27,6 +29,8 @@ export function Button({
       onClick={onClick}
       type={type}
       disabled={disabled}
+      aria-label={ariaLabel}
+      data-button
     >
       {children}
     </button>

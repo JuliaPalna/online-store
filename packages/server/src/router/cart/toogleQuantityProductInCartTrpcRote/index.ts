@@ -4,7 +4,7 @@ import { Cart } from "@prisma/client";
 import { updateCartTotalAmount } from "../updateCartTotalAmount";
 import { updateProductInCartSchema } from "../../../lib/shema/updateProductInCartSchema/shema";
 
-export const addProductInCartTrpcRote = trpc.procedure
+export const toogleQuantityProductInCartTrpcRote = trpc.procedure
   .input(updateProductInCartSchema)
   .mutation(async ({ ctx, input }) => {
     const cartUser: Cart = await findOrCreateCart({ ctx });
@@ -18,7 +18,23 @@ export const addProductInCartTrpcRote = trpc.procedure
       },
     });
 
-    if (findCartItem) {
+    if (!findCartItem) {
+      return;
+    }
+
+    if (input.typeButton === "decrease") {
+      await ctx.prisma.cartItem.update({
+        where: {
+          id: findCartItem.id,
+        },
+
+        data: {
+          quantity: findCartItem.quantity - 1,
+        },
+      });
+    }
+
+    if (input.typeButton === "increase") {
       await ctx.prisma.cartItem.update({
         where: {
           id: findCartItem.id,
@@ -27,26 +43,6 @@ export const addProductInCartTrpcRote = trpc.procedure
         data: {
           quantity: findCartItem.quantity + 1,
         },
-      });
-    } else {
-      const product = await ctx.prisma.product.findUnique({
-        where: {
-          name: input.name,
-        },
-      });
-
-      if (!product) {
-        throw Error(`not found`);
-      }
-
-      const newCartItem = {
-        quantity: 1,
-        cartId: cartUser.id,
-        productId: product.id,
-      };
-
-      await ctx.prisma.cartItem.create({
-        data: newCartItem,
       });
     }
 

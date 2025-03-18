@@ -20,25 +20,25 @@ import css from "./index.module.scss";
 
 export const ProductInfoPage = PageWrapperCheckData({
   useQuery: () => {
-    const { id } = useParams();
-    if (id) {
-      return trpc.getProduct.useQuery({ id: id });
+    const { name } = useParams();
+    if (name) {
+      return trpc.getProduct.useQuery({ name });
     }
   },
 })(({ product }) => {
   const user = useUserContext();
-  const productLike = setProductLike({ product });
+  const productLike = setProductLike({ name: product.name });
   const addProductInCartTrpc = trpc.addProductInCart.useMutation();
 
   const handelClickToggleLikeProduct = () => {
     productLike.mutateAsync({
-      productId: product.id,
+      name: product.name,
       isLike: !product.isLike,
     });
   };
 
   const handelClickAddProductInCart = async () => {
-    await addProductInCartTrpc.mutateAsync({ productId: product.id });
+    await addProductInCartTrpc.mutateAsync({ name: product.name });
   };
 
   return (
@@ -70,7 +70,7 @@ export const ProductInfoPage = PageWrapperCheckData({
           <Link
             className={css.link}
             to={updateProductRoute({
-              id: product.id,
+              name: product.name,
               category: product.category.nameEn,
             })}
           >

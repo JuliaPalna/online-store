@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const setProductLikeShema = z.object({
-  productId: z.string().nonempty().min(1),
+  name: z.string().nonempty().min(1),
   isLike: z.boolean(),
 });
 

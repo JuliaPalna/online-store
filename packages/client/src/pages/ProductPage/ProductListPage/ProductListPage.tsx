@@ -7,13 +7,15 @@ import {
   HelmetTitle,
 } from "../../../components";
 import { ProductListView } from "../../../components/ProductListView";
+import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
 
 export const ProductListPage = PageWrapperLoadingData({
   useQuery: () => {
-    const { name } = useParams();
-    if (name) {
+    const { category } = useParams();
+
+    if (category) {
       return trpc.getProductList.useInfiniteQuery(
-        { name: name, limit: 2 },
+        { name: category, limit: 2 },
         {
           getNextPageParam: (lastPage) => lastPage.nextCursor,
         },
@@ -21,29 +23,23 @@ export const ProductListPage = PageWrapperLoadingData({
     }
   },
 })((data) => {
-  if (!data) {
-    return (
-      <Informer status="error">
-        <Text>Not found</Text>
-      </Informer>
-    );
-  }
-
-  const products = data.pages.flatMap((page) => page.products);
-
-  if (products.length < 1) {
-    return (
-      <Informer status="error">
-        <Text>Not found</Text>
-      </Informer>
-    );
-  }
+  const products = data[0].products.flatMap((page) => page);
+  const { handelClick } = useEventButtonProductCard({
+    products,
+    invalidateValues: { name: products[0].category.nameEn },
+  });
 
   return (
     <>
       <HelmetTitle title={products[0].category.nameRu} />
 
-      <ProductListView products={products} />
+      {products.length < 1 ? (
+        <Informer status="error">
+          <Text>Not found</Text>
+        </Informer>
+      ) : (
+        <ProductListView products={products} onClick={handelClick} />
+      )}
     </>
   );
 });

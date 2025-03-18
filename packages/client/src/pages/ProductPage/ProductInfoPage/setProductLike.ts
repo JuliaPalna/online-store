@@ -1,16 +1,13 @@
 import { trpc } from "../../../api/trpc";
-import { TProduct } from "../../../../../server/src/lib/shema/productShema/productSchema/shema";
 
-export function setProductLike({ product }: { product: TProduct | undefined }) {
+export function setProductLike({ name }: { name: string | undefined }) {
   const trpcUtils = trpc.useContext();
 
   const setProductLike = trpc.setProductLike.useMutation({
     onMutate: ({ isLike }) => {
-      if (!product) return;
+      if (!name) return;
 
-      const oldGetProductData = trpcUtils.getProduct.getData({
-        id: product.id,
-      });
+      const oldGetProductData = trpcUtils.getProduct.getData({ name });
 
       if (oldGetProductData?.product) {
         const newGetProductData = {
@@ -22,13 +19,13 @@ export function setProductLike({ product }: { product: TProduct | undefined }) {
           },
         };
 
-        trpcUtils.getProduct.setData({ id: product.id }, newGetProductData);
+        trpcUtils.getProduct.setData({ name }, newGetProductData);
       }
     },
     onSuccess: () => {
-      if (!product) return;
+      if (!name) return;
 
-      trpcUtils.getProduct.invalidate({ id: product.id });
+      trpcUtils.getProduct.invalidate({ name });
     },
   });
 

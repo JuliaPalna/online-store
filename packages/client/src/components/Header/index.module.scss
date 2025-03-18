@@ -9,9 +9,10 @@
   padding-left: 20px;
   padding-right: 20px;
   box-shadow: 0 0 4px #bdbdbd;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 
   .logo {
     position: relative;
-    margin-left: 40vw;
   }
 }

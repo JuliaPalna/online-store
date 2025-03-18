@@ -7,26 +7,29 @@ import css from "./index.module.scss";
 
 export function ProductListView({
   products,
+  onClick,
 }: {
   products: Omit<TProduct, "count" | "description">[];
+  onClick: (event: React.MouseEvent) => void;
 }) {
   return (
     <List className={css.list}>
       {products.map((product) => {
         return (
           <React.Fragment key={product.id}>
-            <ListItem className={css.item}>
+            <ListItem className={css.item} ariaLabel={product.name}>
               <Link
                 className={css.link}
                 to={getProductInfoRoute({
-                  id: product.id,
+                  name: product.name,
                   category: product.category.nameEn,
                 })}
-              >
-                <Box className={css.wrap}>
-                  <CardProduct product={product} />
-                </Box>
-              </Link>
+                // onClick={onClick}
+              ></Link>
+
+              <Box className={css.wrap}>
+                <CardProduct product={product} onClick={onClick} />
+              </Box>
             </ListItem>
           </React.Fragment>
         );

@@ -13,6 +13,7 @@ export const getCartTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
       totalAmount: true,
       items: {
         select: {
+          createAt: true,
           id: true,
           quantity: true,
           product: {
@@ -23,10 +24,10 @@ export const getCartTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
             },
           },
         },
+        orderBy: {
+          createAt: "desc",
+        },
       },
-    },
-    orderBy: {
-      createAt: "desc",
     },
   });
 

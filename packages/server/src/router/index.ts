@@ -14,6 +14,8 @@ import { updateGeneralProfileTrpcRoute } from "./user/updateGeneralProfileTrpcRo
 import { updatePasswordProfileTrpcRoute } from "./user/updatePasswordProfileTrpcRoute";
 import { getCartTrpcRoute } from "./cart/getCartTrpcRoute";
 import { addProductInCartTrpcRote } from "./cart/addProductInCartTrpcRoute";
+import { deleteProductInCartTrpcRote } from "./cart/deleteProductInCartTrpcRote";
+import { toogleQuantityProductInCartTrpcRote } from "./cart/toogleQuantityProductInCartTrpcRote";
 
 export const trpcRouter = trpc.router({
   //get-запрос
@@ -27,6 +29,8 @@ export const trpcRouter = trpc.router({
 
   //cart
   addProductInCart: addProductInCartTrpcRote,
+  deleteProductInCart: deleteProductInCartTrpcRote,
+  toogleQuantityProductInCart: toogleQuantityProductInCartTrpcRote,
   getCart: getCartTrpcRoute,
 
   // authorization

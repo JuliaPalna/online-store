@@ -8,12 +8,12 @@ export const setProductLikeTrpcRoute = trpc.procedure
       throw Error("Не авторизованный пользователь");
     }
 
-    const { productId, isLike } = input;
+    const { name, isLike } = input;
     const userId = ctx.authorization.id;
 
     const product = await ctx.prisma.product.findUnique({
       where: {
-        id: productId,
+        name,
       },
     });
 
@@ -25,13 +25,13 @@ export const setProductLikeTrpcRoute = trpc.procedure
       await ctx.prisma.productLike.upsert({
         where: {
           productId_userId: {
-            productId,
+            productId: product.id,
             userId,
           },
         },
         create: {
           userId,
-          productId,
+          productId: product.id,
         },
         update: {},
       });
@@ -39,7 +39,7 @@ export const setProductLikeTrpcRoute = trpc.procedure
       await ctx.prisma.productLike.delete({
         where: {
           productId_userId: {
-            productId,
+            productId: product.id,
             userId,
           },
         },
@@ -48,13 +48,13 @@ export const setProductLikeTrpcRoute = trpc.procedure
 
     const likeCount = await ctx.prisma.productLike.count({
       where: {
-        productId,
+        productId: product.id,
       },
     });
 
     return {
       product: {
-        id: product.id,
+        name: product.name,
         likeCount,
         isLike,
       },

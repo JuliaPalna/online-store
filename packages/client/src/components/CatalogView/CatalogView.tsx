@@ -29,7 +29,7 @@ export function CatalogView({ сategory, viewRow }: IProps): ReactElement {
               <Link
                 className={css.link}
                 to={getProductListByCategoryRoute({
-                  name: item.nameEn,
+                  category: item.nameEn,
                 })}
               >
                 <Box className={css.wrap}>

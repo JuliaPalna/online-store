@@ -19,9 +19,9 @@ export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
 
 const WrapperUpdateProductPage = PageWrapperCheckData({
   useQuery: () => {
-    const { id } = useParams();
-    if (id) {
-      return trpc.getProduct.useQuery({ id: id });
+    const { name } = useParams();
+    if (name) {
+      return trpc.getProduct.useQuery({ name: name });
     }
   },
 })(({ product }) => {
@@ -48,7 +48,7 @@ const WrapperUpdateProductPage = PageWrapperCheckData({
 
       navigate(
         getProductInfoRoute({
-          id: product.id,
+          name: product.name,
           category: product.category.nameEn,
         }),
       );

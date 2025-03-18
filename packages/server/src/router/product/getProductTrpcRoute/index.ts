@@ -5,13 +5,13 @@ import _ from "lodash";
 export const getProductTrpcRoute = trpc.procedure
   .input(
     z.object({
-      id: z.string(),
+      name: z.string().min(1),
     }),
   )
   .query(async ({ ctx, input }) => {
     const product = await ctx.prisma.product.findUnique({
       where: {
-        id: input.id,
+        name: input.name,
       },
       select: {
         id: true,

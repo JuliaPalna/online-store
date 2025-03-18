@@ -9,7 +9,7 @@ export function LoadingDataTrpc<TData, TError>({
   const result = useQuery();
 
   if (result === undefined) {
-    return  (
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>
@@ -24,10 +24,10 @@ export function LoadingDataTrpc<TData, TError>({
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-    isRefetching,
+    // isRefetching,
   } = result;
 
-  if (isLoading || isRefetching) {
+  if (isLoading) {
     return <Loader type="section" />;
   }
 
@@ -39,8 +39,10 @@ export function LoadingDataTrpc<TData, TError>({
     throw Error(`${error}`);
   }
 
-  if (!data.pages) {
-    return  (
+  const props = data.pages;
+
+  if (!props) {
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>
@@ -49,7 +51,7 @@ export function LoadingDataTrpc<TData, TError>({
 
   return (
     <>
-      <Page {...data} />
+      <Page {...props} />
 
       <div>
         {hasNextPage && !isFetchingNextPage && (

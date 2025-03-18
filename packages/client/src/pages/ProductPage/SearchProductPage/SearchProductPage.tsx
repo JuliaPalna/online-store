@@ -1,49 +1,36 @@
-import { useDebounceValue } from "usehooks-ts";
 import { trpc } from "../../../api/trpc";
-import { Text, Informer, Input, Field, HelmetTitle } from "../../../components";
-import { useForm } from "../../../hook/useForm";
-import { getProductShema } from "../../../../../server/src/lib/shema/productShema/getProductShema/shema";
+import {
+  Text,
+  Informer,
+  HelmetTitle,
+  PageWrapperLoadingData,
+} from "../../../components";
 import { ProductListView } from "../../../components/ProductListView";
-import { useEffect } from "react";
+import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
 
-export const SearchProductPage = () => {
-  const [values, setValues] = useDebounceValue("", 500);
+export const SearchProductPage = PageWrapperLoadingData({
+  useQuery: () => {
+    const values = "";
 
-  const { formik } = useForm({
-    initialValues: { search: "" },
-    validationSchema: getProductShema.pick({ search: true }),
-  });
-
-  useEffect(() => {
-    setValues(formik.values.search);
-  }, [formik, setValues]);
-
-  const { data } = trpc.getProductList.useInfiniteQuery(
-    {
-      search: values,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
-  );
-
-  if (!data) {
-    return (
-      <Informer status="info">
-        <Text>К сожалению, ничего не найдено</Text>
-      </Informer>
+    return trpc.getProductList.useInfiniteQuery(
+      {
+        search: values,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      },
     );
-  }
-
-  const products = data.pages.flatMap((page) => page.products);
+  },
+})((data) => {
+  const products = data[0].products.flatMap((page) => page);
+  const { handelClick } = useEventButtonProductCard({
+    products,
+    invalidateValues: { search: "" },
+  });
 
   return (
     <>
       <HelmetTitle title="Поиск" />
-
-      <Field name="search" label="Поиск" data={formik}>
-        <Input name="search" data={formik} />
-      </Field>
 
       {products.length < 1 && (
         <Informer status="info">
@@ -51,7 +38,7 @@ export const SearchProductPage = () => {
         </Informer>
       )}
 
-      <ProductListView products={products} />
+      <ProductListView products={products} onClick={handelClick} />
     </>
   );
-};
+});

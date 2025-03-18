@@ -9,16 +9,16 @@ export function CheckDataTrpc<TData, TError>({
   const result = useQuery();
 
   if (result === undefined) {
-    return  (
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>
     );
   }
 
-  const { data, error, isLoading, isFetching, isError } = result;
+  const { data, error, isLoading, isError } = result;
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <Loader type="section" />;
   }
 
@@ -31,7 +31,7 @@ export function CheckDataTrpc<TData, TError>({
   }
 
   if (!data) {
-    return  (
+    return (
       <Informer status="error">
         <Text>Not found</Text>
       </Informer>

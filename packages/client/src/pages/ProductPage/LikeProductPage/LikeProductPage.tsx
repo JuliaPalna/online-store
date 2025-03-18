@@ -6,6 +6,7 @@ import {
   PageWrapperLoadingData,
 } from "../../../components";
 import { ProductListView } from "../../../components/ProductListView";
+import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
 
 export const LikeProductPage = PageWrapperLoadingData({
   useQuery: () => {
@@ -20,27 +21,23 @@ export const LikeProductPage = PageWrapperLoadingData({
     );
   },
 })((data) => {
-  if (!data) {
-    return (
-      <Informer status="error">
-        <Text>Not found</Text>
-      </Informer>
-    );
-  }
-
-  const products = data.pages.flatMap((page) => page.products);
+  const products = data[0].products.flatMap((page) => page);
+  const { handelClick } = useEventButtonProductCard({
+    products,
+    invalidateValues: { filterByLike: true },
+  });
 
   return (
     <>
       <HelmetTitle title="Избранное" />
 
-      {products.length < 1 && (
-        <Informer status="info">
+      {products.length < 1 ? (
+        <Informer status="error">
           <Text>К сожалению, ничего не найдено</Text>
         </Informer>
+      ) : (
+        <ProductListView products={products} onClick={handelClick} />
       )}
-
-      <ProductListView products={products} />
     </>
   );
 });

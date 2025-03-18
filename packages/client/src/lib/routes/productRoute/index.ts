@@ -2,35 +2,35 @@ export function getCatalogRoute(): string {
   return `/catalog`;
 }
 
-export const productLisByCategorytRouteParams = { name: ":name" };
+export const productLisByCategorytRouteParams = { category: ":category" };
 export type TProductLisByCategorytRouteParams =
   typeof productLisByCategorytRouteParams;
 
 export function getProductListByCategoryRoute({
-  name,
+  category,
 }: TProductLisByCategorytRouteParams): string {
-  return `/catalog/${name}`;
+  return `/catalog/${category}`;
 }
 
 export const productRouteParams = {
-  id: ":id",
+  name: ":name",
   category: ":category",
 };
 
 export type TProductRouteParams = typeof productRouteParams;
 
 export function getProductInfoRoute({
-  id,
+  name,
   category,
 }: TProductRouteParams): string {
-  return `/catalog/${category}/${id}`;
+  return `/catalog/${category}/${name}`;
 }
 
 export function updateProductRoute({
-  id,
+  name,
   category,
 }: TProductRouteParams): string {
-  return `/catalog/${category}/${id}/update`;
+  return `/catalog/${category}/${name}/update`;
 }
 
 export function getNewProductRoute(): string {
