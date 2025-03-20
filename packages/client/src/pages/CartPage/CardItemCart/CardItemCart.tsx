@@ -13,11 +13,9 @@ import { CartItemProps } from "./types";
 
 export function CardItemCart({
   item,
-  onClick,
   onChange,
 }: {
   item: CartItemProps;
-  onClick: (e: React.MouseEvent) => void;
   onChange: (e: React.ChangeEvent) => void;
 }): ReactElement {
   return (
@@ -33,7 +31,6 @@ export function CardItemCart({
         <Box className={css.countButton}>
           <Button
             ariaView="reset"
-            onClick={onClick}
             disabled={item.quantity === 1}
             ariaLabel="decrease"
           >
@@ -47,13 +44,13 @@ export function CardItemCart({
             onChange={onChange}
           />
 
-          <Button ariaView="reset" ariaLabel="increase" onClick={onClick}>
+          <Button ariaView="reset" ariaLabel="increase">
             +
           </Button>
         </Box>
 
         <Box className={css.delete}>
-          <Button ariaView="reset" ariaLabel="delete" onClick={onClick}>
+          <Button ariaView="reset" ariaLabel="delete">
             <DeleteIcon />
           </Button>
         </Box>

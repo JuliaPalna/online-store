@@ -13,7 +13,7 @@ export function ProductListView({
   onClick: (event: React.MouseEvent) => void;
 }) {
   return (
-    <List className={css.list}>
+    <List className={css.list} onClick={onClick}>
       {products.map((product) => {
         return (
           <React.Fragment key={product.id}>
@@ -24,11 +24,10 @@ export function ProductListView({
                   name: product.name,
                   category: product.category.nameEn,
                 })}
-                // onClick={onClick}
               ></Link>
 
               <Box className={css.wrap}>
-                <CardProduct product={product} onClick={onClick} />
+                <CardProduct product={product} />
               </Box>
             </ListItem>
           </React.Fragment>

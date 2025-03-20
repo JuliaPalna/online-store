@@ -5,9 +5,10 @@
 .navigation {
   display: block;
   position: absolute;
-  top: 49px;
+  top: 0;
   left: -1px;
   height: auto;
+  padding-top: 10px;
   background-color: $white;
   box-shadow: 0 0 10px $grey;
   @include hidden;

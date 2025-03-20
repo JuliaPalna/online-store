@@ -14,7 +14,6 @@ import {
 import { validationPasswordSchema } from "./UpdatePasswordUserForm";
 
 export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
-  // const trpcUtils = trpc.useContext();
   const updateGeneralProfileTrpc = trpc.updateGeneralProfile.useMutation();
   const updatePasswordlProfileTrpc = trpc.updatePasswordProfile.useMutation();
 
@@ -32,14 +31,6 @@ export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
     validationSchema: updateGeneralProfileShema,
     onSubmit: async (values) => {
       await updateGeneralProfileTrpc.mutateAsync(values);
-      // const updatedGeneral = await updateGeneralProfileTrpc.mutateAsync(values);
-      // trpcUtils.authorizationUser.setData(undefined, {
-      //   authorization: {
-      //     name: updatedGeneral.name,
-      //     id: updatedGeneral.id,
-      //     email: updatedGeneral.email,
-      //   },
-      // });
     },
     isReset: false,
   });

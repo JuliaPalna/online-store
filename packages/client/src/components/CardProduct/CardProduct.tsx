@@ -6,10 +6,8 @@ import css from "./index.module.scss";
 
 export function CardProduct({
   product,
-  onClick,
 }: {
   product: ICardProductProps;
-  onClick: (e: React.MouseEvent) => void;
 }): ReactElement {
   return (
     <>
@@ -23,14 +21,14 @@ export function CardProduct({
 
       <Text className={css.price}>{`Цена: ${product.price}`}</Text>
 
-      <Button ariaView="reset" onClick={onClick} ariaLabel="like">
+      <Button ariaView="reset" ariaLabel="like">
         <Likes
           count={product.likes}
           like={product.isLike ? "like" : "notLike"}
         />
       </Button>
 
-      <Button disabled={false} onClick={onClick} ariaLabel="addInCart">
+      <Button disabled={false} ariaLabel="addInCart">
         Купить
       </Button>
     </>

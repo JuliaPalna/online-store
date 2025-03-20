@@ -28,16 +28,12 @@ export const CartPage = PageWrapperCheckData({
           <Text>Ваша корзина пуста</Text>
         </Informer>
       ) : (
-        <List>
+        <List onClick={handelClick}>
           {cart.items.map((item, index) => {
             return (
               <React.Fragment key={index}>
                 <ListItem ariaLabel={item.product.name}>
-                  <CardItemCart
-                    item={item}
-                    onClick={handelClick}
-                    onChange={handelChange}
-                  />
+                  <CardItemCart item={item} onChange={handelChange} />
                 </ListItem>
               </React.Fragment>
             );

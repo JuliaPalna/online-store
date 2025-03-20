@@ -4,5 +4,6 @@ export interface IFieldProps {
   name: string;
   label: string;
   data: FormikValues;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  hidden?: boolean;
 }

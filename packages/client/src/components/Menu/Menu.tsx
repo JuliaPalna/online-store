@@ -1,62 +1,80 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import { Button, List, ListItem, Sidebar } from "../ui";
 import { hasAdminPermission } from "../../../../server/src/utils/checkUserPermission";
-import * as pages from "../../lib/pageList";
 import cn from "classnames";
 import css from "./index.module.scss";
+import { useModal } from "../../hook/useModal";
+import { useClickAway } from "react-use";
+import { usePageListMenu } from "../../hook/usePageListMenu";
 
 export function Menu(): ReactElement {
-  const [isOpen, setIsOpen] = useState(false);
+  const menu = useModal();
+  const menuRef = useRef(null);
+  const menuContentRef = useRef(null);
+
   const user = useUserContext();
   const isAdmin = hasAdminPermission(user);
-  let pageList = [...pages.pageListInitial];
 
-  if (user) {
-    pageList = isAdmin
-      ? [
-          ...pageList,
-          ...pages.pageListAdminPermission,
-          ...pages.pageListAutorisationUser,
-        ]
-      : [...pageList, ...pages.pageListAutorisationUser];
-  }
+  const pageList = usePageListMenu((state) => state.pages);
+  const setAdminPages = usePageListMenu((state) => state.setAdminPages);
+  const setAutorisationPages = usePageListMenu(
+    (state) => state.setAutorisationPages,
+  );
+  const setNotAutorisationPages = usePageListMenu(
+    (state) => state.setNotAutorisationPages,
+  );
 
-  if (!user) {
-    pageList = [...pageList, ...pages.pageListNotAutorisationUser];
-  }
+  useEffect(() => {
+    if (!user) {
+      setNotAutorisationPages();
+      return;
+    }
+
+    if (isAdmin) {
+      setAdminPages();
+      return;
+    }
+
+    setAutorisationPages();
+  }, [
+    isAdmin,
+    setAdminPages,
+    setAutorisationPages,
+    setNotAutorisationPages,
+    user,
+  ]);
+
+  useClickAway(menuContentRef, menu.close);
 
   function handelClick() {
-    if (isOpen) {
-      setIsOpen(false);
+    if (menu.isOpen) {
+      menu.close();
     } else {
-      setIsOpen(true);
+      menu.open();
     }
   }
 
   return (
     <>
-      <Button onClick={handelClick} ariaView="reset">
-        <Sidebar status={isOpen} />
+      <Button onClick={handelClick} ariaView="reset" ref={menuRef}>
+        <Sidebar status={menu.isOpen} />
       </Button>
 
       <nav
+        ref={menuContentRef}
         className={cn({
           [css.navigation]: true,
-          [css.open]: isOpen,
+          [css.open]: menu.isOpen,
         })}
       >
-        <List className={css.menu}>
+        <List className={css.menu} onClick={handelClick}>
           {pageList.map((item, index) => {
             return (
               <React.Fragment key={index}>
                 <ListItem className={css.item}>
-                  <Link
-                    className={css.link}
-                    to={item.route}
-                    onClick={handelClick}
-                  >
+                  <Link className={css.link} to={item.route}>
                     {item.name}
                   </Link>
                 </ListItem>

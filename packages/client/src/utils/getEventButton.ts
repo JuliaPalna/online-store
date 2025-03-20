@@ -1,6 +1,7 @@
 export function getEventButton(event: React.MouseEvent) {
   if (event.target instanceof Element) {
     const isButton = event.target.closest("button");
+
     if (isButton === null) {
       return;
     }

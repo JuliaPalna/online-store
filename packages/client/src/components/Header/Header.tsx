@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
-import { Box, Logo } from "../ui";
+import { Box, Logo, Search } from "../ui";
 import { Menu } from "../Menu";
 import css from "./index.module.scss";
-import { Search } from "../Search";
 
 export function Header(): ReactElement {
   return (

@@ -1,22 +1,27 @@
 import { useForm } from "./useForm";
-import { getProductShema } from "../../../server/src/lib/shema/productShema/getProductShema/shema";
 import { useEffect } from "react";
-import { useDebounceValue } from "usehooks-ts";
+import { useDebounceCallback } from "usehooks-ts";
+import { getProductShema } from "../../../server/src/lib/shema/productShema/getProductShema/shema";
+import { useSearchState } from "./useSearchState";
+import { useNavigate } from "react-router-dom";
+import { searchProductRoute } from "../lib/routes";
 
 export function useSearch() {
-  const [values, setValues] = useDebounceValue("", 500);
+  const setValueSearch = useSearchState((state) => state.set);
+  const debounced = useDebounceCallback(setValueSearch, 500);
+  const navigate = useNavigate();
 
   const { formik } = useForm({
     initialValues: { search: "" },
     validationSchema: getProductShema.pick({ search: true }),
+    onSubmit: () => {
+      navigate(searchProductRoute());
+    },
   });
 
   useEffect(() => {
-    setValues(formik.values.search);
-  }, [formik, setValues]);
+    debounced(formik.values.search);
+  }, [debounced, formik, navigate]);
 
-  return {
-    formik,
-    values,
-  };
+  return { formik };
 }

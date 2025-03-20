@@ -10,6 +10,7 @@ export function Field({
   label,
   children,
   data,
+  hidden,
 }: IFieldProps): ReactElement {
   const error = data.errors[name] && data.touched[name] && data.errors[name];
   const invalid = !!error;
@@ -17,7 +18,10 @@ export function Field({
 
   return (
     <Box className={cn({ [css.field]: true, [css.disabled]: disabled })}>
-      <label htmlFor={name} className={css.label}>
+      <label
+        htmlFor={name}
+        className={cn({ [css.label]: true, [css.hidden]: hidden })}
+      >
         {label}
       </label>
       {children}

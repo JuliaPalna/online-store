@@ -7,14 +7,15 @@ import {
 } from "../../../components";
 import { ProductListView } from "../../../components/ProductListView";
 import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
+import { useSearchState } from "../../../hook/useSearchState";
 
 export const SearchProductPage = PageWrapperLoadingData({
   useQuery: () => {
-    const values = "";
+    const valuesSearch = useSearchState((state) => state.search);
 
     return trpc.getProductList.useInfiniteQuery(
       {
-        search: values,
+        search: valuesSearch,
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -22,10 +23,13 @@ export const SearchProductPage = PageWrapperLoadingData({
     );
   },
 })((data) => {
+  const valuesSearch = useSearchState((state) => state.search);
+
   const products = data[0].products.flatMap((page) => page);
+
   const { handelClick } = useEventButtonProductCard({
     products,
-    invalidateValues: { search: "" },
+    invalidateValues: { search: valuesSearch },
   });
 
   return (
