@@ -1,8 +1,9 @@
 import { z } from "zod";
+import { zBoolean, zStringMin } from "../..";
 
 export const setProductLikeShema = z.object({
-  name: z.string().nonempty().min(1),
-  isLike: z.boolean(),
+  name: zStringMin(1),
+  isLike: zBoolean,
 });
 
 export type TSetProductLikeShema = z.infer<typeof setProductLikeShema>;

@@ -1,8 +1,9 @@
 import { z } from "zod";
+import { zEmailRequired, zPassword } from "../..";
 
 export const singInShema = z.object({
-  email: z.string().min(3).email(),
-  password: z.string().min(4),
+  email: zEmailRequired,
+  password: zPassword,
 });
 
 export type TSingInShema = z.infer<typeof singInShema>;

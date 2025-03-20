@@ -1,8 +1,9 @@
 import { z } from "zod";
+import { zPassword } from "..";
 
 export const updatePasswordProfileShema = z.object({
-  password: z.string().nonempty().min(1),
-  passwordNew: z.string().nonempty().min(1),
+  password: zPassword,
+  passwordNew: zPassword,
 });
 
 export type TUpdatePasswordProfileShema = z.infer<

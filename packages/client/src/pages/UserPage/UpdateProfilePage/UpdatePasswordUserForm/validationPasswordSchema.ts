@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { updatePasswordProfileShema } from "../../../../../../server/src/lib/shema/updatePasswordShema/shema";
+import { zPassword } from "../../../../../../server/src/lib/shema";
 
 export const validationPasswordSchema = updatePasswordProfileShema
   .extend({
-    passwordNewAgain: z.string().nonempty().min(1),
+    passwordNewAgain: zPassword,
   })
   .superRefine((values, ctx) => {
     if (values.passwordNew !== values.passwordNewAgain) {

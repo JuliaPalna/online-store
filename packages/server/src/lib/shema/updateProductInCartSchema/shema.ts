@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { zStringMin } from "..";
 
 export const updateProductInCartSchema = z.object({
-  name: z.string().nonempty().min(1),
-  typeButton: z.string().min(1).optional(),
+  name: zStringMin(3),
+  typeButton: zStringMin(1).optional(),
 });

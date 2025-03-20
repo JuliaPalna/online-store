@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { createProductSchema } from "../createProductSchema/shema";
+import { zStringMin } from "../..";
 
 export const updateProductShema = createProductSchema.extend({
-  id: z.string().nonempty().min(1),
+  id: zStringMin(1),
 });
 
 export type TUpdateProductShema = z.infer<typeof updateProductShema>;

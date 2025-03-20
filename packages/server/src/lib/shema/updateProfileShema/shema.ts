@@ -1,8 +1,9 @@
 import { z } from "zod";
+import { zEmailRequired, zStringMin } from "..";
 
 export const updateGeneralProfileShema = z.object({
-  email: z.string().min(3).email(),
-  name: z.string(),
+  email: zEmailRequired,
+  name: zStringMin(3),
 });
 
 export type TUpdateGeneralProfileShema = z.infer<
