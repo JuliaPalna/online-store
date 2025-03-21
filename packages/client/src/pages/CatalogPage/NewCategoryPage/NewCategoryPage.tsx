@@ -10,7 +10,7 @@ import { useForm } from "../../../hook/useForm";
 import { initialCategorytProps } from "./types";
 import { createCategorySchema } from "../../../../../server/src/lib/shema/createCategorySchema/shema";
 import { useUserContext } from "../../../context/UserContext";
-import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { hasAdminPermission } from "../../../../../server/src/utils/hasAdminPermission";
 import { NotFoundPage } from "../../OtherPage/NotFoundPage";
 
 export const NewCategoryPage = PageWrapperCkecAuthorization()(() => {

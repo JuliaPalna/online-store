@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import { Button, List, ListItem, Sidebar } from "../ui";
-import { hasAdminPermission } from "../../../../server/src/utils/checkUserPermission";
+import { hasAdminPermission } from "../../../../server/src/utils/hasAdminPermission";
 import cn from "classnames";
 import css from "./index.module.scss";
 import { useModal } from "../../hook/useModal";

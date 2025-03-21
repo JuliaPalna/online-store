@@ -11,6 +11,7 @@
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
     "stylelint": "stylelint src/**/*.scss",
     "stylecheck": "sass --update -q ./src:./node_modules/.cache/.stylecheckcache",
+    "test": "jest",
     "types": "tsc --noEmit --project ./tsconfig.json && tsc --noEmit --project ./tsconfig.node.json && tsc --noEmit --project ./tsconfig.app.json"
   },
   "dependencies": {

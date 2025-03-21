@@ -8,6 +8,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
 import stylisticJs from "@stylistic/eslint-plugin-js";
 import eslintPluginN from "eslint-plugin-n";
+import pluginJest from "eslint-plugin-jest";
 
 /** @type { import("eslint").Linter.Config[] } */
 export default tseslint.config(
@@ -20,10 +21,11 @@ export default tseslint.config(
       "@stylistic/js": stylisticJs,
       prettier: prettierPlugin,
       n: eslintPluginN,
+      jest: pluginJest,
     },
   },
   {
-    ignores: ["node_modules", "dist", "eslint.config.js"],
+    ignores: ["node_modules", "dist", "eslint.config.js", '*.config.js'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -33,6 +35,7 @@ export default tseslint.config(
         ...globals.node,
         ...globals.browser,
         ...globals.es2020,
+        ...pluginJest.environments.globals.globals,
       },
       parserOptions: {
         project: ["tsconfig.json", "tsconfig.node.json", "tsconfig.app.json"],
@@ -40,7 +43,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["**/*.{ts,tsx}", '**/*.test.ts'],
     rules: {
       ...eslintConfigPrettier.rules,
       ...eslintReactHooks.configs.recommended.rules,
@@ -64,6 +67,12 @@ export default tseslint.config(
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/consistent-type-assertions": "off",
       "jsx-a11y/anchor-is-valid": "off",
+
+      'jest/no-disabled-tests': 'warn',
+      'jest/no-focused-tests': 'error',
+      'jest/no-identical-title': 'error',
+      'jest/prefer-to-have-length': 'warn',
+      'jest/valid-expect': 'error',
     },
   },
 );

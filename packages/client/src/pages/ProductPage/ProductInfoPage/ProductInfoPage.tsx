@@ -13,7 +13,7 @@ import {
 import { getbalanceStatus } from "../../../utils/getBalanceStatus";
 import { setProductLike } from "./setProductLike";
 import { updateProductRoute } from "../../../lib/routes";
-import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { hasAdminPermission } from "../../../../../server/src/utils/hasAdminPermission";
 import { useUserContext } from "../../../context/UserContext";
 import image from "../../../assets/images/organicFarming.png";
 import css from "./index.module.scss";

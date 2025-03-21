@@ -10,7 +10,7 @@ import {
   ProductInfoForm,
 } from "../../../components";
 import { useUserContext } from "../../../context/UserContext";
-import { hasAdminPermission } from "../../../../../server/src/utils/checkUserPermission";
+import { hasAdminPermission } from "../../../../../server/src/utils/hasAdminPermission";
 import { NotFoundPage } from "../../OtherPage/NotFoundPage";
 
 export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
