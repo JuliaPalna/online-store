@@ -1,13 +1,16 @@
 import { inferAsyncReturnType } from "@trpc/server";
-import * as trpcExpress from "@trpc/server/adapters/express";
+// import * as trpcExpress from "@trpc/server/adapters/express";
 import { TAppContext } from "../AppContext";
-import { TExpressRequest } from "./types";
+// import { Prisma, User } from "@prisma/client";
+// import { TExpressRequest } from "./types";
+import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
 
 export const getTrpcContext =
   (appContext: TAppContext) =>
-  ({ req }: trpcExpress.CreateExpressContextOptions) => ({
+  ({ req }: CreateNextContextOptions["req"]) => ({
+
     ...appContext,
-    authorization: (req as TExpressRequest).user || null,
+    authorization: (req).user || null,
   });
 
 export type TTrpcContext = inferAsyncReturnType<

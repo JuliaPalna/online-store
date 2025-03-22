@@ -12,7 +12,7 @@
     "prismagc": "prisma generate",
     "start": "node ./dist/index.js",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "test": "jest",
+    "test": "jest  --runInBand",
     "prepare": "npm run prismagc"
   },
   "prisma": {
