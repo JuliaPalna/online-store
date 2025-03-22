@@ -1,9 +1,9 @@
 import _ from "lodash";
 import { trpc } from "../../../api/trpc";
-import { getProductShema } from "../../../lib/shema/productShema/getProductShema/shema";
+import { getProductSchema } from "../../../lib/schema/productSchema/getProductSchema/schema";
 
 export const getProductListTrpcRoute = trpc.procedure
-  .input(getProductShema)
+  .input(getProductSchema)
   .query(async ({ ctx, input }) => {
     const normalizedSearch = input.search
       ? input.search.trim().replace(/[\s\n\t]/g, " & ")

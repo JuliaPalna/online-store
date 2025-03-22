@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { List, ListItem, CardProduct, Box } from "../../components";
 import { getProductInfoRoute } from "../../lib/routes";
-import { TProduct } from "../../../../server/src/lib/shema/productShema/productSchema/shema";
+import { TProduct } from "../../../../server/src/lib/schema/productSchema/productSchema/schema";
 import css from "./index.module.scss";
 
 export function ProductListView({

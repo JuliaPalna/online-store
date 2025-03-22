@@ -6,7 +6,7 @@ import { trpc } from "../../../api/trpc";
 import { getMainRoute } from "../../../lib/routes";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { useForm } from "../../../hook/useForm";
-import { signUpShema } from "../../../../../server/src/lib/shema/singShema/signUpShema/shema";
+import { signUpSchema } from "../../../../../server/src/lib/schema/singSchema/signUpSchema/schema";
 import { initialSingUpProps } from "./initialSingUpProps";
 
 export function SingUpPage(): ReactElement {
@@ -14,7 +14,7 @@ export function SingUpPage(): ReactElement {
   const navigate = useNavigate();
   const trpcUtils = trpc.useContext();
 
-  const validationSchema = signUpShema.extend({
+  const validationSchema = signUpSchema.extend({
     passwordAgain: z.string().min(4),
   });
 

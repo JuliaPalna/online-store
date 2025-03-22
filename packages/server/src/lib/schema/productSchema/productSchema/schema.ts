@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { updateProductShema } from "../updateProductShema/shema";
-import { createCategorySchema } from "../../createCategorySchema/shema";
+import { updateProductSchema } from "../updateProductSchema/schema";
+import { createCategorySchema } from "../../createCategorySchema/schema";
 import { zBoolean, zNumber } from "../..";
 
-export const productSchema = updateProductShema.extend({
+export const productSchema = updateProductSchema.extend({
   category: createCategorySchema,
   likes: zNumber,
   isLike: zBoolean,

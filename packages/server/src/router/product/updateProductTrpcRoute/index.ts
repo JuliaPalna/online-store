@@ -1,8 +1,8 @@
 import { trpc } from "../../../api/trpc";
-import { updateProductShema } from "../../../lib/shema/productShema/updateProductShema/shema";
+import { updateProductSchema } from "../../../lib/schema/productSchema/updateProductSchema/schema";
 
 export const updateProductTrpcRoute = trpc.procedure
-  .input(updateProductShema)
+  .input(updateProductSchema)
   .mutation(async ({ ctx, input }) => {
     const { id, category, ...productInput } = input;
     const authorizedUser = ctx.authorization;

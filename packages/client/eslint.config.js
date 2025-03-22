@@ -23,7 +23,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["node_modules", "dist", "eslint.config.js", '*.config.js'],
+    ignores: ["node_modules", "dist", "eslint.config.js", "*.config.js"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -41,7 +41,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.{ts,tsx}", '**/*.test.ts'],
+    files: ["**/*.{ts,tsx}", "**/*.test.ts"],
     rules: {
       ...eslintConfigPrettier.rules,
       ...eslintReactHooks.configs.recommended.rules,
@@ -70,11 +70,30 @@ export default tseslint.config(
         },
       ],
 
-      'jest/no-disabled-tests': 'warn',
-      'jest/no-focused-tests': 'error',
-      'jest/no-identical-title': 'error',
-      'jest/prefer-to-have-length': 'warn',
-      'jest/valid-expect': 'error',
+      "no-restricted-imports": "off",
+
+      //запрет на импор с бэкэнда, кроме schema, types, utils: "has"
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["server"],
+              message:
+                "Only types and input schemas are allowed to be imported from backend workspace",
+              allowTypeImports: true,
+              allowImportNamePattern: "(^T)|(^has)|(Schema$)",
+            },
+          ],
+        },
+      ],
+
+      //настройка тестов
+      "jest/no-disabled-tests": "warn",
+      "jest/no-focused-tests": "error",
+      "jest/no-identical-title": "error",
+      "jest/prefer-to-have-length": "warn",
+      "jest/valid-expect": "error",
     },
   },
 );

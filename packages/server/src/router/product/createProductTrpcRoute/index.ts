@@ -1,5 +1,5 @@
 import { trpc } from "../../../api/trpc";
-import { createProductSchema } from "../../../lib/shema/productShema/createProductSchema/shema";
+import { createProductSchema } from "../../../lib/schema/productSchema/createProductSchema/schema";
 
 export const createProductTrpcRoute = trpc.procedure
   .input(createProductSchema)

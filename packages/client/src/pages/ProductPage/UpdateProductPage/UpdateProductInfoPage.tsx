@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { trpc } from "../../../api/trpc";
 import { useForm } from "../../../hook/useForm";
-import { updateProductShema } from "../../../../../server/src/lib/shema/productShema/updateProductShema/shema";
+import { updateProductSchema } from "../../../../../server/src/lib/schema/productSchema/updateProductSchema/schema";
 import { getProductInfoRoute } from "../../../lib/routes";
 import {
   HelmetTitle,
@@ -39,7 +39,7 @@ const WrapperUpdateProductPage = PageWrapperCheckData({
 
   const { formik, error } = useForm({
     initialValues: initialValues,
-    validationSchema: updateProductShema.omit({ id: true }),
+    validationSchema: updateProductSchema.omit({ id: true }),
     onSubmit: async (values) => {
       await updateProductTrpc.mutateAsync({
         id: product.id,

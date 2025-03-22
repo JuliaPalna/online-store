@@ -5,7 +5,7 @@ import { getMainRoute } from "../../../lib/routes";
 import { useForm } from "../../../hook/useForm";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { initialSingInProps } from "./initialSingInProps";
-import { singInShema } from "../../../../../server/src/lib/shema/singShema/singInShema/shema";
+import { singInSchema } from "../../../../../server/src/lib/schema/singSchema/singInSchema/schema";
 
 export function SingInPage() {
   const singInTrpcRoute = trpc.singIn.useMutation();
@@ -14,7 +14,7 @@ export function SingInPage() {
 
   const { formik, error } = useForm({
     initialValues: initialSingInProps,
-    validationSchema: singInShema,
+    validationSchema: singInSchema,
     onSubmit: async (values) => {
       const { token } = await singInTrpcRoute.mutateAsync(values);
       Cookies.set("token", token, { expires: 99999 });

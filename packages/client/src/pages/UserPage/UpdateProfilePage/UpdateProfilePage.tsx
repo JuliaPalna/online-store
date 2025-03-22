@@ -1,4 +1,4 @@
-import { updateGeneralProfileShema } from "../../../../../server/src/lib/shema/updateProfileShema/shema";
+import { updateGeneralProfileSchema } from "../../../../../server/src/lib/schema/updateProfileSchema/schema";
 import { trpc } from "../../../api/trpc";
 import {
   HelmetTitle,
@@ -28,7 +28,7 @@ export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
     isSuccess: isSuccessGeneral,
   } = useForm({
     initialValues: initialGeneralValues,
-    validationSchema: updateGeneralProfileShema,
+    validationSchema: updateGeneralProfileSchema,
     onSubmit: async (values) => {
       await updateGeneralProfileTrpc.mutateAsync(values);
     },

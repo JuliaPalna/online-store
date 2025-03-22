@@ -1,7 +1,7 @@
 import { useForm } from "./useForm";
 import { useEffect } from "react";
 import { useDebounceCallback } from "usehooks-ts";
-import { getProductShema } from "../../../server/src/lib/shema/productShema/getProductShema/shema";
+import { getProductSchema } from "../../../server/src/lib/schema/productSchema/getProductSchema/schema";
 import { useSearchState } from "./useSearchState";
 import { useNavigate } from "react-router-dom";
 import { searchProductRoute } from "../lib/routes";
@@ -13,7 +13,7 @@ export function useSearch() {
 
   const { formik } = useForm({
     initialValues: { search: "" },
-    validationSchema: getProductShema.pick({ search: true }),
+    validationSchema: getProductSchema.pick({ search: true }),
     onSubmit: () => {
       navigate(searchProductRoute());
     },

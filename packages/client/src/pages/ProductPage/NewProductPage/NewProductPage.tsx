@@ -1,5 +1,5 @@
 import { trpc } from "../../../api/trpc";
-import { createProductSchema } from "../../../../../server/src/lib/shema/productShema/createProductSchema/shema";
+import { createProductSchema } from "../../../../../server/src/lib/schema/productSchema/createProductSchema/schema";
 import { initialProductProps } from "./initialProductProps";
 import {
   HelmetTitle,

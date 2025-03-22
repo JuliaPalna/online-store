@@ -1,9 +1,9 @@
 import { trpc } from "../../../api/trpc";
-import { updatePasswordProfileShema } from "../../../lib/shema/updatePasswordShema/shema";
+import { updatePasswordProfileSchema } from "../../../lib/schema/updatePasswordSchema/schema";
 import { getPasswordHash } from "../../../utils/getPasswordHash";
 
 export const updatePasswordProfileTrpcRoute = trpc.procedure
-  .input(updatePasswordProfileShema)
+  .input(updatePasswordProfileSchema)
   .mutation(async ({ ctx, input }) => {
     const user = ctx.authorization;
 

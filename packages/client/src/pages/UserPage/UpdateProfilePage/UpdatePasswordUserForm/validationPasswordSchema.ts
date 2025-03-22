@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { updatePasswordProfileShema } from "../../../../../../server/src/lib/shema/updatePasswordShema/shema";
-import { zPassword } from "../../../../../../server/src/lib/shema";
+import { updatePasswordProfileSchema } from "../../../../../../server/src/lib/schema/updatePasswordSchema/schema";
+import { zPasswordSchema } from "../../../../../../server/src/lib/schema";
 
-export const validationPasswordSchema = updatePasswordProfileShema
+export const validationPasswordSchema = updatePasswordProfileSchema
   .extend({
-    passwordNewAgain: zPassword,
+    passwordNewAgain: zPasswordSchema,
   })
   .superRefine((values, ctx) => {
     if (values.passwordNew !== values.passwordNewAgain) {

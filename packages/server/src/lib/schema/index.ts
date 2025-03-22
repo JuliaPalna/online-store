@@ -11,4 +11,4 @@ export const zEmailRequired = z.string().trim().min(3).email();
 export const zStringOptional = z.string().trim().optional();
 export const zBooleanOptional = z.boolean().optional();
 
-export const zPassword = z.string().trim().nonempty().min(4);
+export const zPasswordSchema = z.string().trim().nonempty().min(4);

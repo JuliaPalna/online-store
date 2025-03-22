@@ -1,5 +1,5 @@
 import { trpc } from "../../../api/trpc";
-import { createCategorySchema } from "../../../lib/shema/createCategorySchema/shema";
+import { createCategorySchema } from "../../../lib/schema/createCategorySchema/schema";
 
 export const createCategoryTrpcRote = trpc.procedure
   .input(createCategorySchema)

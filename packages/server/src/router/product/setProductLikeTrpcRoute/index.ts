@@ -1,8 +1,8 @@
 import { trpc } from "../../../api/trpc";
-import { setProductLikeShema } from "../../../lib/shema/productShema/setProductLikeShema/shema";
+import { setProductLikeSchema } from "../../../lib/schema/productSchema/setProductLikeSchema/schema";
 
 export const setProductLikeTrpcRoute = trpc.procedure
-  .input(setProductLikeShema)
+  .input(setProductLikeSchema)
   .mutation(async ({ ctx, input }) => {
     if (!ctx.authorization) {
       throw Error("Не авторизованный пользователь");

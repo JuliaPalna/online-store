@@ -2,7 +2,7 @@ import { trpc } from "../../../api/trpc";
 import { findOrCreateCart } from "../findOrCreateCart";
 import { Cart } from "@prisma/client";
 import { updateCartTotalAmount } from "../updateCartTotalAmount";
-import { updateProductInCartSchema } from "../../../lib/shema/updateProductInCartSchema/shema";
+import { updateProductInCartSchema } from "../../../lib/schema/updateProductInCartSchema/schema";
 
 export const addProductInCartTrpcRote = trpc.procedure
   .input(updateProductInCartSchema)

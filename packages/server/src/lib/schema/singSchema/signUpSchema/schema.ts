@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { zEmailRequired, zStringMin } from "../..";
 
-export const signUpShema = z.object({
+export const signUpSchema = z.object({
   email: zEmailRequired,
   password: zStringMin(4),
 });
 
-export type TSignUpShema = z.infer<typeof signUpShema>;
+export type TSignUpSchema = z.infer<typeof signUpSchema>;

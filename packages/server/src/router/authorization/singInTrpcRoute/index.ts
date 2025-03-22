@@ -1,11 +1,11 @@
 import { trpc } from "../../../api/trpc";
 import { env } from "../../../lib/env";
-import { singInShema } from "../../../lib/shema/singShema/singInShema/shema";
+import { singInSchema } from "../../../lib/schema/singSchema/singInSchema/schema";
 import { getPasswordHash } from "../../../utils/getPasswordHash";
 import { getToken } from "../../../utils/getToken";
 
 export const singInTrpcRoute = trpc.procedure
-  .input(singInShema)
+  .input(singInSchema)
   .mutation(async ({ ctx, input }) => {
     const user = await ctx.prisma.user.findUnique({
       where: {
