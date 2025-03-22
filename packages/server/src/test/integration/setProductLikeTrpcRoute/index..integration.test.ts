@@ -1,13 +1,13 @@
 import {
   appContextTest,
-  createProduct,
+  createProductWithCategory,
   createUser,
   getTrpcCaller,
 } from "../../integration";
 
 describe("setProductLikeTrpcRoute", () => {
   it("create like", async () => {
-    const product = await createProduct({ number: 1 });
+    const { product } = await createProductWithCategory({ number: 1 });
     const liker = await createUser({ number: 2 });
     const trpcCallerForLiker = getTrpcCaller(liker);
     const result = await trpcCallerForLiker.setProductLike({
@@ -18,7 +18,7 @@ describe("setProductLikeTrpcRoute", () => {
     expect(result).toMatchObject({
       product: {
         isLike: true,
-        likesCount: 1,
+        likeCount: 1,
       },
     });
 

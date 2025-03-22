@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const zEnvNonemptyTrimmed = z.string().trim().min(1);
+
 export const zStringMin = (min: number) =>
   z.string().trim().nonempty().min(min, `Введите не менее ${min} символов.`);
 

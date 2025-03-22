@@ -3,6 +3,11 @@ import { createAppContext, getTrpcContext } from "../context";
 import { trpcRouter } from "../router";
 import { getPasswordHash } from "../utils/getPasswordHash";
 import _ from "lodash";
+import { env } from "../lib/env";
+
+if (env.NODE_ENV !== "test") {
+  throw new Error("Run integration tests only with NODE_ENV=test");
+}
 
 export const appContextTest = createAppContext();
 
@@ -14,6 +19,7 @@ beforeEach(async () => {
   await appContextTest.prisma.productLike.deleteMany();
   await appContextTest.prisma.product.deleteMany();
   await appContextTest.prisma.user.deleteMany();
+  await appContextTest.prisma.category.deleteMany();
 });
 
 //получение контекста
@@ -38,9 +44,11 @@ export const createUser = async ({
 
 export const createProduct = async ({
   product = {},
+  category,
   number = 1,
 }: {
   product?: Partial<Product>;
+  category: Partial<Category>;
   number?: number;
 }) => {
   return await appContextTest.prisma.product.create({
@@ -48,7 +56,7 @@ export const createProduct = async ({
       name: `Product ${number}`,
       price: number,
       count: number,
-      categoryId: `category.id`,
+      categoryId: `${category.id}`,
       description: `Product ${number} description`,
       ...product,
     },
@@ -60,7 +68,7 @@ export const createCategory = async ({
   number = 1,
 }: {
   category?: Partial<Category>;
-  number: number;
+  number?: number;
 }) => {
   return await appContextTest.prisma.category.create({
     data: {
@@ -69,6 +77,27 @@ export const createCategory = async ({
       ...category,
     },
   });
+};
+
+export const createProductWithCategory = async ({
+  category,
+  product,
+  number,
+}: {
+  category?: Partial<Category>;
+  product?: Partial<Product>;
+  number?: number;
+} = {}) => {
+  const createdCategory = await createCategory({ category: category, number });
+  const createdProduct = await createProduct({
+    product,
+    category: createdCategory,
+    number,
+  });
+  return {
+    product: createdProduct,
+    category: createdCategory,
+  };
 };
 
 export const createProductLike = async ({
