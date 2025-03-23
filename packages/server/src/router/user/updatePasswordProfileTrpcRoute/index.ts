@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { trpc } from "../../../api/trpc";
 import { updatePasswordProfileSchema } from "../../../lib/schema/updatePasswordSchema/schema";
 import { getPasswordHash } from "../../../utils/getPasswordHash";
@@ -5,7 +6,7 @@ import { getPasswordHash } from "../../../utils/getPasswordHash";
 export const updatePasswordProfileTrpcRoute = trpc.procedure
   .input(updatePasswordProfileSchema)
   .mutation(async ({ ctx, input }) => {
-    const user = ctx.authorization;
+    const user: User = ctx.authorization;
 
     if (!user) {
       throw Error("UNAUTHORIZED");

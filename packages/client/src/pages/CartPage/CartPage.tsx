@@ -10,6 +10,7 @@ import {
 } from "../../components";
 import { CardItemCart } from "./CardItemCart";
 import { useEventButtonCart } from "../../hook/useEventButtonCart";
+// import { useChangeQuantityProductInCart } from "../../hook/useChangeQuantityProductInCart";
 
 export const CartPage = PageWrapperCheckData({
   useQuery: () => {
@@ -17,7 +18,7 @@ export const CartPage = PageWrapperCheckData({
   },
 })(({ cart }) => {
   const { handelClick } = useEventButtonCart();
-  const handelChange = () => {};
+  // const { handelChange } = useChangeQuantityProductInCart();
 
   return (
     <>
@@ -33,7 +34,7 @@ export const CartPage = PageWrapperCheckData({
             return (
               <React.Fragment key={index}>
                 <ListItem ariaLabel={item.product.name}>
-                  <CardItemCart item={item} onChange={handelChange} />
+                  <CardItemCart item={item} />
                 </ListItem>
               </React.Fragment>
             );

@@ -1,7 +1,7 @@
 import { trpc } from "../../../api/trpc";
 
 export const getCartTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
-  const userId = ctx.authorization?.id;
+  const userId: string = ctx.authorization?.id;
 
   const cart = await ctx.prisma.cart.findFirst({
     where: {

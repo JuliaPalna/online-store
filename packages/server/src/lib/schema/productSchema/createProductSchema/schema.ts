@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { zNumber, zStringMin } from "../..";
+import { zNumberSchema, zStringMin } from "../..";
 
 export const createProductSchema = z.object({
   name: zStringMin(3),
   description: zStringMin(5),
-  price: zNumber,
-  count: zNumber,
+  price: zNumberSchema,
+  count: zNumberSchema,
   category: zStringMin(3),
 });
 

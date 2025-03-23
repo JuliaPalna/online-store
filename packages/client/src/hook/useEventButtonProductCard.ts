@@ -1,5 +1,5 @@
 import { trpc } from "../api/trpc";
-import { getEventButton } from "../utils/getEventButton";
+import { getEventButton, IEventButton } from "../utils/getEventButton";
 
 interface IProps {
   products: {
@@ -26,20 +26,21 @@ export function useEventButtonProductCard({
 
   const handelClick = async (event: React.MouseEvent) => {
     if (!event) return;
-    const eventButton = getEventButton(event);
+    const eventButton: IEventButton | undefined = getEventButton(event);
 
     if (!eventButton) return;
+    const { nameProduct, action }: IEventButton = eventButton;
 
-    if (eventButton.action === "addInCart") {
-      await addProductInCartTrpc.mutateAsync({ name: eventButton.name });
+    if (action === "add") {
+      await addProductInCartTrpc.mutateAsync({ name: nameProduct });
     }
 
-    if (eventButton.action === "like") {
-      const product = products.find((item) => item.name === eventButton.name);
+    if (action === "like") {
+      const product = products.find((item) => item.name === nameProduct);
       if (!product) return;
 
       await productLike.mutateAsync({
-        name: eventButton.name,
+        name: nameProduct,
         isLike: !product.isLike,
       });
 

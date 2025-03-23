@@ -5,13 +5,14 @@ import { getProductSchema } from "../../../server/src/lib/schema/productSchema/g
 import { useSearchState } from "./useSearchState";
 import { useNavigate } from "react-router-dom";
 import { searchProductRoute } from "../lib/routes";
+import { FormikValues } from "formik";
 
-export function useSearch() {
+export function useSearch(): FormikValues {
   const setValueSearch = useSearchState((state) => state.set);
   const debounced = useDebounceCallback(setValueSearch, 500);
   const navigate = useNavigate();
 
-  const { formik } = useForm({
+  const { formik }: FormikValues = useForm({
     initialValues: { search: "" },
     validationSchema: getProductSchema.pick({ search: true }),
     onSubmit: () => {
@@ -21,7 +22,7 @@ export function useSearch() {
 
   useEffect(() => {
     debounced(formik.values.search);
-  }, [debounced, formik, navigate]);
+  }, [debounced, formik]);
 
   return { formik };
 }

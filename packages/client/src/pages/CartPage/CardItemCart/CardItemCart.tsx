@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import image from "../../../assets/images/organicFarming.png";
 import {
   Box,
@@ -11,13 +11,13 @@ import {
 import css from "./index.module.scss";
 import { CartItemProps } from "./types";
 
-export function CardItemCart({
-  item,
-  onChange,
-}: {
-  item: CartItemProps;
-  onChange: (e: React.ChangeEvent) => void;
-}): ReactElement {
+export function CardItemCart({ item }: { item: CartItemProps }): ReactElement {
+  const [count, setCount] = useState<number>(item.quantity);
+
+  const handelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setCount(+event.target.value);
+  };
+
   return (
     <Box className={css.wrap}>
       <Box>
@@ -29,24 +29,12 @@ export function CardItemCart({
         <Text>{`Цена за 1 ед.: ${item.product.price} руб.`}</Text>
 
         <Box className={css.countButton}>
-          <Button
-            ariaView="reset"
-            disabled={item.quantity === 1}
-            ariaLabel="decrease"
-          >
-            -
-          </Button>
-
           <input
             name="quantity"
             type="number"
-            value={item.quantity}
-            onChange={onChange}
+            value={count}
+            onChange={handelChange}
           />
-
-          <Button ariaView="reset" ariaLabel="increase">
-            +
-          </Button>
         </Box>
 
         <Box className={css.delete}>

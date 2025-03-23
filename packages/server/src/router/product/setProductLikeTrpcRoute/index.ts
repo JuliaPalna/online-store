@@ -9,7 +9,7 @@ export const setProductLikeTrpcRoute = trpc.procedure
     }
 
     const { name, isLike } = input;
-    const userId = ctx.authorization.id;
+    const userId: string = ctx.authorization.id;
 
     const product = await ctx.prisma.product.findUnique({
       where: {
@@ -46,7 +46,7 @@ export const setProductLikeTrpcRoute = trpc.procedure
       });
     }
 
-    const likeCount = await ctx.prisma.productLike.count({
+    const likeCount: number = await ctx.prisma.productLike.count({
       where: {
         productId: product.id,
       },

@@ -7,7 +7,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
   ariaView?: "reset";
-  ariaLabel?: "addInCart" | "like" | "increase" | "decrease" | "delete";
+  ariaLabel?: "add" | "like" | "increase" | "decrease" | "delete";
   ref?: React.RefObject<null> | undefined;
 }
 

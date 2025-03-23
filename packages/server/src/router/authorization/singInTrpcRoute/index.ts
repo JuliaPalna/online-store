@@ -18,7 +18,7 @@ export const singInTrpcRoute = trpc.procedure
       throw Error("Неправильный пароль или почта");
     }
 
-    const token = getToken({
+    const token: string = getToken({
       value: user.id,
       key: env.JWT_SECRET_KEY_AUTHORIZATION,
     });

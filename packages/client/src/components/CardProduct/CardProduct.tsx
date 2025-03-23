@@ -28,7 +28,7 @@ export function CardProduct({
         />
       </Button>
 
-      <Button disabled={false} ariaLabel="addInCart">
+      <Button disabled={false} ariaLabel="add">
         Купить
       </Button>
     </>

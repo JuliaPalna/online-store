@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { trpc } from "../../../api/trpc";
 import { updateProductSchema } from "../../../lib/schema/productSchema/updateProductSchema/schema";
 
@@ -5,7 +6,7 @@ export const updateProductTrpcRoute = trpc.procedure
   .input(updateProductSchema)
   .mutation(async ({ ctx, input }) => {
     const { id, category, ...productInput } = input;
-    const authorizedUser = ctx.authorization;
+    const authorizedUser: User = ctx.authorization;
 
     if (!authorizedUser) {
       throw Error("UNAUTHORIZED");

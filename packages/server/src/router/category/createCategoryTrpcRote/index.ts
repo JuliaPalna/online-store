@@ -4,14 +4,14 @@ import { createCategorySchema } from "../../../lib/schema/createCategorySchema/s
 export const createCategoryTrpcRote = trpc.procedure
   .input(createCategorySchema)
   .mutation(async ({ ctx, input }) => {
-    const isFind = await ctx.prisma.category.findUnique({
+    const category = await ctx.prisma.category.findUnique({
       where: {
         nameRu: input.nameRu,
         nameEn: input.nameEn,
       },
     });
 
-    if (isFind) {
+    if (category) {
       throw Error(`${input.nameRu} (${input.nameEn}) уже есть в каталоге`);
     }
 

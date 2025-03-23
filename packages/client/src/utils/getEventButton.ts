@@ -1,18 +1,25 @@
-export function getEventButton(event: React.MouseEvent) {
-  if (event.target instanceof Element) {
-    const isButton = event.target.closest("button");
+export interface IEventButton {
+  action: string;
+  nameProduct: string;
+}
 
-    if (isButton === null) {
+export function getEventButton(
+  event: React.MouseEvent,
+): IEventButton | undefined {
+  if (event.target instanceof Element) {
+    const isButton: HTMLButtonElement | null = event.target.closest("button");
+    const item: HTMLLIElement | null = event.target.closest("li");
+
+    if (!isButton || !isButton.ariaLabel || !item || !item.ariaLabel) {
       return;
     }
 
-    const item = event.target.closest("li");
-
-    if (!item || !item.ariaLabel) return;
+    const action: string = isButton.ariaLabel;
+    const nameProduct: string = item.ariaLabel;
 
     return {
-      action: isButton.ariaLabel,
-      name: item.ariaLabel,
+      action,
+      nameProduct,
     };
   }
 }

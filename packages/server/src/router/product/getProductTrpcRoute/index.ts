@@ -40,8 +40,8 @@ export const getProductTrpcRoute = trpc.procedure
       throw Error("Товар не найден");
     }
 
-    const likesCount = product._count.likes;
-    const isLike = !!product.likes.length;
+    const likesCount: number = product._count.likes;
+    const isLike: boolean = !!product.likes.length;
 
     const result = {
       ..._.omit(product, ["_count"]),

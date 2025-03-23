@@ -91,7 +91,7 @@ export const getProductListTrpcRoute = trpc.procedure
     });
 
     const nextProduct = products.at(input.limit);
-    const nextCursor = nextProduct?.serialNumber;
+    const nextCursor: number | undefined = nextProduct?.serialNumber;
     const productsView = products.slice(0, input.limit);
 
     const result = productsView.map((product) => ({

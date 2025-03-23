@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 export function useFeching(callback: () => Promise<void>) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetching = async () => {
+  const fetching = async (): Promise<void> => {
     try {
       setIsLoading(true);
       await callback();

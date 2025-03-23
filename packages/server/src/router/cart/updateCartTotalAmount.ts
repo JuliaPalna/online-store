@@ -5,7 +5,7 @@ export async function updateCartTotalAmount({ ctx }: { ctx: TTrpcContext }) {
     throw Error(`Not authorization`);
   }
 
-  const userId = ctx.authorization.id;
+  const userId: string = ctx.authorization.id;
 
   const cart = await ctx.prisma.cart.findFirst({
     where: {
@@ -30,7 +30,7 @@ export async function updateCartTotalAmount({ ctx }: { ctx: TTrpcContext }) {
     return;
   }
 
-  const totalAmount = cart.items.reduce((acc, item) => {
+  const totalAmount: number = cart.items.reduce((acc, item) => {
     return acc + item.quantity * item.product.price;
   }, 0);
 

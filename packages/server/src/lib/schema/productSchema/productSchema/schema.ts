@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { updateProductSchema } from "../updateProductSchema/schema";
 import { createCategorySchema } from "../../createCategorySchema/schema";
-import { zBoolean, zNumber } from "../..";
+import { zBoolean, zNumberSchema } from "../..";
 
 export const productSchema = updateProductSchema.extend({
   category: createCategorySchema,
-  likes: zNumber,
+  likes: zNumberSchema,
   isLike: zBoolean,
 });
 

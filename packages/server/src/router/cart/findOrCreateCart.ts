@@ -1,3 +1,4 @@
+import { Cart } from "@prisma/client";
 import { TTrpcContext } from "../../context";
 
 export async function findOrCreateCart({ ctx }: { ctx: TTrpcContext }) {
@@ -5,7 +6,7 @@ export async function findOrCreateCart({ ctx }: { ctx: TTrpcContext }) {
     throw Error(`Not authorization`);
   }
 
-  const userId = ctx.authorization.id;
+  const userId: string = ctx.authorization.id;
 
   const cart = await ctx.prisma.cart.findFirst({
     where: {
@@ -13,7 +14,7 @@ export async function findOrCreateCart({ ctx }: { ctx: TTrpcContext }) {
     },
   });
 
-  const cartUser = cart
+  const cartUser: Cart = cart
     ? cart
     : await ctx.prisma.cart.create({
         data: {

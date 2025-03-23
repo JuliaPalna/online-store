@@ -1,11 +1,12 @@
 import _ from "lodash";
 import { trpc } from "../../../api/trpc";
 import { updateGeneralProfileSchema } from "../../../lib/schema/updateProfileSchema/schema";
+import { User } from "@prisma/client";
 
 export const updateGeneralProfileTrpcRoute = trpc.procedure
   .input(updateGeneralProfileSchema)
   .mutation(async ({ ctx, input }) => {
-    const authorizedUser = ctx.authorization;
+    const authorizedUser: User = ctx.authorization;
 
     if (!authorizedUser) {
       throw Error("UNAUTHORIZED");
