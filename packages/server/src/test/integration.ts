@@ -17,9 +17,11 @@ afterAll(appContextTest.stop);
 //очищение перед запуском тестов
 beforeEach(async () => {
   await appContextTest.prisma.productLike.deleteMany();
+  await appContextTest.prisma.cartItem.deleteMany();
   await appContextTest.prisma.product.deleteMany();
-  await appContextTest.prisma.user.deleteMany();
   await appContextTest.prisma.category.deleteMany();
+  await appContextTest.prisma.cart.deleteMany();
+  await appContextTest.prisma.user.deleteMany();
 });
 
 //получение контекста
