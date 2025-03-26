@@ -1,0 +1,19 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/vars";
+
+.header {
+  @include flex;
+  @include flexRow;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 0 0 4px #bdbdbd;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    position: relative;
+  }
+}

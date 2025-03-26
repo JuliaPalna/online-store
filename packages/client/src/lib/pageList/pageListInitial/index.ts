@@ -1,13 +1,13 @@
+import { API_ROUTES } from "../../../api/routes";
 import { TPageListRouteProps } from "../types";
-import * as routes from "../../routes";
 
 export const pageListInitial: TPageListRouteProps = [
   {
     name: "Главная страница",
-    route: routes.getMainRoute(),
+    route: API_ROUTES.MAIN,
   },
   {
     name: "Каталог",
-    route: routes.getCatalogRoute(),
+    route: API_ROUTES.CATALOGY,
   },
 ];

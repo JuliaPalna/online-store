@@ -1,6 +1,6 @@
 import { trpc } from "../../../api/trpc";
 import { HelmetTitle, PageWrapperCheckData, Title } from "../../../components";
-import { CatalogView } from "../../../components/CatalogView";
+import { CatalogView } from "../../../components/shared/CatalogView";
 
 export const CatalogPage = PageWrapperCheckData({
   useQuery: () => {

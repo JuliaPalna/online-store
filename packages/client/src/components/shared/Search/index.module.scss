@@ -1,0 +1,36 @@
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins/" as *;
+
+.wrap {
+  .search {
+    @include flex;
+    @include flexRow;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3px;
+
+    .icon {
+      position: relative;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .modal {
+    display: none;
+
+    &.open {
+      display: block;
+      position: fixed;
+      top: 100px;
+      right: 10%;
+      left: 10%;
+      border-radius: $borderRadiusSmall;
+
+      color: $black;
+      background-color: $white;
+      box-shadow: 0 0 4px #bdbdbd;
+    }
+  }
+}

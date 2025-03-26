@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { applyTrpcToExpressApp } from "./api/trpc";
 import { applyPassportToExpressApp } from "./api/passport";
-import { trpcRouter } from "./router";
+import { trpcRouter } from "./api/router";
 import { createAppContext, TAppContext } from "./context/AppContext/AppContext";
 import { env } from "./lib/env";
 

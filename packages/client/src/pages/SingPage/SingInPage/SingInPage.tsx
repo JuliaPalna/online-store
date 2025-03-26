@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
-import { getMainRoute } from "../../../lib/routes";
 import { useForm } from "../../../hook/useForm";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { initialSingInProps } from "./initialSingInProps";
 import { singInSchema } from "../../../../../server/src/lib/schema/singSchema/singInSchema/schema";
+import { API_ROUTES } from "../../../api/routes";
 
 export function SingInPage() {
   const singInTrpcRoute = trpc.singIn.useMutation();
@@ -19,7 +19,7 @@ export function SingInPage() {
       const { token } = await singInTrpcRoute.mutateAsync(values);
       Cookies.set("token", token, { expires: 99999 });
       trpcUtils.invalidate();
-      navigate(getMainRoute());
+      navigate(API_ROUTES.MAIN);
     },
   });
 

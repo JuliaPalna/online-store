@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { TrpcRouterOutput } from "../../../../server/src/router";
+import { TrpcRouterOutput } from "../../../../server/src/api/router";
 
 export interface IUserContext {
   user: TrpcRouterOutput["authorizationUser"]["authorization"];

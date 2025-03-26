@@ -9,3 +9,5 @@ export const getProductSchema = z.object({
   filterByLike: zBooleanOptional,
   filterByCart: zBooleanOptional,
 });
+
+export type TGetProductSchema = z.infer<typeof getProductSchema>;

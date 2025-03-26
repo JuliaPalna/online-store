@@ -5,7 +5,7 @@ import {
   HelmetTitle,
   PageWrapperLoadingData,
 } from "../../../components";
-import { ProductListView } from "../../../components/ProductListView";
+import { ProductListView } from "../../../components/shared/ProductListView";
 import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
 
 export const LikeProductPage = PageWrapperLoadingData({

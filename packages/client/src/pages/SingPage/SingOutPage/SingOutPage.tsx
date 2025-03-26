@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
-import { getMainRoute } from "../../../lib/routes";
 import { Loader } from "../../../components";
+import { API_ROUTES } from "../../../api/routes";
 
 export function SingOutPage() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export function SingOutPage() {
     trpcUtils
       .invalidate()
       .then(() => {
-        navigate(getMainRoute(), { replace: true });
+        navigate(API_ROUTES.MAIN, { replace: true });
       })
       .catch((error) => {
         throw Error(`Ошибка: ${error}`);

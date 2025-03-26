@@ -1,5 +1,5 @@
 import { trpc } from "../api/trpc";
-import { getEventButton, IEventButton } from "../utils/getEventButton";
+import { getEventButton, IEventButton } from "../lib/utils/getEventButton";
 
 export function useEventButtonCart() {
   const deleteProductInCartTrpc = trpc.deleteProductInCart.useMutation();

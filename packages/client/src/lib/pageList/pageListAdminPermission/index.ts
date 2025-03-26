@@ -1,13 +1,13 @@
+import { API_ROUTES } from "../../../api/routes";
 import { TPageListRouteProps } from "../types";
-import * as routes from "../../routes";
 
 export const pageListAdminPermission: TPageListRouteProps = [
   {
     name: "Создать новый товаров",
-    route: routes.getNewProductRoute(),
+    route: API_ROUTES.NEW_PRODUCT,
   },
   {
     name: "Создать новую категорию",
-    route: routes.getNewCategoryRoute(),
+    route: API_ROUTES.NEW_CATEGORY,
   },
 ];

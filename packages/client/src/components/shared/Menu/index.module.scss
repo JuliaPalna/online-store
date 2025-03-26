@@ -1,0 +1,38 @@
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../../styles/vars" as *;
+@use "../../../styles/mixins" as *;
+
+.navigation {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -1px;
+  height: auto;
+  padding-top: 10px;
+  background-color: $white;
+  box-shadow: 0 0 10px $grey;
+  @include hidden;
+
+  &.open {
+    @include visible;
+  }
+
+  .menu {
+    @include flex;
+    @include flexColumn;
+    gap: 0;
+
+    .item {
+      position: relative;
+      padding: 10px 30px;
+
+      &:not(:first-child) {
+        border-top: 2px solid $grey;
+      }
+
+      .link {
+        @include link;
+      }
+    }
+  }
+}

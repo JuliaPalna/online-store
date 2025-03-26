@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import { Box } from "../ui";
-import { Header } from "../Header";
-import { Footer } from "../Footer";
-import { MenuMin } from "../MenuMin";
+import { Header } from "../shared/Header";
+import { Footer } from "../shared/Footer";
+import { MenuMin } from "../shared/MenuMin";
 import css from "./index.module.scss";
 
 export function Layout(): ReactElement {

@@ -41,6 +41,7 @@ model Product {
   description   String
   price         Float
   count         Int
+  imageUrl      String?
 
   likes         ProductLike[] 
   items         CartItem[]

@@ -8,11 +8,11 @@ export function Input({
   type = "text",
   data,
 }: IInputProps): ReactElement {
-  const handleChange = data.handleChange;
   const value = data.values[name];
-  const onBlur = data.handleBlur;
   const disabled = data.isSubmitting;
   const invalid = !!(data.errors[name] && data.touched[name]);
+  const handleChange = data.handleChange;
+  const onBlur = data.handleBlur;
 
   return (
     <input

@@ -1,7 +1,7 @@
 import { Category, Product, User } from "@prisma/client";
 import { createAppContext, getTrpcContext } from "../context";
-import { trpcRouter } from "../router";
-import { getPasswordHash } from "../utils/getPasswordHash";
+import { trpcRouter } from "../api/router";
+import { getPasswordHash } from "../lib/utils/getPasswordHash";
 import _ from "lodash";
 import { env } from "../lib/env";
 

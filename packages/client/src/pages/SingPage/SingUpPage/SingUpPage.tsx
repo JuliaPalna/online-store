@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { z } from "zod";
 import { trpc } from "../../../api/trpc";
-import { getMainRoute } from "../../../lib/routes";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { signUpSchema } from "../../../../../server/src/lib/schema/singSchema/signUpSchema/schema";
 import { initialSingUpProps } from "./initialSingUpProps";
+import { API_ROUTES } from "../../../api/routes";
 
 export function SingUpPage(): ReactElement {
   const singUpTrpc = trpc.singUp.useMutation();
@@ -25,7 +25,7 @@ export function SingUpPage(): ReactElement {
       const { token } = await singUpTrpc.mutateAsync(values);
       Cookies.set("token", token, { expires: 99999 });
       trpcUtils.invalidate();
-      navigate(getMainRoute());
+      navigate(API_ROUTES.MAIN);
     },
   });
 

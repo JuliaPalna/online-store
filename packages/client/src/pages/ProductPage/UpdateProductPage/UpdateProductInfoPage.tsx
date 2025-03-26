@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { trpc } from "../../../api/trpc";
 import { useForm } from "../../../hook/useForm";
 import { updateProductSchema } from "../../../../../server/src/lib/schema/productSchema/updateProductSchema/schema";
-import { getProductInfoRoute } from "../../../lib/routes";
 import {
   HelmetTitle,
   PageWrapperCheckData,
@@ -10,8 +9,9 @@ import {
   ProductInfoForm,
 } from "../../../components";
 import { useUserContext } from "../../../context/UserContext";
-import { hasAdminPermission } from "../../../../../server/src/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../../../../server/src/lib/utils/hasAdminPermission";
 import { NotFoundPage } from "../../OtherPage/NotFoundPage";
+import { getProductInfoRoute } from "../../../api/routes/getProductInfoRoute";
 
 export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
   return <WrapperUpdateProductPage />;

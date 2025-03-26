@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import * as routs from "./lib/routes";
 import {
   CatalogPage,
   MainPage,
@@ -13,67 +12,69 @@ import {
   UpdateProductPage,
   NotFoundPage,
   UpdateProfilePage,
-  SearchProductPage,
+  SearchProductListPage,
 } from "./pages";
 import { Layout } from "./components";
 import "./styles/global.scss";
 import { LikeProductPage } from "./pages/ProductPage/LikeProductPage";
 import { CartPage } from "./pages/CartPage";
+import { API_ROUTES } from "./api/routes";
+import { getUpdateProductRoute } from "./api/routes/getUpdateProductRoute";
+import {
+  getProductInfoRoute,
+  productRouteParams,
+} from "./api/routes/getProductInfoRoute";
+import {
+  getProductListByCategoryRoute,
+  productLisByCategorytRouteParams,
+} from "./api/routes/getProductListByCategoryRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path={routs.singOutRoute()} element={<SingOutPage />} />
+      <Route path={API_ROUTES.SING_OUT} element={<SingOutPage />} />
 
       <Route element={<Layout />}>
-        <Route path={routs.getMainRoute()} element={<MainPage />} />
+        <Route path={API_ROUTES.MAIN} element={<MainPage />} />
         <Route path="*" element={<NotFoundPage />} />
 
         {/* category */}
-        <Route path={routs.getCatalogRoute()} element={<CatalogPage />} />
+        <Route path={API_ROUTES.CATALOGY} element={<CatalogPage />} />
 
-        <Route
-          path={routs.getNewCategoryRoute()}
-          element={<NewCategoryPage />}
-        />
+        <Route path={API_ROUTES.NEW_CATEGORY} element={<NewCategoryPage />} />
 
         {/* product */}
         <Route
-          path={routs.getProductListByCategoryRoute(
-            routs.productLisByCategorytRouteParams,
-          )}
+          path={getProductListByCategoryRoute(productLisByCategorytRouteParams)}
           element={<ProductListPage />}
         />
         <Route
-          path={routs.getProductInfoRoute(routs.productRouteParams)}
+          path={getProductInfoRoute(productRouteParams)}
           element={<ProductInfoPage />}
         />
         <Route
-          path={routs.searchProductRoute()}
-          element={<SearchProductPage />}
+          path={API_ROUTES.SEARCH__PRODUCT}
+          element={<SearchProductListPage />}
         />
-        <Route
-          path={routs.getLikeProductRoute()}
-          element={<LikeProductPage />}
-        />
-        <Route path={routs.getCartUserRoute()} element={<CartPage />} />
+        <Route path={API_ROUTES.LIKE__PRODUCT} element={<LikeProductPage />} />
+        <Route path={API_ROUTES.CART} element={<CartPage />} />
 
         <Route
-          path={routs.updateProductRoute(routs.productRouteParams)}
+          path={getUpdateProductRoute(productRouteParams)}
           element={<UpdateProductPage />}
         />
 
-        <Route path={routs.getNewProductRoute()} element={<NewProductPage />} />
+        <Route path={API_ROUTES.NEW_PRODUCT} element={<NewProductPage />} />
 
         {/* user */}
         <Route
-          path={routs.updateProfileRoute()}
+          path={API_ROUTES.UPDATE_PROFILE}
           element={<UpdateProfilePage />}
         />
 
         {/* authorization */}
-        <Route path={routs.singUpRoute()} element={<SingUpPage />} />
-        <Route path={routs.singInRoute()} element={<SingInPage />} />
+        <Route path={API_ROUTES.SING_UP} element={<SingUpPage />} />
+        <Route path={API_ROUTES.SING_IN} element={<SingInPage />} />
       </Route>
     </Routes>
   );

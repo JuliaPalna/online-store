@@ -1,7 +1,7 @@
 import { initTRPC } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { type Express } from "express";
-import { TTrpcRouter } from "../router";
+import { TTrpcRouter } from "./router";
 import { TAppContext } from "../context/AppContext/AppContext";
 import { getTrpcContext, TTrpcContext } from "../context";
 

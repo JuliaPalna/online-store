@@ -1,0 +1,43 @@
+@use "../../../styles/_vars.scss" as *;
+@use "../../../styles/mixins" as *;
+
+.list {
+  @include grid;
+  @include gridColumn;
+  gap: 30px;
+
+  &.view-row {
+    @include flex;
+    @include flexRow;
+    flex-wrap: nowrap;
+    gap: 30px;
+    overflow: auto;
+  }
+
+  &.view-column {
+    @include grid;
+    @include gridColumn;
+    gap: 30px;
+  }
+
+  .item {
+    position: relative;
+    width: 100%;
+
+    .link {
+      @include link;
+    }
+  }
+
+  .wrap {
+    @include flex;
+    @include flexColumn;
+    align-items: center;
+    gap: 3px;
+
+    .wrapImage {
+      position: relative;
+      border-radius: $borderRadiusSmall;
+    }
+  }
+}

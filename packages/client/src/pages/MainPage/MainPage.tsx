@@ -1,5 +1,5 @@
 import { trpc } from "../../api/trpc";
-import { CatalogView } from "../../components/CatalogView";
+import { CatalogView } from "../../components/shared/CatalogView";
 import {
   Box,
   HelmetTitle,

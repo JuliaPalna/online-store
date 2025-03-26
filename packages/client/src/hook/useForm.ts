@@ -18,7 +18,11 @@ export function useForm<TZodSchema extends z.ZodTypeAny>({
   validationSchema,
   onSubmit,
   isReset = true,
-}: IUseFormProps<TZodSchema>) {
+}: IUseFormProps<TZodSchema>): {
+  formik: FormikValues;
+  error: string | null;
+  isSuccess: boolean;
+} {
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 

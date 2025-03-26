@@ -1,13 +1,13 @@
+import { API_ROUTES } from "../../../api/routes";
 import { TPageListRouteProps } from "../types";
-import * as routes from "../../routes";
 
 export const pageListAutorisationUser: TPageListRouteProps = [
   {
     name: "Редактировать профиль",
-    route: routes.updateProfileRoute(),
+    route: API_ROUTES.UPDATE_PROFILE,
   },
   {
     name: "Выход",
-    route: routes.singOutRoute(),
+    route: API_ROUTES.SING_OUT,
   },
 ];

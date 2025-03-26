@@ -12,7 +12,6 @@ export * from "./List";
 export * from "./ListItem";
 export * from "./Loader";
 export * from "./Logo";
-export * from "./Search";
 export * from "./Sidebar";
 export * from "./Text";
 export * from "./Textarea";

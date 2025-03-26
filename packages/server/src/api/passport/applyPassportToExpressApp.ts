@@ -37,8 +37,8 @@ export function applyPassportToExpressApp(
     }),
   );
 
-  expressApp.use((req, res, next) => {
-    if (!req.headers.authorization) {
+  expressApp.use((request, response, next) => {
+    if (!request.headers.authorization) {
       next();
       return;
     }
@@ -49,9 +49,9 @@ export function applyPassportToExpressApp(
       //исправление ошибки:
       // при некорретном токене отражается главная страница + авторизация/вход
       (...args: undefined[]) => {
-        req.user = args[1] || undefined;
+        request.user = args[1] || undefined;
         next();
       },
-    )(req, res, next);
+    )(request, response, next);
   });
 }

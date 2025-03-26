@@ -1,0 +1,9 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/vars";
+
+.footer {
+  @include flex;
+  @include flexColumn;
+
+  padding: 20px;
+}

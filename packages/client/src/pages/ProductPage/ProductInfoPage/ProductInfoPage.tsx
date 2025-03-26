@@ -10,13 +10,13 @@ import {
   Text,
   Title,
 } from "../../../components";
-import { getbalanceStatus } from "../../../utils/getBalanceStatus";
+import { getBalanceStatus } from "../../../lib/utils/getBalanceStatus";
 import { setProductLike } from "./setProductLike";
-import { updateProductRoute } from "../../../lib/routes";
-import { hasAdminPermission } from "../../../../../server/src/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../../../../server/src/lib/utils/hasAdminPermission";
 import { useUserContext } from "../../../context/UserContext";
 import image from "../../../assets/images/organicFarming.png";
 import css from "./index.module.scss";
+import { getUpdateProductRoute } from "../../../api/routes/getUpdateProductRoute";
 
 export const ProductInfoPage = PageWrapperCheckData({
   useQuery: () => {
@@ -55,7 +55,7 @@ export const ProductInfoPage = PageWrapperCheckData({
         </Title>
         <Text>{`${product.description}`}</Text>
         <Text>{`Цена: ${product.price}`}</Text>
-        <Text>{`статус: ${getbalanceStatus({ count: product.count })}`}</Text>
+        <Text>{`статус: ${getBalanceStatus({ count: product.count })}`}</Text>
 
         <Button ariaView="reset" onClick={handelClickToggleLikeProduct}>
           <Likes
@@ -69,7 +69,7 @@ export const ProductInfoPage = PageWrapperCheckData({
         {hasAdminPermission(user) && (
           <Link
             className={css.link}
-            to={updateProductRoute({
+            to={getUpdateProductRoute({
               name: product.name,
               category: product.category.nameEn,
             })}

@@ -1,0 +1,33 @@
+@use "../../../../../../node_modules/include-media/dist/_include-media" as *;
+@use "../../../styles/vars" as *;
+@use "../../../styles/_mixins/" as *;
+
+.wrap {
+  .list {
+    @include flex;
+    @include flexColumn;
+    gap: 0;
+    width: 100%;
+
+    .item {
+      position: relative;
+      padding: 10px 20px;
+      width: 100%;
+
+      .link {
+        @include link;
+      }
+    }
+    border-bottom: 1px solid $grey;
+  }
+
+  .all {
+    position: relative;
+    padding: 10px;
+    text-align: center;
+
+    .link {
+      @include link;
+    }
+  }
+}
