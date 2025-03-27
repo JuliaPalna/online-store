@@ -11,47 +11,54 @@ export const getProductTrpcRoute = trpc.procedure
     }),
   )
   .query(async ({ ctx, input }) => {
-    const userId: string = getAuthorizedUser({ ctx }).id;
+    try {
+      const userId: string = getAuthorizedUser({ ctx }).id;
 
-    const product = await ctx.prisma.product.findUnique({
-      where: {
-        name: input.name,
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        price: true,
-        count: true,
-        category: true,
-        _count: {
-          select: {
-            likes: true,
+      const product = await ctx.prisma.product.findUnique({
+        where: {
+          name: input.name,
+        },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          count: true,
+          category: true,
+          _count: {
+            select: {
+              likes: true,
+            },
+          },
+          likes: {
+            select: {
+              id: true,
+            },
+            where: {
+              userId: userId,
+            },
           },
         },
-        likes: {
-          select: {
-            id: true,
-          },
-          where: {
-            userId: userId,
-          },
-        },
-      },
-    });
+      });
 
-    if (!product) {
-      throw Error("Товар не найден");
+      if (!product) {
+        throw Error("Товар не найден");
+      }
+
+      const likesCount: number = product._count.likes;
+      const isLike: boolean = !!product.likes.length;
+
+      const result = {
+        ..._.omit(product, ["_count"]),
+        likes: likesCount,
+        isLike: isLike,
+      };
+
+      return { product: result };
+    } catch (error) {
+      if (error instanceof Error) {
+        throw Error(`${error}`);
+      }
+      throw Error(`${error}`);
     }
-
-    const likesCount: number = product._count.likes;
-    const isLike: boolean = !!product.likes.length;
-
-    const result = {
-      ..._.omit(product, ["_count"]),
-      likes: likesCount,
-      isLike: isLike,
-    };
-
-    return { product: result };
   });

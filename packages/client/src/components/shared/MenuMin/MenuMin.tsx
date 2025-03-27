@@ -9,7 +9,7 @@ import {
   SearchIcon,
   UserIcon,
 } from "../../Icon";
-import { API_ROUTES } from "../../../api/routes";
+import { API_ROUTES } from "../../../api/routes/constants";
 
 export function MenuMin(): ReactElement {
   const menu: {

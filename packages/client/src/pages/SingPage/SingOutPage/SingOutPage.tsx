@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
 import { Loader } from "../../../components";
-import { API_ROUTES } from "../../../api/routes";
+import { API_ROUTES } from "../../../api/routes/constants";
 
 export function SingOutPage() {
   const navigate = useNavigate();

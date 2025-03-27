@@ -5,7 +5,7 @@ import { useSearchProductList } from "../../../hook/useSearchProductList";
 import { PageWrapperLoadingData } from "../PageWrapper";
 import css from "./index.module.scss";
 import cn from "classnames";
-import { API_ROUTES } from "../../../api/routes";
+import { API_ROUTES } from "../../../api/routes/constants";
 import { getProductInfoRoute } from "../../../api/routes/getProductInfoRoute";
 
 export const SearchProductListModalView = PageWrapperLoadingData({

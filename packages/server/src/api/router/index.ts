@@ -16,6 +16,8 @@ import { getCartTrpcRoute } from "./cart/getCartTrpcRoute";
 import { addProductInCartTrpcRote } from "./cart/addProductInCartTrpcRoute";
 import { deleteProductInCartTrpcRote } from "./cart/deleteProductInCartTrpcRote";
 import { updateQuantityProductInCartTrpcRote } from "./cart/updateQuantityProductInCartTrpcRote";
+import { createOrderTrpcRote } from "./order/createOrderTrpcRote";
+import { getOrderListTrpcRouter } from "./order/getOrderListTrpcRouter";
 
 export const trpcRouter = trpc.router({
   //get-запрос
@@ -32,6 +34,10 @@ export const trpcRouter = trpc.router({
   deleteProductInCart: deleteProductInCartTrpcRote,
   updateQuantityProductInCart: updateQuantityProductInCartTrpcRote,
   getCart: getCartTrpcRoute,
+
+  //order
+  createOrder: createOrderTrpcRote,
+  getOrderList: getOrderListTrpcRouter,
 
   // authorization
   singUp: singUpTrpcRoute,

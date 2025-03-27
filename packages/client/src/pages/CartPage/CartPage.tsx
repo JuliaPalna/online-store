@@ -7,9 +7,12 @@ import {
   List,
   ListItem,
   PageWrapperCheckData,
+  Button,
 } from "../../components";
-import { CardItemCart } from "./CardItemCart";
+import { CartItem } from "./CartItem";
 import { useEventButtonCart } from "../../hook/useEventButtonCart";
+import { useNavigate } from "react-router-dom";
+import { API_ROUTES } from "../../api/routes/constants";
 // import { useChangeQuantityProductInCart } from "../../hook/useChangeQuantityProductInCart";
 
 export const CartPage = PageWrapperCheckData({
@@ -17,8 +20,13 @@ export const CartPage = PageWrapperCheckData({
     return trpc.getCart.useQuery();
   },
 })(({ cart }) => {
+  const navigate = useNavigate();
   const { handelClick } = useEventButtonCart();
   // const { handelChange } = useChangeQuantityProductInCart();
+
+  const handelClickGoToOrder = () => {
+    navigate(API_ROUTES.ORDER);
+  };
 
   return (
     <>
@@ -34,7 +42,7 @@ export const CartPage = PageWrapperCheckData({
             return (
               <React.Fragment key={index}>
                 <ListItem ariaLabel={item.product.name}>
-                  <CardItemCart item={item} />
+                  <CartItem item={item} />
                 </ListItem>
               </React.Fragment>
             );
@@ -43,6 +51,10 @@ export const CartPage = PageWrapperCheckData({
       )}
 
       <Text>{`Итого: ${cart.totalAmount} руб.`}</Text>
+
+      <Button onClick={handelClickGoToOrder}>
+        Перейти к оформлению заказа
+      </Button>
     </>
   );
 });

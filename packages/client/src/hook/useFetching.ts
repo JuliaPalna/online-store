@@ -12,6 +12,7 @@ export function useFeching(callback: () => Promise<void>) {
       if (error instanceof Error) {
         setError(error.message);
       }
+      throw Error(`${error}`);
     } finally {
       setIsLoading(false);
     }

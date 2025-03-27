@@ -11,7 +11,7 @@ import {
 import css from "./index.module.scss";
 import { CartItemProps } from "./types";
 
-export function CardItemCart({ item }: { item: CartItemProps }): ReactElement {
+export function CartItem({ item }: { item: CartItemProps }): ReactElement {
   const [count, setCount] = useState<number>(item.quantity);
 
   const handelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

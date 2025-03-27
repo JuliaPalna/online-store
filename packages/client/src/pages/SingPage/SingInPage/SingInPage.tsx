@@ -5,7 +5,7 @@ import { useForm } from "../../../hook/useForm";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { initialSingInProps } from "./initialSingInProps";
 import { singInSchema } from "../../../../../server/src/lib/schema/singSchema/singInSchema/schema";
-import { API_ROUTES } from "../../../api/routes";
+import { API_ROUTES } from "../../../api/routes/constants";
 
 export function SingInPage() {
   const singInTrpcRoute = trpc.singIn.useMutation();

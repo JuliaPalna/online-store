@@ -1,19 +1,7 @@
-export enum API_ROUTES {
-  MAIN = "/",
+// @index('./**/index.ts', f => `export * from  '${f.path.split('/').slice(0, -1).join('/')}';`)
+export * from "./getProductInfoRoute";
+export * from "./getProductListByCategoryRoute";
+export * from "./getUpdateProductRoute";
+// @endindex
 
-  SING_UP = "/singup",
-  SING_IN = "/singin",
-  SING_OUT = "/singout",
-
-  UPDATE_PROFILE = "/update",
-
-  CART = "/cart",
-
-  CATALOGY = `/catalog`,
-
-  NEW_CATEGORY = "/newcategory",
-
-  NEW_PRODUCT = "/newproduct",
-  SEARCH__PRODUCT = "/search",
-  LIKE__PRODUCT = "/like",
-}
+export * from "./constants";

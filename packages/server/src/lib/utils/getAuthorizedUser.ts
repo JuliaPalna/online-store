@@ -2,7 +2,7 @@ import { User } from "@prisma/client";
 import { TTrpcContext } from "../../context";
 
 export function getAuthorizedUser({ ctx }: { ctx: TTrpcContext }): User {
-  const authorizedUser = getAuthorizedUser({ ctx });
+  const authorizedUser = ctx.authorization;
 
   if (!authorizedUser) {
     throw Error("UNAUTHORIZED");

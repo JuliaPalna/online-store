@@ -6,7 +6,7 @@ import { useSearchStore } from "../store/useSearchStore";
 import { useNavigate } from "react-router-dom";
 import { FormikValues } from "formik";
 import { useSearchModalStore } from "../store/useSearchModalStore";
-import { API_ROUTES } from "../api/routes";
+import { API_ROUTES } from "../api/routes/constants";
 
 export function useSearchValue(): {
   formik: FormikValues;
@@ -31,7 +31,9 @@ export function useSearchValue(): {
   });
 
   useEffect(() => {
-    debounced(formik.values.search);
+    if (formik.values.search !== "") {
+      debounced(formik.values.search);
+    }
   }, [formik.values.search]);
 
   return { formik };

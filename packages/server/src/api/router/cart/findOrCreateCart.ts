@@ -1,4 +1,3 @@
-import { Cart } from "@prisma/client";
 import { TTrpcContext } from "../../../context";
 import { getAuthorizedUser } from "../../../lib/utils/getAuthorizedUser";
 
@@ -11,7 +10,7 @@ export async function findOrCreateCart({ ctx }: { ctx: TTrpcContext }) {
     },
   });
 
-  const cartUser: Cart = cart
+  const cartUser = cart
     ? cart
     : await ctx.prisma.cart.create({
         data: {

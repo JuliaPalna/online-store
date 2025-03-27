@@ -13,21 +13,21 @@ import {
   NotFoundPage,
   UpdateProfilePage,
   SearchProductListPage,
+  OrderPage,
+  LikeProductPage,
+  CartPage,
+  OrderListPage,
 } from "./pages";
 import { Layout } from "./components";
-import "./styles/global.scss";
-import { LikeProductPage } from "./pages/ProductPage/LikeProductPage";
-import { CartPage } from "./pages/CartPage";
-import { API_ROUTES } from "./api/routes";
-import { getUpdateProductRoute } from "./api/routes/getUpdateProductRoute";
 import {
+  API_ROUTES,
   getProductInfoRoute,
-  productRouteParams,
-} from "./api/routes/getProductInfoRoute";
-import {
   getProductListByCategoryRoute,
+  getUpdateProductRoute,
   productLisByCategorytRouteParams,
-} from "./api/routes/getProductListByCategoryRoute";
+  productRouteParams,
+} from "./api/routes";
+import "./styles/global.scss";
 
 function App() {
   return (
@@ -40,7 +40,6 @@ function App() {
 
         {/* category */}
         <Route path={API_ROUTES.CATALOGY} element={<CatalogPage />} />
-
         <Route path={API_ROUTES.NEW_CATEGORY} element={<NewCategoryPage />} />
 
         {/* product */}
@@ -57,8 +56,6 @@ function App() {
           element={<SearchProductListPage />}
         />
         <Route path={API_ROUTES.LIKE__PRODUCT} element={<LikeProductPage />} />
-        <Route path={API_ROUTES.CART} element={<CartPage />} />
-
         <Route
           path={getUpdateProductRoute(productRouteParams)}
           element={<UpdateProductPage />}
@@ -75,6 +72,11 @@ function App() {
         {/* authorization */}
         <Route path={API_ROUTES.SING_UP} element={<SingUpPage />} />
         <Route path={API_ROUTES.SING_IN} element={<SingInPage />} />
+
+        {/* cart, order */}
+        <Route path={API_ROUTES.CART} element={<CartPage />} />
+        <Route path={API_ROUTES.ORDER} element={<OrderPage />} />
+        <Route path={API_ROUTES.ORDER_ALL} element={<OrderListPage />} />
       </Route>
     </Routes>
   );

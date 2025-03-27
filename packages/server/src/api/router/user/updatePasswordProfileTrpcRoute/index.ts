@@ -29,5 +29,6 @@ export const updatePasswordProfileTrpcRoute = trpc.procedure
       if (error instanceof Error) {
         throw Error(error.message);
       }
+      throw Error(`${error}`);
     }
   });

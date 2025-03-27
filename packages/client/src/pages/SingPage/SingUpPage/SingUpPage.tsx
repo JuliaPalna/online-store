@@ -7,7 +7,7 @@ import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { useForm } from "../../../hook/useForm";
 import { signUpSchema } from "../../../../../server/src/lib/schema/singSchema/signUpSchema/schema";
 import { initialSingUpProps } from "./initialSingUpProps";
-import { API_ROUTES } from "../../../api/routes";
+import { API_ROUTES } from "../../../api/routes/constants";
 
 export function SingUpPage(): ReactElement {
   const singUpTrpc = trpc.singUp.useMutation();

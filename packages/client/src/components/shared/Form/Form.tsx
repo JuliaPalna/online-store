@@ -18,7 +18,7 @@ export function Form({
   isSuccess,
   children,
   onSubmit,
-  title = "Форма",
+  title = "",
   buttonName = "Отправить",
   successMessage = "Форма отправлена успешно",
 }: IFormProps): ReactElement {
