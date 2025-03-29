@@ -4,4 +4,5 @@ export interface ICardProductProps {
   price: number;
   likes: number;
   isLike: boolean;
+  imageUrl: string | null;
 }

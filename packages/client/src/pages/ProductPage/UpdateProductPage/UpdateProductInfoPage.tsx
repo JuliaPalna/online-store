@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { trpc } from "../../../api/trpc";
-import { useForm } from "../../../hook/useForm";
-import { updateProductSchema } from "../../../../../server/src/lib/schema/productSchema/updateProductSchema/schema";
+import { useForm } from "../../../hook";
+import { updateProductSchema } from "../../../../../server/src/lib/schema";
 import {
   HelmetTitle,
   PageWrapperCheckData,
@@ -9,9 +9,9 @@ import {
   ProductInfoForm,
 } from "../../../components";
 import { useUserContext } from "../../../context/UserContext";
-import { hasAdminPermission } from "../../../../../server/src/lib/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../../../../server/src/lib/utils";
 import { NotFoundPage } from "../../OtherPage/NotFoundPage";
-import { getProductInfoRoute } from "../../../api/routes/getProductInfoRoute";
+import { getProductInfoRoute } from "../../../api/routes";
 
 export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
   return <WrapperUpdateProductPage />;
@@ -19,14 +19,14 @@ export const UpdateProductPage = PageWrapperCkecAuthorization()(() => {
 
 const WrapperUpdateProductPage = PageWrapperCheckData({
   useQuery: () => {
-    const { name } = useParams();
+    const { name } = useParams<string>();
     if (name) {
       return trpc.getProduct.useQuery({ name: name });
     }
   },
 })(({ product }) => {
   const user = useUserContext();
-  const isAdmin = hasAdminPermission(user);
+  const isAdmin: boolean = hasAdminPermission(user);
   const navigate = useNavigate();
   const updateProductTrpc = trpc.updateProduct.useMutation();
   const initialValues = {

@@ -1,8 +1,10 @@
 import _ from "lodash";
 import { trpc } from "../../../trpc";
-import { updateGeneralProfileSchema } from "../../../../lib/schema/updateProfileSchema/schema";
+import { updateGeneralProfileSchema } from "../../../../lib/schema";
 import { User } from "@prisma/client";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { getAuthorizedUser } from "../../../../lib/utils";
+import { findUniqueUser } from "../../../../lib/utils/findUniqueUser";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const updateGeneralProfileTrpcRoute = trpc.procedure
   .input(updateGeneralProfileSchema)
@@ -11,13 +13,9 @@ export const updateGeneralProfileTrpcRoute = trpc.procedure
       const authorizedUser: User = getAuthorizedUser({ ctx });
 
       if (authorizedUser.email !== input.email) {
-        const user = await ctx.prisma.user.findUnique({
-          where: {
-            email: input.email,
-          },
-        });
+        const isUser = await findUniqueUser({ctx, email: input.email});
 
-        if (user) {
+        if (isUser) {
           throw new Error("Пользователь с данным адесом уже существует");
         }
       }
@@ -35,9 +33,6 @@ export const updateGeneralProfileTrpcRoute = trpc.procedure
       ctx.authorization = updateUser;
       return _.pick(authorizedUser, ["id", "email", "name"]);
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

@@ -13,8 +13,7 @@
     "prismamtest": "dotenv -e ./.env.test prisma migrate deploy",
     "start": "cross-env NODE_ENV=production node ./dist/server/src/index.js",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "test": "jest  --runInBand",
-    "prepare": "npm run prismagc"
+    "test": "jest  --runInBand"
   },
   "prisma": {
     "schema": "./src/prisma/schema.prisma"

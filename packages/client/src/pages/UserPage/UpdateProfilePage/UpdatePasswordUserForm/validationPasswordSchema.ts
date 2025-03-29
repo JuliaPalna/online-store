@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { updatePasswordProfileSchema } from "../../../../../../server/src/lib/schema/updatePasswordSchema/schema";
-import { zPasswordSchema } from "../../../../../../server/src/lib/schema";
+import { updatePasswordProfileSchema, zPasswordSchema } from "../../../../../../server/src/lib/schema";
 
 export const validationPasswordSchema = updatePasswordProfileSchema
   .extend({

@@ -4,9 +4,9 @@ import {
   Informer,
   HelmetTitle,
   PageWrapperLoadingData,
+  ProductListView,
 } from "../../../components";
-import { ProductListView } from "../../../components/shared/ProductListView";
-import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
+import { useEventButtonProductCard } from "../../../hook";
 
 export const LikeProductPage = PageWrapperLoadingData({
   useQuery: () => {

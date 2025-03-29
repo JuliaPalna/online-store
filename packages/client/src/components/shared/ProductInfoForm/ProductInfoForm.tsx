@@ -1,13 +1,6 @@
-import { FormikValues } from "formik";
-import { Field, Form, Input, Textarea } from "../..";
-interface IFormProps {
-  title?: string;
-  successMessage?: string;
-  isSuccess?: boolean;
-  error: string | null;
-  buttonName?: string;
-  formik: FormikValues;
-}
+import { Form } from "../Form";
+import { IFormProps } from "./types";
+import { Field, Input, Textarea } from "../../ui";
 
 export function ProductInfoForm({
   title,

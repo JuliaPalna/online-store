@@ -5,13 +5,13 @@ import {
   PageWrapperLoadingData,
   Informer,
   HelmetTitle,
+  ProductListView,
 } from "../../../components";
-import { ProductListView } from "../../../components/shared/ProductListView";
-import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
+import { useEventButtonProductCard } from "../../../hook";
 
 export const ProductListPage = PageWrapperLoadingData({
   useQuery: () => {
-    const { category } = useParams();
+    const { category } = useParams<string>();
 
     if (category) {
       return trpc.getProductList.useInfiniteQuery(

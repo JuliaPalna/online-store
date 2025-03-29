@@ -16,8 +16,8 @@ import {
 } from "../../../components";
 import image from "../../../assets/images/organicFarming.png";
 import css from "./index.module.scss";
-import { useForm } from "../../../hook/useForm";
-import { createOrderSchema } from "../../../../../server/src/lib/schema/createOrderSchema/schema";
+import { useForm } from "../../../hook";
+import { createOrderSchema } from "../../../../../server/src/lib/schema";
 import { initialProps } from "./initialProps";
 
 export const OrderPage = PageWrapperCheckData({
@@ -25,7 +25,7 @@ export const OrderPage = PageWrapperCheckData({
     return trpc.getCart.useQuery();
   },
 })(({ cart }) => {
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const createOrderTrpc = trpc.createOrder.useMutation();
 
   const { formik, error } = useForm({

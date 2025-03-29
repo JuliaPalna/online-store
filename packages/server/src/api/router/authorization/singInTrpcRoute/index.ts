@@ -1,8 +1,7 @@
 import { trpc } from "../../../trpc";
 import { env } from "../../../../lib/env";
-import { singInSchema } from "../../../../lib/schema/singSchema/singInSchema/schema";
-import { getPasswordHash } from "../../../../lib/utils/getPasswordHash";
-import { getToken } from "../../../../lib/utils/getToken";
+import { singInSchema } from "../../../../lib/schema";
+import { getPasswordHash, getToken } from "../../../../lib/utils";
 
 export const singInTrpcRoute = trpc.procedure
   .input(singInSchema)

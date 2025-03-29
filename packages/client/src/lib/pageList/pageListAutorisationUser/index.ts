@@ -1,4 +1,4 @@
-import { API_ROUTES } from "../../../api/routes/constants";
+import { API_ROUTES } from "../../../api/routes";
 import { TPageListRouteProps } from "../types";
 
 export const pageListAutorisationUser: TPageListRouteProps = [

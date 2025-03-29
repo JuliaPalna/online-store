@@ -1,14 +1,12 @@
-import { Input } from "../../ui/Input";
-import { useSearchValue } from "../../../hook/useSearchValue";
-import { Field } from "../../ui/Field";
-import { Box } from "../../ui/Box";
-import { SearchIcon } from "../../Icon";
-import css from "./index.module.scss";
-import { SearchProductListModalView } from "../SearchProductListModalView";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
+import { useSearchValue } from "../../../hook";
+import { Input, Box, Field } from "../../ui";
+import { SearchIcon } from "../../Icon";
+import { SearchProductListModalView } from "../SearchProductListModalView";
+import { useSearchModalStore } from "../../../store";
 import cn from "classnames";
-import { useSearchModalStore } from "../../../store/useSearchModalStore";
+import css from "./index.module.scss";
 
 export function Search() {
   const { formik } = useSearchValue();

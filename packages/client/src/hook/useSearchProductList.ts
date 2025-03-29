@@ -1,5 +1,5 @@
 import { trpc } from "../api/trpc";
-import { useSearchStore } from "../store/useSearchStore";
+import { useSearchStore } from "../store";
 
 export function useSearchProductList() {
   const valuesSearch: string = useSearchStore((state) => state.search);

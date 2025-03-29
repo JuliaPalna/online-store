@@ -1,9 +1,8 @@
 import _ from "lodash";
 import { trpc } from "../../../trpc";
-import { getProductSchema } from "../../../../lib/schema/productSchema/getProductSchema/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { getProductSchema } from "../../../../lib/schema";
+import { getAuthorizedUser, getNextListProps, getNormalizedSearch } from "../../../../lib/utils";
 import { Prisma } from "@prisma/client";
-import { getNormalizedSearch } from "../../../../lib/utils/getNormalizedSearch";
 
 export const getProductListTrpcRoute = trpc.procedure
   .input(getProductSchema)
@@ -58,6 +57,7 @@ export const getProductListTrpcRoute = trpc.procedure
           name: true,
           price: true,
           category: true,
+          imageUrl: true,
           serialNumber: true,
           _count: {
             select: {
@@ -85,11 +85,9 @@ export const getProductListTrpcRoute = trpc.procedure
         take: input.limit + 1,
       });
 
-      const nextProduct = products.at(input.limit);
-      const nextCursor: number | undefined = nextProduct?.serialNumber;
-      const productsView = products.slice(0, input.limit);
+      const {nextCursor, newList} = getNextListProps({list: products, limit: input.limit});
 
-      const result = productsView.map((product) => ({
+      const result = newList.map((product) => ({
         ..._.omit(product, ["_count"]),
         likes: product._count.likes,
         isLike: !!product.likes.length,

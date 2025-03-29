@@ -1,16 +1,17 @@
-import { z } from "zod";
+// @index('./**/schema.ts', f => `export * from  '${f.path}';`)
+export * from  './createCategorySchema/schema';
+export * from  './createOrderSchema/schema';
+export * from  './getOrderListSchema/schema';
+export * from  './productSchema/createProductSchema/schema';
+export * from  './productSchema/getProductSchema/schema';
+export * from  './productSchema/productSchema/schema';
+export * from  './productSchema/setProductLikeSchema/schema';
+export * from  './productSchema/updateProductSchema/schema';
+export * from  './singSchema/signUpSchema/schema';
+export * from  './singSchema/singInSchema/schema';
+export * from  './updatePasswordSchema/schema';
+export * from  './updateProductInCartSchema/schema';
+export * from  './updateProfileSchema/schema';
+// @endindex
 
-export const zEnvNonemptyTrimmed = z.string().trim().min(1);
-
-export const zStringMin = (min: number) =>
-  z.string().trim().nonempty().min(min, `Введите не менее ${min} символов.`);
-
-export const zNumberSchema = z.number();
-export const zBoolean = z.boolean();
-
-export const zEmailRequired = z.string().trim().min(3).email();
-
-export const zStringOptional = z.string().trim().optional();
-export const zBooleanOptional = z.boolean().optional();
-
-export const zPasswordSchema = z.string().trim().nonempty().min(4);
+export * from './constants';

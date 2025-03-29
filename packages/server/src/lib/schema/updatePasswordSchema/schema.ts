@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zPasswordSchema } from "..";
+import { zPasswordSchema } from "../constants";
 
 export const updatePasswordProfileSchema = z.object({
   password: zPasswordSchema,

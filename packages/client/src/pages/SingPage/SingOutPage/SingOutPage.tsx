@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
 import { Loader } from "../../../components";
-import { API_ROUTES } from "../../../api/routes/constants";
+import { API_ROUTES } from "../../../api/routes";
 
-export function SingOutPage() {
+export function SingOutPage(): ReactElement {
   const navigate = useNavigate();
   const trpcUtils = trpc.useContext();
 

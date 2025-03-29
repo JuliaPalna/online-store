@@ -1,15 +1,11 @@
-import { z } from "zod";
-import { trpc } from "../../../trpc";
 import _ from "lodash";
-import { JsonObject, JsonArray } from "@prisma/client/runtime/library";
+import { trpc } from "../../../trpc";
+import { getNextListProps, parseData } from "../../../../lib/utils";
+import { getOrderListSchema, TCreateOrderSchema } from "../../../../lib/schema";
+import { initialProps } from "./initialProps";
 
 export const getOrderListTrpcRouter = trpc.procedure
-  .input(
-    z.object({
-      limit: z.number().min(1).max(100).default(10),
-      cursor: z.coerce.number().optional(),
-    }),
-  )
+  .input(getOrderListSchema)
   .query(async ({ ctx, input }) => {
     try {
       const orders = await ctx.prisma.order.findMany({
@@ -29,13 +25,11 @@ export const getOrderListTrpcRouter = trpc.procedure
         take: input.limit + 1,
       });
 
-      const nextProduct = orders.at(input.limit);
-      const nextCursor: number | undefined = nextProduct?.serialNumber;
-      const ordersView = orders.slice(0, input.limit);
+      const {nextCursor, newList} = getNextListProps({list: orders, limit: input.limit});
 
-      const result = ordersView.map((order) => ({
+      const result = newList.map((order) => ({
         ..._.omit(order, ["info", "products"]),
-        info: parseData(order.info),
+        info: parseData<TCreateOrderSchema>(order.info) || initialProps,
         products: parseData(order.products),
       }));
 
@@ -47,11 +41,3 @@ export const getOrderListTrpcRouter = trpc.procedure
       throw Error(`${error}`);
     }
   });
-
-function parseData(
-  data: string | number | boolean | JsonObject | JsonArray | null,
-) {
-  if (typeof data === "string") {
-    return JSON.parse(data);
-  }
-}

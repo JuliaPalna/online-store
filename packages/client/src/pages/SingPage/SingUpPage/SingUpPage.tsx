@@ -1,22 +1,17 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { z } from "zod";
 import { trpc } from "../../../api/trpc";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
-import { useForm } from "../../../hook/useForm";
-import { signUpSchema } from "../../../../../server/src/lib/schema/singSchema/signUpSchema/schema";
+import { useForm } from "../../../hook";
 import { initialSingUpProps } from "./initialSingUpProps";
-import { API_ROUTES } from "../../../api/routes/constants";
+import { API_ROUTES } from "../../../api/routes";
+import { validationSchema } from "./schema";
 
 export function SingUpPage(): ReactElement {
   const singUpTrpc = trpc.singUp.useMutation();
   const navigate = useNavigate();
   const trpcUtils = trpc.useContext();
-
-  const validationSchema = signUpSchema.extend({
-    passwordAgain: z.string().min(4),
-  });
 
   const { formik, error } = useForm({
     initialValues: initialSingUpProps,

@@ -6,16 +6,16 @@ import {
   Input,
   PageWrapperCkecAuthorization,
 } from "../../../components";
-import { useForm } from "../../../hook/useForm";
+import { useForm } from "../../../hook";
 import { initialCategorytProps } from "./types";
-import { createCategorySchema } from "../../../../../server/src/lib/schema/createCategorySchema/schema";
+import { createCategorySchema } from "../../../../../server/src/lib/schema";
 import { useUserContext } from "../../../context/UserContext";
-import { hasAdminPermission } from "../../../../../server/src/lib/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../../../../server/src/lib/utils";
 import { NotFoundPage } from "../../OtherPage/NotFoundPage";
 
 export const NewCategoryPage = PageWrapperCkecAuthorization()(() => {
   const user = useUserContext();
-  const isAdmin = hasAdminPermission(user);
+  const isAdmin: boolean = hasAdminPermission(user);
   const createProductCategoryTrpc = trpc.createCategory.useMutation();
 
   const { formik, error } = useForm({

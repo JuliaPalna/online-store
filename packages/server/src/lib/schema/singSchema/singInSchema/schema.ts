@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zEmailRequired, zPasswordSchema } from "../..";
+import { zEmailRequired, zPasswordSchema } from "../../constants";
 
 export const singInSchema = z.object({
   email: zEmailRequired,

@@ -1,4 +1,4 @@
-import { getUser } from "../../../../lib/utils/getUser";
+import { getUser } from "../../../../lib/utils";
 import { trpc } from "../../../trpc";
 
 export const getAuthorizationUserTrpcRoute = trpc.procedure.query(({ ctx }) => {

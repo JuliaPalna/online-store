@@ -1,5 +1,7 @@
 import { trpc } from "../api/trpc";
-import { getEventButton, IEventButton } from "../lib/utils/getEventButton";
+import { ActionButton } from "../components";
+import { TEventButton } from "../lib/types";
+import { getPropsEventButton, IEventButton } from "../lib/utils";
 
 interface IProps {
   products: {
@@ -19,23 +21,25 @@ interface IProps {
 export function useEventButtonProductCard({
   products,
   invalidateValues,
-}: IProps) {
+}: IProps): {
+  handelClick: (event: TEventButton) => Promise<void>;
+} {
   const addProductInCartTrpc = trpc.addProductInCart.useMutation();
   const productLike = trpc.setProductLike.useMutation();
   const trpcUtils = trpc.useContext();
 
-  const handelClick = async (event: React.MouseEvent) => {
+  const handelClick = async (event: TEventButton): Promise<void> => {
     if (!event) return;
-    const eventButton: IEventButton | undefined = getEventButton(event);
+    const eventButton: IEventButton | undefined = getPropsEventButton(event);
 
     if (!eventButton) return;
-    const { nameProduct, action }: IEventButton = eventButton;
+    const { nameProduct, action } = eventButton;
 
-    if (action === "add") {
+    if (action === ActionButton.ADD) {
       await addProductInCartTrpc.mutateAsync({ name: nameProduct });
     }
 
-    if (action === "like") {
+    if (action === ActionButton.LIKE) {
       const product = products.find((item) => item.name === nameProduct);
       if (!product) return;
 

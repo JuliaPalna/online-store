@@ -1,8 +1,9 @@
 import { trpc } from "../../../trpc";
 import { findOrCreateCart } from "../findOrCreateCart";
 import { updateCartTotalAmount } from "../updateCartTotalAmount";
-import { updateProductInCartSchema } from "../../../../lib/schema/updateProductInCartSchema/schema";
+import { updateProductInCartSchema } from "../../../../lib/schema";
 import { findCartItem } from "../findCartItem";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const deleteProductInCartTrpcRote = trpc.procedure
   .input(updateProductInCartSchema)
@@ -21,9 +22,6 @@ export const deleteProductInCartTrpcRote = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

@@ -1,21 +1,19 @@
-// import { trpc } from "../../../api/trpc";
 import {
   Text,
   Informer,
   HelmetTitle,
   PageWrapperLoadingData,
+  ProductListView,
 } from "../../../components";
-import { ProductListView } from "../../../components/shared/ProductListView";
-import { useEventButtonProductCard } from "../../../hook/useEventButtonProductCard";
-import { useSearchProductList } from "../../../hook/useSearchProductList";
-import { useSearchStore } from "../../../store/useSearchStore";
+import { useEventButtonProductCard, useSearchProductList } from "../../../hook";
+import { useSearchStore } from "../../../store";
 
 export const SearchProductListPage = PageWrapperLoadingData({
   useQuery: () => {
     return useSearchProductList();
   },
 })((data) => {
-  const valuesSearch = useSearchStore((state) => state.search);
+  const valuesSearch: string = useSearchStore((state) => state.search);
 
   const products = data[0].products.flatMap((page) => page);
 

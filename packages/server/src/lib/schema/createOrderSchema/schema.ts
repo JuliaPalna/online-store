@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zEmailRequired, zEnvNonemptyTrimmed, zStringMin } from "..";
+import { zEmailRequired, zEnvNonemptyTrimmed, zStringMin } from "../constants";
 
 export const createOrderSchema = z.object({
   name: zEnvNonemptyTrimmed,

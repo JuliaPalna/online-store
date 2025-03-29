@@ -1,19 +1,12 @@
 import { ReactElement } from "react";
+import { IButtonProps, TypeButton } from "./types";
 import cn from "classnames";
 import css from "./index.module.scss";
-interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  onClick?: (e: React.MouseEvent) => void;
-  type?: "submit" | "reset" | "button";
-  disabled?: boolean;
-  ariaView?: "reset";
-  ariaLabel?: "add" | "like" | "increase" | "decrease" | "delete";
-}
 
 export function Button({
   children,
   onClick,
-  type = "button",
+  type = TypeButton.BUTTON,
   disabled = false,
   ariaView,
   ariaLabel,

@@ -1,12 +1,12 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Box, List, ListItem, Text } from "../../ui";
-import React from "react";
-import { useSearchProductList } from "../../../hook/useSearchProductList";
+import { useSearchProductList } from "../../../hook";
 import { PageWrapperLoadingData } from "../PageWrapper";
+import { API_ROUTES } from "../../../api/routes";
+import { getProductInfoRoute } from "../../../api/routes";
 import css from "./index.module.scss";
 import cn from "classnames";
-import { API_ROUTES } from "../../../api/routes/constants";
-import { getProductInfoRoute } from "../../../api/routes/getProductInfoRoute";
 
 export const SearchProductListModalView = PageWrapperLoadingData({
   useQuery: () => {
@@ -48,7 +48,7 @@ export const SearchProductListModalView = PageWrapperLoadingData({
           </List>
 
           <Box className={css.all}>
-            <Link className={css.link} to={API_ROUTES.SEARCH__PRODUCT}>
+            <Link className={css.link} to={API_ROUTES.SEARCH_PRODUCT}>
               <Text>Показать все совпадения</Text>
             </Link>
           </Box>

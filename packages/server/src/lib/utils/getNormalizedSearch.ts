@@ -1,3 +1,12 @@
 export function getNormalizedSearch(value: string | undefined): string {
-  return value ? value.trim().replace(/[\s\n\t]/g, " & ") : "";
+  if(value) {
+    return value
+      .trim()
+      .replace(/[\n\t\s]/g, " & ")
+      .split(" & ")
+      .filter((item) =>  item !== "")
+      .join(" & ");
+  } else {;
+    return "";
+  }
 }

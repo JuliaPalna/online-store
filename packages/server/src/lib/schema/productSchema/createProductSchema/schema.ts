@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zNumberSchema, zStringMin } from "../..";
+import { zNumberSchema, zStringMin } from "../../constants";
 
 export const createProductSchema = z.object({
   name: zStringMin(3),

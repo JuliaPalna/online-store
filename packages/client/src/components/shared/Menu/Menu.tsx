@@ -1,13 +1,12 @@
 import React, { ReactElement, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useOnClickOutside } from "usehooks-ts";
 import { useUserContext } from "../../../context/UserContext";
 import { Button, List, ListItem, Sidebar } from "../../ui";
-import { hasAdminPermission } from "../../../../../server/src/lib/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../../../../server/src/lib/utils";
+import { useModalStore, usePageListMenuStore } from "../../../store";
 import cn from "classnames";
 import css from "./index.module.scss";
-import { useModalStore } from "../../../store/useModalStore";
-import { useOnClickOutside } from "usehooks-ts";
-import { usePageListMenuStore } from "../../../store/usePageListMenuStore";
 
 export function Menu(): ReactElement {
   const menu = useModalStore();

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zBoolean, zStringMin } from "../..";
+import { zBoolean, zStringMin } from "../../constants";
 
 export const setProductLikeSchema = z.object({
   name: zStringMin(1),

@@ -1,6 +1,8 @@
 import { trpc } from "../../../trpc";
-import { setProductLikeSchema } from "../../../../lib/schema/productSchema/setProductLikeSchema/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { setProductLikeSchema } from "../../../../lib/schema";
+import { getAuthorizedUser } from "../../../../lib/utils";
+import { findUniqueProduct } from "../../../../lib/utils/findUniqueProduct";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const setProductLikeTrpcRoute = trpc.procedure
   .input(setProductLikeSchema)
@@ -8,12 +10,7 @@ export const setProductLikeTrpcRoute = trpc.procedure
     try {
       const { name, isLike } = input;
       const userId: string = getAuthorizedUser({ ctx }).id;
-
-      const product = await ctx.prisma.product.findUnique({
-        where: {
-          name,
-        },
-      });
+      const product = await findUniqueProduct({ ctx, name});
 
       if (!product) {
         throw Error("Нет товара");
@@ -58,9 +55,6 @@ export const setProductLikeTrpcRoute = trpc.procedure
         },
       };
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error); 
     }
   });

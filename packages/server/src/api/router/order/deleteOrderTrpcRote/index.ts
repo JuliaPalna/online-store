@@ -1,7 +1,8 @@
 import { trpc } from "../../../trpc";
-import {} from "../../../../lib/schema/updateProductInCartSchema/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import {} from "../../../../lib/schema";
+import { getAuthorizedUser } from "../../../../lib/utils";
 import { z } from "zod";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const deleteOrderTrpcRote = trpc.procedure
   .input(
@@ -22,9 +23,6 @@ export const deleteOrderTrpcRote = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

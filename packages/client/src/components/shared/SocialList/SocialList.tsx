@@ -1,27 +1,12 @@
 import React, { ReactElement } from "react";
 import { Link, List, ListItem } from "../../ui";
-import { ISocialProps } from "./types";
 import css from "./index.module.scss";
+import { socialList } from "../../../lib/socialList";
 
 export function SocialList(): ReactElement {
-  const social: ISocialProps[] = [
-    {
-      href: "#",
-      icon: "VK",
-    },
-    {
-      href: "#",
-      icon: "TG",
-    },
-    {
-      href: "#",
-      icon: "IN",
-    },
-  ];
-
   return (
     <List className={css.list}>
-      {social.map((item, index) => {
+      {socialList.map((item, index) => {
         return (
           <React.Fragment key={index}>
             <ListItem className={css.item}>

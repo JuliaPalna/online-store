@@ -12,7 +12,7 @@ export function applyPassportToExpressApp(
 
   const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("Bearer"),
-    secretOrKey: env.JWT_SECRET_KEY_AUTHORIZATION,
+    secretOrKey: env.JWT_SECRET_KEY_AUTHORIZATION!,
   };
 
   passport.use(

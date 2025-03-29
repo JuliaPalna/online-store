@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zEmailRequired, zStringMin } from "..";
+import { zEmailRequired, zStringMin } from "../constants";
 
 export const updateGeneralProfileSchema = z.object({
   email: zEmailRequired,

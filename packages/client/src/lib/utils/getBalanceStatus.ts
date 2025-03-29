@@ -1,13 +1,18 @@
-import { TBalanceStatus } from "../../types/TBalanceStatus";
+export enum BalanceStatus {
+  runningOut = "Товар заканчивается",
+  notAvailable = "Нет в наличии",
+  inStock = "Товар в наличии", 
+  checkAvailability= "Необходимо уточнить по наличию",
+}
 
-export function getBalanceStatus({ count }: { count: number }): TBalanceStatus {
-  if (+count === 0) {
-    return "Нет в наличии";
+export function getBalanceStatus({ count }: { count: number }): BalanceStatus {
+  if (+count <= 0) {
+    return BalanceStatus.notAvailable;
   } else if (+count < 4) {
-    return "Заканчивается";
+    return BalanceStatus.runningOut;
   } else if (+count > 10) {
-    return "В наличии";
+    return BalanceStatus.inStock;
   } else {
-    return "Необходимо уточнить по наличию";
+    return BalanceStatus.checkAvailability;
   }
 }

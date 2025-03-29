@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { getAuthorizedUser } from "../../../../lib/utils";
 import { trpc } from "../../../trpc";
 
 export const getCartTrpcRoute = trpc.procedure.query(async ({ ctx }) => {

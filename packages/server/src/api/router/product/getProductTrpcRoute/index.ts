@@ -2,7 +2,7 @@ import { z } from "zod";
 import { trpc } from "../../../trpc";
 import _ from "lodash";
 import { zEnvNonemptyTrimmed } from "../../../../lib/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { getAuthorizedUser } from "../../../../lib/utils";
 
 export const getProductTrpcRoute = trpc.procedure
   .input(
@@ -24,6 +24,7 @@ export const getProductTrpcRoute = trpc.procedure
           description: true,
           price: true,
           count: true,
+          imageUrl: true,
           category: true,
           _count: {
             select: {
@@ -45,13 +46,10 @@ export const getProductTrpcRoute = trpc.procedure
         throw Error("Товар не найден");
       }
 
-      const likesCount: number = product._count.likes;
-      const isLike: boolean = !!product.likes.length;
-
       const result = {
         ..._.omit(product, ["_count"]),
-        likes: likesCount,
-        isLike: isLike,
+        likes: product._count.likes,
+        isLike: !!product.likes.length,
       };
 
       return { product: result };

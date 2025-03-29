@@ -1,8 +1,10 @@
 import { trpc } from "../../../trpc";
 import { findOrCreateCart } from "../findOrCreateCart";
 import { updateCartTotalAmount } from "../updateCartTotalAmount";
-import { updateProductInCartSchema } from "../../../../lib/schema/updateProductInCartSchema/schema";
+import { updateProductInCartSchema } from "../../../../lib/schema";
 import { findCartItem } from "../findCartItem";
+import { findUniqueProduct } from "../../../../lib/utils/findUniqueProduct";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const addProductInCartTrpcRote = trpc.procedure
   .input(updateProductInCartSchema)
@@ -22,11 +24,7 @@ export const addProductInCartTrpcRote = trpc.procedure
           },
         });
       } else {
-        const product = await ctx.prisma.product.findUnique({
-          where: {
-            name: input.name,
-          },
-        });
+        const product = await findUniqueProduct({ ctx, name: input.name});
 
         if (!product) {
           throw Error(`not found`);
@@ -47,9 +45,6 @@ export const addProductInCartTrpcRote = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

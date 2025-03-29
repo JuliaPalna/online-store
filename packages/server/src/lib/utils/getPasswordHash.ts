@@ -1,3 +1,4 @@
+// eslint-disable-next-line import-x/no-nodejs-modules
 import crypto from "crypto";
 import { env } from "../env";
 

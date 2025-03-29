@@ -1,23 +1,24 @@
 import { trpc } from "../api/trpc";
+import { TEventInput } from "../lib/types";
+import { getPropsChangeInput, IInputProps } from "../lib/utils";
 
-export function useChangeQuantityProductInCart() {
+export function useChangeQuantityProductInCart(): {
+  handelChange: (event: TEventInput) => Promise<void>;
+} {
   const trpcUtils = trpc.useContext();
   const updateQuantityProductInCart =
     trpc.updateQuantityProductInCart.useMutation();
 
-  const handelChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handelChange = async (event: TEventInput): Promise<void> => {
     if (event.target instanceof Element) {
-      const input: HTMLInputElement | null = event.target.closest("input");
-      const item: HTMLLIElement | null = event.target.closest("li");
+      const eventInput: IInputProps | undefined = getPropsChangeInput(event);
 
-      if (!item || !item.ariaLabel || !input) {
+      if (!eventInput) {
         return;
       }
 
-      await updateQuantityProductInCart.mutateAsync({
-        name: item.ariaLabel,
-        quantity: +input.value,
-      });
+      const { name, quantity } = eventInput;
+      await updateQuantityProductInCart.mutateAsync({ name, quantity });
     }
 
     trpcUtils.getCart.invalidate();

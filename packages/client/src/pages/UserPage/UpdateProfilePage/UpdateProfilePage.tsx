@@ -1,17 +1,17 @@
-import { updateGeneralProfileSchema } from "../../../../../server/src/lib/schema/updateProfileSchema/schema";
 import { trpc } from "../../../api/trpc";
 import {
   HelmetTitle,
   PageWrapperCkecAuthorization,
   Title,
 } from "../../../components";
-import { useForm } from "../../../hook/useForm";
+import { useForm } from "../../../hook";
 import { UpdateGeneralUserForm } from "./UpdateGeneralUserForm";
 import {
   initialPasswordValues,
   UpdatePasswordUserForm,
+  validationPasswordSchema
 } from "./UpdatePasswordUserForm";
-import { validationPasswordSchema } from "./UpdatePasswordUserForm";
+import { updateGeneralProfileSchema } from "../../../../../server/src/lib/schema";
 
 export const UpdateProfilePage = PageWrapperCkecAuthorization()(({ user }) => {
   const updateGeneralProfileTrpc = trpc.updateGeneralProfile.useMutation();

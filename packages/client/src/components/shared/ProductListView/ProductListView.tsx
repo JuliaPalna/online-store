@@ -1,28 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { List, ListItem, CardProduct, Box } from "../..";
-import { TProduct } from "../../../../../server/src/lib/schema/productSchema/productSchema/schema";
+import { getProductInfoRoute } from "../../../api/routes";
+import { Box, List, ListItem } from "../../ui";
+import { CardProduct } from "../CardProduct";
+import { IProductListViewProps } from "./types";
 import css from "./index.module.scss";
-import { getProductInfoRoute } from "../../../api/routes/getProductInfoRoute";
 
 export function ProductListView({
   products,
   onClick,
-}: {
-  products: Omit<TProduct, "count" | "description">[];
-  onClick: (event: React.MouseEvent) => void;
-}) {
+}: IProductListViewProps) {
   return (
     <List className={css.list} onClick={onClick}>
       {products.map((product) => {
+        const {id, name, category} = product;
+
         return (
-          <React.Fragment key={product.id}>
-            <ListItem className={css.item} ariaLabel={product.name}>
+          <React.Fragment key={id}>
+            <ListItem className={css.item} ariaLabel={name}>
               <Link
                 className={css.link}
                 to={getProductInfoRoute({
-                  name: product.name,
-                  category: product.category.nameEn,
+                  name,
+                  category: category.nameEn,
                 })}
               ></Link>
 

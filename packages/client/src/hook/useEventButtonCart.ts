@@ -1,19 +1,22 @@
 import { trpc } from "../api/trpc";
-import { getEventButton, IEventButton } from "../lib/utils/getEventButton";
+import { ActionButton } from "../components";
+import { TEventButton } from "../lib/types";
+import { getPropsEventButton, IEventButton } from "../lib/utils";
 
-export function useEventButtonCart() {
+export function useEventButtonCart(): {
+  handelClick: (event: TEventButton) => Promise<void>;
+} {
   const deleteProductInCartTrpc = trpc.deleteProductInCart.useMutation();
-
   const trpcUtils = trpc.useContext();
 
-  const handelClick = async (event: React.MouseEvent) => {
+  const handelClick = async (event: TEventButton): Promise<void> => {
     if (!event) return;
-    const eventButton: IEventButton | undefined = getEventButton(event);
+    const eventButton: IEventButton | undefined = getPropsEventButton(event);
 
     if (!eventButton) return;
-    const { nameProduct, action }: IEventButton = eventButton;
+    const { nameProduct, action } = eventButton;
 
-    if (action === "delete") {
+    if (action === ActionButton.DELETE) {
       await deleteProductInCartTrpc.mutateAsync({ name: nameProduct });
     }
 

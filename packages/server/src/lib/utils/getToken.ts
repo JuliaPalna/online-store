@@ -5,8 +5,12 @@ export function getToken({
   key,
 }: {
   value: string | object | Buffer<ArrayBufferLike>;
-  key: string;
+  key: string | undefined;
 }): string {
+  if(!key) {
+    return "";
+  }
+  // eslint-disable-next-line import-x/no-named-as-default-member
   const token = jwt.sign(value, key);
 
   return token;

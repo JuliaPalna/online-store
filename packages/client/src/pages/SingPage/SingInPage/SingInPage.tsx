@@ -1,13 +1,14 @@
+import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { trpc } from "../../../api/trpc";
-import { useForm } from "../../../hook/useForm";
+import { useForm } from "../../../hook";
 import { Field, Form, HelmetTitle, Input } from "../../../components";
 import { initialSingInProps } from "./initialSingInProps";
-import { singInSchema } from "../../../../../server/src/lib/schema/singSchema/singInSchema/schema";
-import { API_ROUTES } from "../../../api/routes/constants";
+import { singInSchema } from "../../../../../server/src/lib/schema";
+import { API_ROUTES } from "../../../api/routes";
 
-export function SingInPage() {
+export function SingInPage(): ReactElement {
   const singInTrpcRoute = trpc.singIn.useMutation();
   const navigate = useNavigate();
   const trpcUtils = trpc.useContext();

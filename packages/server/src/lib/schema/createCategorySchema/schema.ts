@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zStringMin } from "..";
+import { zStringMin } from "../constants";
 
 export const createCategorySchema = z.object({
   nameRu: zStringMin(3),

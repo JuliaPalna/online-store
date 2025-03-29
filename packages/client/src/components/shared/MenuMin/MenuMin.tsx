@@ -9,10 +9,14 @@ import {
   SearchIcon,
   UserIcon,
 } from "../../Icon";
-import { API_ROUTES } from "../../../api/routes/constants";
+import { API_ROUTES } from "../../../api/routes";
+import { useUserContext } from "../../../context/UserContext";
 
 export function MenuMin(): ReactElement {
-  const menu: {
+  const user = useUserContext();
+  const userRoute = user ? API_ROUTES.UPDATE_PROFILE : API_ROUTES.SING_IN;
+
+  const menuList: {
     name: React.ReactNode;
     route: string;
   }[] = [
@@ -22,7 +26,7 @@ export function MenuMin(): ReactElement {
     },
     {
       name: <SearchIcon />,
-      route: API_ROUTES.SEARCH__PRODUCT,
+      route: API_ROUTES.SEARCH_PRODUCT,
     },
     {
       name: <BasketIcon />,
@@ -30,18 +34,18 @@ export function MenuMin(): ReactElement {
     },
     {
       name: <LikeIcon />,
-      route: API_ROUTES.LIKE__PRODUCT,
+      route: API_ROUTES.LIKE_PRODUCT,
     },
     {
       name: <UserIcon />,
-      route: API_ROUTES.SING_IN,
+      route: userRoute,
     },
   ];
 
   return (
     <nav className={css.menuBlock}>
       <List className={css.menu}>
-        {menu.map((item, index) => {
+        {menuList.map((item, index) => {
           return (
             <React.Fragment key={index}>
               <ListItem className={css.item}>

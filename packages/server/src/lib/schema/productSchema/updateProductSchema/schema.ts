@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createProductSchema } from "../createProductSchema/schema";
-import { zStringMin } from "../..";
+import { zStringMin } from "../../constants";
 
 export const updateProductSchema = createProductSchema.extend({
   id: zStringMin(1),

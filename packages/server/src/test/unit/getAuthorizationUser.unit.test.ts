@@ -1,4 +1,4 @@
-import { hasAdminPermission } from "../../lib/utils/hasAdminPermission";
+import { hasAdminPermission } from "../../lib/utils";
 
 describe("hasAdminPermission", () => {
   it("hasAdminPermission return true for user with this permission", () => {

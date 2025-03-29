@@ -1,6 +1,6 @@
 import { CartItem } from "@prisma/client";
 import { TTrpcContext } from "../../../context";
-import { TUpdateProductInCartSchema } from "../../../lib/schema/updateProductInCartSchema/schema";
+import { TUpdateProductInCartSchema } from "../../../lib/schema";
 
 interface IFindCartItemProps {
   ctx: TTrpcContext;

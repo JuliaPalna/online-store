@@ -1,6 +1,7 @@
 import { trpc } from "../../../trpc";
-import { createOrderSchema } from "../../../../lib/schema/createOrderSchema/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { createOrderSchema } from "../../../../lib/schema/";
+import { getAuthorizedUser } from "../../../../lib/utils";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const createOrderTrpcRote = trpc.procedure
   .input(createOrderSchema)
@@ -41,9 +42,6 @@ export const createOrderTrpcRote = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

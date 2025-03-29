@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { Box, Button, Image, Likes, Text, Title } from "../../ui";
-import { ICardProductProps } from "./ICardProductProps";
-import image from "../../../assets/images/organicFarming.png";
+import { Box, Button, Image, Likes, Text, Title, ActionButton } from "../../ui";
+import { ICardProductProps } from "./types";
+import stubImage from "../../../assets/images/organicFarming.png";
 import css from "./index.module.scss";
 
 export function CardProduct({
@@ -9,26 +9,28 @@ export function CardProduct({
 }: {
   product: ICardProductProps;
 }): ReactElement {
+  const {name, price, imageUrl,  likes, isLike} = product;
+
   return (
     <>
       <Box className={css.wrapImage}>
-        <Image alt={product.name} src={image} />
+        <Image alt={name} src={`${imageUrl || stubImage}`} />
       </Box>
 
       <Title size={1} className={css.title}>
-        {product.name}
+        {name}
       </Title>
 
-      <Text className={css.price}>{`Цена: ${product.price}`}</Text>
+      <Text className={css.price}>{`Цена: ${price}`}</Text>
 
-      <Button ariaView="reset" ariaLabel="like">
+      <Button ariaView="reset" ariaLabel={ActionButton.LIKE}>
         <Likes
-          count={product.likes}
-          like={product.isLike ? "like" : "notLike"}
+          count={likes}
+          like={isLike ? "like" : "notLike"}
         />
       </Button>
 
-      <Button disabled={false} ariaLabel="add">
+      <Button disabled={false} ariaLabel={ActionButton.ADD}>
         Купить
       </Button>
     </>

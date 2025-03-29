@@ -1,4 +1,6 @@
 import React from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { API_ROUTES } from "../../api/routes";
 import { trpc } from "../../api/trpc";
 import {
   Text,
@@ -10,17 +12,15 @@ import {
   Button,
 } from "../../components";
 import { CartItem } from "./CartItem";
-import { useEventButtonCart } from "../../hook/useEventButtonCart";
-import { useNavigate } from "react-router-dom";
-import { API_ROUTES } from "../../api/routes/constants";
-// import { useChangeQuantityProductInCart } from "../../hook/useChangeQuantityProductInCart";
+import { useEventButtonCart } from "../../hook";
+// import { useChangeQuantityProductInCart } from "../../hook";
 
 export const CartPage = PageWrapperCheckData({
   useQuery: () => {
     return trpc.getCart.useQuery();
   },
 })(({ cart }) => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const { handelClick } = useEventButtonCart();
   // const { handelChange } = useChangeQuantityProductInCart();
 

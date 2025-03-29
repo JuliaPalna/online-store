@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zBooleanOptional, zStringOptional } from "../..";
+import { zBooleanOptional, zStringOptional } from "../../constants";
 
 export const getProductSchema = z.object({
   name: zStringOptional,

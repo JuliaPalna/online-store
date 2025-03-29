@@ -52,10 +52,10 @@ function App() {
           element={<ProductInfoPage />}
         />
         <Route
-          path={API_ROUTES.SEARCH__PRODUCT}
+          path={API_ROUTES.SEARCH_PRODUCT}
           element={<SearchProductListPage />}
         />
-        <Route path={API_ROUTES.LIKE__PRODUCT} element={<LikeProductPage />} />
+        <Route path={API_ROUTES.LIKE_PRODUCT} element={<LikeProductPage />} />
         <Route
           path={getUpdateProductRoute(productRouteParams)}
           element={<UpdateProductPage />}

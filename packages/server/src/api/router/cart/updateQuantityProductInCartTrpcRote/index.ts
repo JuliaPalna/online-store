@@ -2,8 +2,9 @@ import { trpc } from "../../../trpc";
 import { findOrCreateCart } from "../findOrCreateCart";
 import { Cart } from "@prisma/client";
 import { updateCartTotalAmount } from "../updateCartTotalAmount";
-import { updateProductInCartSchema } from "../../../../lib/schema/updateProductInCartSchema/schema";
+import { updateProductInCartSchema } from "../../../../lib/schema";
 import { findCartItem } from "../findCartItem";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const updateQuantityProductInCartTrpcRote = trpc.procedure
   .input(updateProductInCartSchema)
@@ -30,9 +31,6 @@ export const updateQuantityProductInCartTrpcRote = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

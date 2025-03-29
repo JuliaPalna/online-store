@@ -1,19 +1,15 @@
 import { trpc } from "../../../trpc";
-import { signUpSchema } from "../../../../lib/schema/singSchema/signUpSchema/schema";
-import { getToken } from "../../../../lib/utils/getToken";
-import { getPasswordHash } from "../../../../lib/utils/getPasswordHash";
+import { signUpSchema } from "../../../../lib/schema";
+import { getPasswordHash, getToken } from "../../../../lib/utils";
 import { env } from "../../../../lib/env";
+import { findUniqueUser } from "../../../../lib/utils/findUniqueUser";
 
 export const singUpTrpcRoute = trpc.procedure
   .input(signUpSchema)
   .mutation(async ({ ctx, input }) => {
-    const isFindUser = await ctx.prisma.user.findUnique({
-      where: {
-        email: input.email,
-      },
-    });
+    const isUser = await findUniqueUser({ctx, email: input.email});
 
-    if (isFindUser) {
+    if (isUser) {
       throw Error(`Пользователь с данным адресом уже существует`);
     }
 

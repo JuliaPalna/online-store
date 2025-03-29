@@ -1,6 +1,7 @@
 import { ReactElement, useState } from "react";
 import image from "../../../assets/images/organicFarming.png";
 import {
+  ActionButton,
   Box,
   Button,
   DeleteIcon,
@@ -10,11 +11,12 @@ import {
 } from "../../../components";
 import css from "./index.module.scss";
 import { CartItemProps } from "./types";
+import { TEventInput } from "../../../lib/types";
 
 export function CartItem({ item }: { item: CartItemProps }): ReactElement {
   const [count, setCount] = useState<number>(item.quantity);
 
-  const handelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handelChange = (event: TEventInput): void => {
     setCount(+event.target.value);
   };
 
@@ -38,7 +40,7 @@ export function CartItem({ item }: { item: CartItemProps }): ReactElement {
         </Box>
 
         <Box className={css.delete}>
-          <Button ariaView="reset" ariaLabel="delete">
+          <Button ariaView="reset" ariaLabel={ActionButton.DELETE}>
             <DeleteIcon />
           </Button>
         </Box>

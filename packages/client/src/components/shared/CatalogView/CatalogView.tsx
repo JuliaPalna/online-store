@@ -1,18 +1,11 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Box, Image, List, ListItem, Text } from "../../ui";
+import { getProductListByCategoryRoute } from "../../../api/routes";
+import { IProps } from "./types";
 import image from "../../../assets/images/organicFarming.png";
 import cn from "classnames";
 import css from "./index.module.scss";
-import { getProductListByCategoryRoute } from "../../../api/routes/getProductListByCategoryRoute";
-
-interface IProps {
-  сategory: {
-    nameRu: string;
-    nameEn: string;
-  }[];
-  viewRow?: "row";
-}
 
 export function CatalogView({ сategory, viewRow }: IProps): ReactElement {
   return (

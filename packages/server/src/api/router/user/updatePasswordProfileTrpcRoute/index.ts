@@ -1,8 +1,8 @@
 import { User } from "@prisma/client";
 import { trpc } from "../../../trpc";
-import { updatePasswordProfileSchema } from "../../../../lib/schema/updatePasswordSchema/schema";
-import { getPasswordHash } from "../../../../lib/utils/getPasswordHash";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { updatePasswordProfileSchema } from "../../../../lib/schema";
+import { getAuthorizedUser, getPasswordHash } from "../../../../lib/utils";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const updatePasswordProfileTrpcRoute = trpc.procedure
   .input(updatePasswordProfileSchema)
@@ -26,9 +26,6 @@ export const updatePasswordProfileTrpcRoute = trpc.procedure
       ctx.authorization = updatePassword;
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

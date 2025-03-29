@@ -12,10 +12,9 @@ export enum API_ROUTES {
   ORDER_ALL = "/orderall",
 
   CATALOGY = `/catalog`,
-
   NEW_CATEGORY = "/newcategory",
 
   NEW_PRODUCT = "/newproduct",
-  SEARCH__PRODUCT = "/search",
-  LIKE__PRODUCT = "/like",
+  SEARCH_PRODUCT = "/search",
+  LIKE_PRODUCT = "/like",
 }

@@ -1,16 +1,7 @@
-import React, { ReactElement } from "react";
-import { Button, Informer, Text, Title } from "../../ui";
+import { ReactElement } from "react";
+import { Button, Informer, Text, Title, TypeButton } from "../../ui";
 import css from "./index.module.scss";
-interface IFormProps {
-  title?: string;
-  children: React.ReactNode;
-  successMessage?: string;
-  disabled: boolean;
-  isSuccess?: boolean;
-  error: string | null;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  buttonName?: React.ReactNode;
-}
+import { IFormProps } from "./types";
 
 export function Form({
   disabled,
@@ -42,7 +33,7 @@ export function Form({
         </Informer>
       )}
 
-      <Button disabled={disabled} type="submit">
+      <Button disabled={disabled} type={TypeButton.SUBMIT}>
         {buttonName}
       </Button>
     </form>

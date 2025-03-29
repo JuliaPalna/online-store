@@ -1,28 +1,23 @@
 import { trpc } from "../../../trpc";
-import { createProductSchema } from "../../../../lib/schema/productSchema/createProductSchema/schema";
+import { createProductSchema } from "../../../../lib/schema";
+import { findUniqueProduct } from "../../../../lib/utils/findUniqueProduct";
+import { findUniqueCategory } from "../../../../lib/utils/findUniqueCategory";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const createProductTrpcRoute = trpc.procedure
   .input(createProductSchema)
   .mutation(async ({ ctx, input }) => {
     try {
-      const product = await ctx.prisma.product.findUnique({
-        where: {
-          name: input.name,
-        },
-      });
+      const product = await findUniqueProduct({ ctx, name: input.name});
 
       if (product) {
         throw Error(`Товар ${input.name} уже есть в каталоге`);
       }
 
-      const category = await ctx.prisma.category.findUnique({
-        where: {
-          nameRu: input.category,
-        },
-      });
+      const category = await findUniqueCategory({ctx, name: input.category});
 
       if (!category) {
-        throw Error(`Товар ${input.category} нет каталоге`);
+        throw Error(`Категории ${input.category} нет в каталоге`);
       }
 
       const newProduct = {
@@ -39,9 +34,6 @@ export const createProductTrpcRoute = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });

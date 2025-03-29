@@ -1,5 +1,5 @@
 import { TTrpcContext } from "../../../context";
-import { getAuthorizedUser } from "../../../lib/utils/getAuthorizedUser";
+import { getAuthorizedUser } from "../../../lib/utils";
 
 export async function updateCartTotalAmount({ ctx }: { ctx: TTrpcContext }) {
   const userId: string = getAuthorizedUser({ ctx }).id;

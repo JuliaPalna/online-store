@@ -1,6 +1,8 @@
 import { trpc } from "../../../trpc";
-import { updateProductSchema } from "../../../../lib/schema/productSchema/updateProductSchema/schema";
-import { getAuthorizedUser } from "../../../../lib/utils/getAuthorizedUser";
+import { updateProductSchema } from "../../../../lib/schema";
+import { getAuthorizedUser } from "../../../../lib/utils";
+import { findUniqueCategory } from "../../../../lib/utils/findUniqueCategory";
+import { throwErrorMessage } from "../../../../lib/utils/throwErrorMessage";
 
 export const updateProductTrpcRoute = trpc.procedure
   .input(updateProductSchema)
@@ -19,11 +21,7 @@ export const updateProductTrpcRoute = trpc.procedure
         throw Error("Not found");
       }
 
-      const categorySearch = await ctx.prisma.category.findUnique({
-        where: {
-          nameRu: category,
-        },
-      });
+      const categorySearch = await findUniqueCategory({ctx, name: category});
 
       if (!categorySearch) {
         throw Error(`Товар ${category} нет каталоге`);
@@ -41,9 +39,6 @@ export const updateProductTrpcRoute = trpc.procedure
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Error(error.message);
-      }
-      throw Error(`${error}`);
+      throwErrorMessage(error);
     }
   });
